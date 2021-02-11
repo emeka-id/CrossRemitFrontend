@@ -1,0 +1,14 @@
+.btn {
+    padding: 1rem 2rem;
+    font-family: var(--body-font) !important;
+    color: var(--dark);
+    background: var(--primary-color);
+    border-radius: 5px;
+    border:1px solid var(--primary-color);
+    box-shadow: none;
+    &[data-variant="outline"]{
+        background-color: transparent;
+        color: var(--dark);
+        border:1px solid var(--border-color);
+    }
+}

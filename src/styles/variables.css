@@ -1,0 +1,23 @@
+:root {
+  /*==== COLORS ====*/
+  --primary-color: #FFD200;
+  --primary-color-light: #FFF9DE;
+  --secondary-color: #009546;
+  --secondary-color-light: #E9FFDE;
+  --base-color: #838595;
+  --border-color: #BCBECC;
+  --dark: #12161C;
+  --grey: #F1F1F3;
+  --light: #ffffff;
+  --red: #E0475B;
+  --status-color:#191E26;
+
+  /*===== TYPOGRAPHY ====*/
+  --body-font: 'Poppins', san-serif;
+  --normal-font-size: 1rem;
+  --normal-font-weight:300;
+
+  /*==== SIZES ====*/
+  --container-size: 1215px;
+  --navbar-height: 110px;
+}

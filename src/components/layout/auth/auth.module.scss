@@ -1,0 +1,23 @@
+@import '../../../styles/breakpoint';
+
+.layout {
+    background: url(../../../assets/img/bg.png);
+
+    .info {
+        background-color: var(--status-color);
+        text-align: right;
+    }
+
+    .card {
+        max-width: 30rem;
+    }
+    
+    .main {
+        display: block;
+        margin-top: 2.625rem;
+        min-height: calc(100vh - var(--navbar-height) - 0.7rem);
+        @include xl {
+            min-height: calc(100vh - var(--navbar-height) - 2.625rem - 45px);
+        }
+    }
+}

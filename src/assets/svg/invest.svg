@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="66" height="66" viewBox="0 0 66 66">
+  <g id="Group_11641" data-name="Group 11641" transform="translate(-568.524 -112.5)">
+    <g id="Ellipse_134" data-name="Ellipse 134" transform="translate(568.524 112.5)" fill="#fff9de" stroke="#ffd200" stroke-width="1">
+      <circle cx="33" cy="33" r="33" stroke="none"/>
+      <circle cx="33" cy="33" r="32.5" fill="none"/>
+    </g>
+    <path id="Icon_simple-khanacademy" data-name="Icon simple-khanacademy" d="M3.279,24.349S-.742,14.736,6.467,7.567C13.006,1.054,22.884.045,24.6,0c0,0,2.651,8.7-3.97,18.572S4.839,25.763,4.839,25.763,13.9,14.209,12.811,14.28c-.762.045-5.519,5.28-9.533,10.071" transform="translate(582.713 143.945) rotate(-39)" fill="#ffd200"/>
+  </g>
+</svg>

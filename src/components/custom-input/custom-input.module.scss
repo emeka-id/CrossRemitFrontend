@@ -1,0 +1,15 @@
+.suffix {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    
+
+    input {
+        border: none;
+        font-size:1.6rem;
+        width: 100%;
+        &[readonly]{
+            background-color: var(--grey);
+        }
+    }
+}

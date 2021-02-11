@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="66" height="66" viewBox="0 0 66 66">
+  <g id="Group_11640" data-name="Group 11640" transform="translate(-77.84 -112.5)">
+    <g id="Ellipse_133" data-name="Ellipse 133" transform="translate(77.84 112.5)" fill="#fff9de" stroke="#ffd200" stroke-width="1">
+      <circle cx="33" cy="33" r="33" stroke="none"/>
+      <circle cx="33" cy="33" r="32.5" fill="none"/>
+    </g>
+    <path id="Icon_awesome-wallet" data-name="Icon awesome-wallet" d="M24.972,7.448H4.332a.866.866,0,0,1,0-1.733H25.124a.866.866,0,0,0,.866-.866,2.6,2.6,0,0,0-2.6-2.6H3.465A3.465,3.465,0,0,0,0,5.715V23.042a3.465,3.465,0,0,0,3.465,3.465H24.972a2.681,2.681,0,0,0,2.751-2.6V10.047A2.681,2.681,0,0,0,24.972,7.448ZM22.525,18.711a1.733,1.733,0,1,1,1.733-1.733A1.733,1.733,0,0,1,22.525,18.711Z" transform="translate(96.979 131.121)" fill="#ffd200"/>
+  </g>
+</svg>

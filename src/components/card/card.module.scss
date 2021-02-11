@@ -1,0 +1,22 @@
+@import '../../styles/breakpoint';
+
+.card {
+    width: 100%;
+    height: auto;
+    padding: 1.5rem;
+    background-color: var(--light);
+    border-radius: 5px;
+    margin-bottom: 1.75rem;
+
+    @include md {
+        width: 100%;
+        height: auto;
+        padding: 2.5rem;
+        background-color: var(--light);
+        border-radius: 5px;
+    }
+
+    [data-variant='outline'] {
+        border: 1px solid var(--border-color);
+    }
+}

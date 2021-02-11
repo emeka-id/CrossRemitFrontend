@@ -1,0 +1,9 @@
+
+
+.action {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto;
+    align-items: center;
+    margin-top: 40px;
+}

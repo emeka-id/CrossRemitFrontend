@@ -1,0 +1,23 @@
+@import '../../../styles/breakpoint';
+
+.action {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.formGrid {
+    display: block;
+   @include md {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        grid-column-gap: 10px;
+
+        & > div:last-child {
+            grid-column-start: 1;
+            grid-column-end: 3;
+        }
+   }
+}

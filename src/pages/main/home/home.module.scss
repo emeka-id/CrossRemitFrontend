@@ -1,0 +1,15 @@
+@import '../../../styles/breakpoint';
+
+.home {
+    display: grid;
+
+    .accounting {
+        display: block;
+
+        @include lg {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 2rem;
+        }
+    }
+}
