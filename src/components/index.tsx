@@ -7,6 +7,7 @@ import Button from './button';
 import InvestmentCard from './investment-card';
 import ProgressBar from './progress-bar';
 import CustomInput from './custom-input';
+import Tabs from './tabs';
 
 export {
   Navigation,
@@ -18,4 +19,5 @@ export {
   InvestmentCard,
   ProgressBar,
   CustomInput,
+  Tabs,
 };
