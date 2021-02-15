@@ -1,0 +1,20 @@
+import { Button, Card, CustomInput } from 'components';
+import React from 'react';
+import styles from './settings.module.scss';
+
+const Settings = () => {
+  return (
+    <>
+      Deposit
+      <Card>
+        Deposit Amount
+          <div className={styles.deposit}>
+          <CustomInput label="Enter Amount to invest" />
+        </div>
+        <Button>Deposit</Button>
+      </Card>
+    </>
+  );
+};
+
+export default Settings;
