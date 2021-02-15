@@ -5,7 +5,7 @@ import styles from './settings.module.scss';
 const Settings = () => {
   return (
     <>
-      Deposit
+      Settings
       <Card>
         Deposit Amount
           <div className={styles.deposit}>
