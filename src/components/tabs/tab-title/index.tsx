@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import styles from './tab-title.module.scss';
 
 type Props = {
   title: string
@@ -14,7 +15,7 @@ const TabTitle: React.FC<Props> = ({ title, setSelectedTab, index }) => {
 
   return (
     <li>
-      <button onClick={onClick}>{title}</button>
+      <button onClick={onClick} className={styles.button}>{title}</button>
     </li>
   )
 }
