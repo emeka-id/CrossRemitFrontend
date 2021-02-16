@@ -8,15 +8,17 @@ const Settings = () => {
     <>
       Settings
       <Card>
-        {/* Deposit Amount
-          <div className={styles.deposit}>
-          <CustomInput label="Enter Amount to invest" />
-        </div>
-        <Button>Deposit</Button> */}
         <Tabs>
           <Tab title="Bank Details">
-            Hello, these are bank details
-            {/* Contents of the tab */}
+            Account Number
+            <input type="text" />
+            Beneficiary Bank
+            <select name="" id="">
+              <option value="FirstBank">FirstBank</option>
+            </select>
+            Account name
+            <input type="text" />
+            <Button>Save</Button>
           </Tab>
           <Tab title="Verification">
             Hello, these are verification details
