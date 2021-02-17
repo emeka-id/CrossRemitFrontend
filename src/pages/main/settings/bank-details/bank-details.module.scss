@@ -1,0 +1,13 @@
+@import '../../../../styles/breakpoint';
+
+.bankDetails {
+  display: block;
+
+  @include sm {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-rows: auto;
+      gap: 1rem;
+  }
+
+} 

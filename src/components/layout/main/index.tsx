@@ -14,7 +14,7 @@ const AppLayout = ({ children }: Props) => {
 
   const location = useLocation();
   const [toggle, setToggle] = useState(false);
-  
+
   const data = [
     {
       icon: <Analytics />,
@@ -44,7 +44,7 @@ const AppLayout = ({ children }: Props) => {
     {
       icon: <Analytics />,
       name: 'Settings',
-      link: '/app/invest'
+      link: '/app/settings'
     },
     {
       icon: <Analytics />,
@@ -55,20 +55,20 @@ const AppLayout = ({ children }: Props) => {
 
   return (
     <div className={styles.layout}>
-      <Navigation onClick={ () => setToggle(!toggle) }/>
+      <Navigation onClick={() => setToggle(!toggle)} />
 
       <div className={[styles.main, 'container'].join(' ')}>
         <aside className={toggle ? 'showMobileNav' : 'hideMobileNav'}>
           <Card>
             <>
-            <i onClick={ () => setToggle(!toggle) }><Close /></i>
-            <ul>
-              {data.map((item, index) => (
-                <li key={index} className={`flex${location.pathname===item.link ? ' activeLink': ''}`}>
-                  <Link to={item.link} onClick={() => setToggle(false)}>{item.icon} <span className="ml-15">{item.name}</span></Link>
-                </li>
-              ))}
-            </ul>
+              <i onClick={() => setToggle(!toggle)}><Close /></i>
+              <ul>
+                {data.map((item, index) => (
+                  <li key={index} className={`flex${location.pathname === item.link ? ' activeLink' : ''}`}>
+                    <Link to={item.link} onClick={() => setToggle(false)}>{item.icon} <span className="ml-15">{item.name}</span></Link>
+                  </li>
+                ))}
+              </ul>
             </>
           </Card>
         </aside>
