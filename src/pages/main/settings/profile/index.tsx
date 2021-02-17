@@ -1,7 +1,7 @@
-import { Button, CustomInput } from "components";
-import React from "react";
-import styles from "./profile.module.scss";
-import profile from "../../../../assets/img/profile.png";
+import { Button, Card, CustomInput } from 'components';
+import React from 'react';
+import styles from './profile.module.scss';
+import profile from '../../../../assets/img/profile.png';
 
 const Profile = () => {
   return (
@@ -51,14 +51,14 @@ const Profile = () => {
       <div className="right-column">
         <div className="form-group">
           <label htmlFor="profile_pic">Profile Picture</label>
-          <div className={styles.image_input}>
-            <div className={styles.image_box}>
-              <img src={profile} alt="" />
+          <Card variant="outline">
+            <div className="flex">
+              <div className={styles.image_box}>
+                <img src={profile} alt="" />
+              </div>
+              <Button variant="outline" className="ml-30">Add New</Button>
             </div>
-            <div className={styles.button_box}>
-              <Button variant="outline">Add New</Button>
-            </div>
-          </div>
+          </Card>
         </div>
       </div>
     </div>

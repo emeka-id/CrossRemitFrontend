@@ -8,7 +8,6 @@ import InvestmentCard from "./investment-card";
 import ProgressBar from "./progress-bar";
 import CustomInput from "./custom-input";
 import Tabs from "./tabs";
-import VerificationCard from "./verification-card";
 
 export {
   Navigation,
@@ -21,5 +20,4 @@ export {
   ProgressBar,
   CustomInput,
   Tabs,
-  VerificationCard,
 };

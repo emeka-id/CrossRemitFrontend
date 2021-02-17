@@ -39,7 +39,7 @@ const AppLayout = ({ children }: Props) => {
     {
       icon: <Analytics />,
       name: 'Transaction',
-      link: '/app/invest'
+      link: '/app/transaction'
     },
     {
       icon: <Analytics />,

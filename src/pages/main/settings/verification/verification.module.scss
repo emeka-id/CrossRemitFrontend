@@ -4,10 +4,14 @@
   display: grid;
   grid-template-columns: minmax(300px, 480px);
   .v_details {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 20px;
-    padding: 20px;
+    display: block;
+
+    @include sm{
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 20px;
+       
+    }
 
     .icon,
     .text {
