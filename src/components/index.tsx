@@ -1,13 +1,14 @@
-import Navigation from './navigation';
-import { AppLayout } from './layout';
-import AppRouter from './router';
-import Card from './card';
-import AccountCard from './account-card';
-import Button from './button';
-import InvestmentCard from './investment-card';
-import ProgressBar from './progress-bar';
-import CustomInput from './custom-input';
-import Tabs from './tabs';
+import Navigation from "./navigation";
+import { AppLayout } from "./layout";
+import AppRouter from "./router";
+import Card from "./card";
+import AccountCard from "./account-card";
+import Button from "./button";
+import InvestmentCard from "./investment-card";
+import ProgressBar from "./progress-bar";
+import CustomInput from "./custom-input";
+import Tabs from "./tabs";
+import VerificationCard from "./verification-card";
 
 export {
   Navigation,
@@ -20,4 +21,5 @@ export {
   ProgressBar,
   CustomInput,
   Tabs,
+  VerificationCard,
 };
