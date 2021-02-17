@@ -1,6 +1,41 @@
-@import '../../../../styles/breakpoint';
+@import "../../../../styles/breakpoint";
 
 .profile {
   display: grid;
+  // width: 100%;
   grid-template-columns: repeat(2, 1fr);
+  column-gap: 40px;
+
+  .name_grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 10px;
+  }
+
+  .image_input {
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 20px 0;
+
+    .image_box {
+      height: 100px;
+      width: 100px;
+      background-color: black;
+      border-radius: 50%;
+      margin: auto;
+      overflow: hidden;
+      text-align: center;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .button_box {
+      margin: auto;
+    }
+  }
 }
