@@ -1,5 +1,5 @@
 import { Wallet } from "assets/svg";
-import { VerificationCard } from "components";
+import { Button, VerificationCard } from "components";
 import React from "react";
 import styles from "./verification.module.scss";
 
@@ -16,7 +16,7 @@ const Verification = () => {
               <div className={styles.title}>Personal Details</div>
               <div className={styles.subtitle}>Provide your BVN</div>
             </div>
-            <div className={styles.status}>Verified</div>
+            <div className={styles.status_verified}>Verified</div>
           </div>
         </VerificationCard>
         <VerificationCard>
@@ -31,7 +31,9 @@ const Verification = () => {
                 (International passport, driver's license)
               </div>
             </div>
-            <div className={styles.status}>Verify</div>
+            <div className={styles.status_not_verified}>
+              <Button>Verify</Button>
+            </div>
           </div>
         </VerificationCard>
       </div>
