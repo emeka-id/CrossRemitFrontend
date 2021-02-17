@@ -1,33 +1,35 @@
-import { Wallet } from "assets/svg";
-import { Button, VerificationCard } from "components";
-import React from "react";
-import styles from "./verification.module.scss";
+import { Wallet } from 'assets/svg';
+import { Button, Card } from 'components';
+import React from 'react';
+import styles from './verification.module.scss';
 
 const Verification = () => {
   return (
     <div className={styles.verification}>
       <div>
-        <VerificationCard>
-          <div className={styles.v_details}>
+        <Card variant="outline">
+          <div className={[styles.v_details, 'flex'].join(' ')}>
             <div className={styles.icon}>
               <Wallet />
             </div>
-            <div className={styles.text}>
+            <div className={[styles.text, 'mt-10 mb-10'].join(' ')}>
               <div className={styles.title}>Personal Details</div>
               <div className={styles.subtitle}>Provide your BVN</div>
             </div>
-            <div className={styles.status_verified}>Verified</div>
+            <div>
+              <span className={styles.status_verified}>Verified</span>
+            </div>
           </div>
-        </VerificationCard>
-        <VerificationCard>
+        </Card>
+        <Card variant="outline">
           <div className={styles.v_details}>
             <div className={styles.icon}>
               <Wallet />
             </div>
-            <div className={styles.text}>
+            <div className={[styles.text, 'mt-10 mb-10'].join(' ')}>
               <div className={styles.title}>Identity</div>
               <div className={styles.subtitle}>
-                Upload your government issued ID card <br />
+                Upload your government issued ID card
                 (International passport, driver's license)
               </div>
             </div>
@@ -35,7 +37,7 @@ const Verification = () => {
               <Button>Verify</Button>
             </div>
           </div>
-        </VerificationCard>
+        </Card>
       </div>
     </div>
   );

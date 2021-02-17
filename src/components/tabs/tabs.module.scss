@@ -3,4 +3,10 @@
 .tabs {
   display: flex;
   margin-bottom: 40px;
+  border-bottom: 1px solid var(--border-color);
+  overflow-x: auto;
+  @include md {
+    overflow-x: hidden;
+  }
+
 }

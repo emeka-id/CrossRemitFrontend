@@ -2,7 +2,14 @@
 
 .button {
   padding: 20px 40px;
+  font-family: var(--body-font) !important;
   background-color: #fff;
   border: none;
-  border-bottom: 2px solid #ffd200;
+  outline: none;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &.active {
+    border-bottom: 4px solid #ffd200;
+  }
 }

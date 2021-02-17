@@ -17,6 +17,7 @@ const Tabs: React.FC<Props> = ({ children }) => {
             key={index}
             title={item.props.title}
             index={index}
+            selectedTab={selectedTab}
             setSelectedTab={setSelectedTab}
           />
         ))}
