@@ -1,18 +1,18 @@
 import React, {
-  ReactElement,
   useImperativeHandle,
   forwardRef,
   useState,
   useEffect,
   useCallback,
   Ref,
+  ReactChild,
 } from "react";
 import { createPortal } from "react-dom";
 import styles from "./modal.module.scss";
 import Card from "../card";
 
 type Props = {
-  children: ReactElement[];
+  children?: ReactChild | ReactChild[];
   defaultOpened?: boolean;
   fade?: boolean;
 };

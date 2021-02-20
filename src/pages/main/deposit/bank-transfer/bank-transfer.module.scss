@@ -1,0 +1,65 @@
+@import "../../../../styles/breakpoint";
+
+.modal_header {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.ref_code_section {
+  margin: 20px 0;
+
+  .heading,
+  .instruction {
+    font-size: 11px;
+    width: 80%;
+  }
+
+  .card {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    margin: 5px 0;
+
+    .code {
+      font-weight: 700;
+      font-size: larger;
+    }
+  }
+}
+
+.account_details_section {
+  margin: 20px 0;
+
+  .heading {
+    font-size: 11px;
+    width: 80%;
+  }
+
+  .card {
+    font-size: 11px;
+    padding: 10px 20px;
+    margin: 5px 0;
+    background-color: #f0f0f0;
+    margin: 10px 0;
+  }
+}
+
+.confirmation_section {
+  margin: 20px 0;
+
+  .heading {
+    font-size: 11px;
+    text-align: center;
+  }
+
+  .button_box {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+
+    Button {
+      width: 45%;
+    }
+  }
+}
