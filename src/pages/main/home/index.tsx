@@ -1,9 +1,12 @@
-import { Invest, Investment, Wallet } from 'assets/svg';
-import { AccountCard, Button, Card, InvestmentCard } from 'components';
-import React from 'react';
-import styles from './home.module.scss';
+import { Invest, Investment, Wallet } from "assets/svg";
+import { AccountCard, Button, Card, InvestmentCard, Modal } from "components";
+import { IModalRef } from "components/modal";
+import React, { useRef } from "react";
+import styles from "./home.module.scss";
+import Withdrawal from "./withdrawal";
 
 const Home = () => {
+  const modal = useRef<IModalRef>(null);
   return (
     <>
       Dashboard
@@ -16,7 +19,9 @@ const Home = () => {
               title="Available Balance"
             >
               <Button>Deposit</Button>
-              <Button variant="outline">Withdraw</Button>
+              <Button variant="outline" onClick={() => modal?.current?.open()}>
+                Withdraw
+              </Button>
             </AccountCard>
             <AccountCard
               icon={Invest}
@@ -41,6 +46,9 @@ const Home = () => {
           </div>
         </div>
       </Card>
+      <Modal ref={modal}>
+        <Withdrawal />
+      </Modal>
     </>
   );
 };

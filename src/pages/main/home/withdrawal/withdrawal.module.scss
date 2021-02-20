@@ -1,0 +1,59 @@
+@import "../../../../styles/breakpoint";
+
+.modal_header {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.available_balance_section {
+  margin: 20px 0;
+
+  .heading {
+    font-size: 11px;
+  }
+
+  .money {
+    font-size: larger;
+  }
+
+  Button {
+    background-color: black;
+    color: white;
+    font-size: 11px;
+    height: min-content;
+    padding: 5px;
+    margin: auto 0;
+  }
+
+  .card {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    margin: 5px 0;
+  }
+}
+
+.withdraw_section {
+  margin: 20px 0;
+
+  .heading {
+    font-size: 11px;
+    width: 80%;
+    margin-bottom: 10px;
+  }
+}
+
+.confirmation_section {
+  margin: 20px 0;
+
+  .button_box {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+
+    Button {
+      width: 45%;
+    }
+  }
+}
