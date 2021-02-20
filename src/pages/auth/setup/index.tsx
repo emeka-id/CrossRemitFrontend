@@ -1,3 +1,4 @@
+import { Loading } from 'assets/svg';
 import { Button } from 'components';
 import AuthContext from 'context/auth';
 import UserContext from 'context/user';
@@ -92,7 +93,7 @@ const Setup = () => {
             </label>
           </div>
           <div className=" text-right">
-            <Button className="mt-40">{loading ? 'loading': 'Finish'}</Button>
+            <Button className="mt-40">{loading ? <Loading />: 'Finish'}</Button>
           </div>
         </div>
       </form>

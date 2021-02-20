@@ -1,3 +1,4 @@
+import { Loading } from 'assets/svg';
 import { Button } from 'components';
 import UserContext from 'context/user';
 import { CheckUserApiService } from 'core/services/user';
@@ -52,7 +53,7 @@ const Signup = () => {
           />
         </div>
         <div className="flex justify-content-end mt-40">
-          <Button type="submit">{loading ? 'loading' : 'Continue'}</Button>
+          <Button type="submit">{loading ? <Loading/> : 'Continue'}</Button>
         </div>
       </form>
     </div>

@@ -9,6 +9,7 @@ import { useHistory } from 'react-router-dom';
 import { IAuth, ILogin } from 'types/user';
 import { IResponse } from 'types/response';
 import styles from './login.module.scss';
+import { Loading } from 'assets/svg';
 
 const Login = () => {
   const { setAuthAndCache } = useContext(AuthContext);
@@ -67,7 +68,7 @@ const Login = () => {
               <input type="checkbox" className="mr-5" /> Remember me
             </label>
           </div>
-          <Button type="submit">{loading ? 'loading': 'Login'}</Button>
+          <Button type="submit">{loading ? <Loading/>: 'Login'}</Button>
         </div>
       </form>
     </div>
