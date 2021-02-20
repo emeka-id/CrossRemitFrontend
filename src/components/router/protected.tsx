@@ -1,3 +1,5 @@
+import { Constants } from 'core/utils/constants';
+import { SecureStorage } from 'core/utils/storage';
 import React, { FC } from 'react';
 import { Route, Redirect, RouteProps } from 'react-router-dom';
 import { AppLayout } from '../layout';
@@ -7,8 +9,8 @@ interface PrivateRouteProps extends Omit<RouteProps, "component"> {
 }
 
 const PrivateRoute: FC<PrivateRouteProps> = ({ component: Component, ...args }) => {
-  
-  const isAuthenticated = true;
+  const secureStorage = new SecureStorage();
+  const isAuthenticated = secureStorage.getItem(Constants.token);
   return (
     <Route
       {...args}
@@ -18,7 +20,7 @@ const PrivateRoute: FC<PrivateRouteProps> = ({ component: Component, ...args }) 
             <Component {...props} />
           </AppLayout>
         ) : (
-          <Redirect to="/login" />
+          <Redirect to="/auth" />
         )
       }
     />

@@ -2,6 +2,7 @@ import ProgressBar from 'components/progress-bar';
 import React, { FC } from 'react';
 import styles from './investment-card.module.scss';
 
+//TODO: use the right datatype for svg
 type Props = {
   icon?: any;
   name: String;

@@ -1,8 +1,11 @@
-# Getting Started with Create React App
+# Rabbi Capital investment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Visit [Rabbi](https://rabbi.com).
 
-## Available Scripts
+## Requirements
+- Node.js 14.15.4 (through nvm)
+
+Install dependency using `yarn` or `npm install`
 
 In the project directory, you can run:
 
