@@ -6,6 +6,7 @@
     border-radius: 5px;
     border:1px solid var(--primary-color);
     box-shadow: none;
+    cursor: pointer;
     &[data-variant="outline"]{
         background-color: transparent;
         color: var(--dark);

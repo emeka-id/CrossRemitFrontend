@@ -10,10 +10,7 @@ const initState = {
     setLogout: () => {}
 }
 const AuthContext = createContext(initState);
-
-
 export const AuthProvider = AuthContext.Provider;
-export const AuthConsumer = AuthContext.Consumer;
 
 export const getDefaultAuth = () => {
   try {
@@ -36,7 +33,7 @@ interface Props {
 
 export const AuthProviderContainer: FC<Props> = ({ children }) => {
   const defaultAuth = getDefaultAuth()
-  const [auth, setAuth] = useState(defaultAuth)
+  const [auth, setAuth] = useState<string | null>(defaultAuth)
 
   const setAuthAndCache = (value: string) => {
     value

@@ -5,4 +5,7 @@ export const Constants = {
 
 export const Page = {
     dashboard: '/app',
+    verify: '/auth/validation',
+    setup: '/auth/setup',
+    signup: '/auth/signup'
 }

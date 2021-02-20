@@ -1,5 +1,5 @@
-export interface IResponse<T> {
+export interface IResponse<T = null> {
     success: boolean;
-    data?: T,
+    data?: T | null,
     message?: string | null;
 }
