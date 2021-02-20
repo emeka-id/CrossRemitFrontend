@@ -1,18 +1,24 @@
-import { Button, Card, CustomInput } from 'components';
-import React from 'react';
-import styles from './deposit.module.scss';
+import { Button, Card, CustomInput, Modal } from "components";
+import { IModalRef } from "components/modal";
+import React, { useRef } from "react";
+import BankTransfer from "./bank-transfer";
+import styles from "./deposit.module.scss";
 
 const Deposit = () => {
+  const modal = useRef<IModalRef>(null);
   return (
     <>
       Deposit
       <Card>
-          Deposit Amount
-          <div className={styles.deposit}>
-            <CustomInput label="Enter Amount to invest"/>
-          </div>
-          <Button>Deposit</Button>
+        Deposit Amount
+        <div className={styles.deposit}>
+          <CustomInput label="Enter Amount to invest" />
+        </div>
+        <Button onClick={() => modal?.current?.open()}>Deposit</Button>
       </Card>
+      <Modal ref={modal}>
+        <BankTransfer />
+      </Modal>
     </>
   );
 };
