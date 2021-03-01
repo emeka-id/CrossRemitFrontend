@@ -1,19 +1,63 @@
 import { Button } from 'components';
-import React from 'react';
+import AuthContext from 'context/auth';
+import { LoginApiService } from 'core/services/user';
+import { Page } from 'core/utils/constants';
+import { handleError } from 'core/utils/error-handler';
+import useForm from 'core/utils/use-form';
+import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { IAuth, ILogin } from 'types/user';
+import { IResponse } from 'types/response';
 import styles from './login.module.scss';
+import { Loading } from 'assets/svg';
+import { useMutation } from 'react-query';
+import { AxiosResponse } from 'axios';
 
 const Login = () => {
+  const { setAuthAndCache } = useContext(AuthContext);
+  const { mutate, isLoading } = useMutation(LoginApiService, {
+    onSuccess: (res: AxiosResponse<IResponse<IAuth>>) => {
+      const { success, data } = res.data;
+      if (success) {
+        setAuthAndCache(`${data?.type} ${data?.token}`);
+        history.push(Page.dashboard);
+        return;
+      }
+    },
+    onError: error => {
+      const { response, message = null } = handleError(error);
+      console.log(response);
+    },
+  });
+  let history = useHistory();
+
+  const submit = () => mutate(inputs)
+  const initState = { email: '', password: '' };
+  const { inputs, handleChange, handleSubmit } = useForm<ILogin>(initState, submit);
+
   return (
     <div>
       <div className="text-center">
         <h2>Login To Rabbi</h2>
       </div>
-      <form className="mt-40">
+      <form className="mt-40" onSubmit={handleSubmit}>
         <div className="form-group">
-          <input placeholder="Email Address" />
+          <input
+            name="email"
+            type="email"
+            required
+            placeholder="Email Address"
+            onChange={handleChange}
+          />
         </div>
         <div className="form-group">
-          <input placeholder="Password" />
+          <input
+            name="password"
+            type="password"
+            required
+            placeholder="Password"
+            onChange={handleChange}
+          />
         </div>
 
         <div className={styles.action}>
@@ -22,7 +66,7 @@ const Login = () => {
               <input type="checkbox" className="mr-5" /> Remember me
             </label>
           </div>
-          <Button>Login</Button>
+          <Button type="submit">{isLoading ? <Loading /> : 'Login'}</Button>
         </div>
       </form>
     </div>

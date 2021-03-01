@@ -1,18 +1,58 @@
+import { Loading } from 'assets/svg';
+import { AxiosResponse } from 'axios';
 import { Button } from 'components';
-import React from 'react';
+import UserContext from 'context/user';
+import { CheckUserApiService } from 'core/services/user';
+import { Page } from 'core/utils/constants';
+import { handleError } from 'core/utils/error-handler';
+import useForm from 'core/utils/use-form';
+import React, { useContext } from 'react';
+import { useMutation } from 'react-query';
+import { useHistory } from 'react-router-dom';
+import { IResponse } from 'types/response';
+import { ISignup } from 'types/user';
 
 const Signup = () => {
+  const { signUpState, updateSignupState } = useContext(UserContext);
+  let history = useHistory();
+  const { mutate, isLoading } = useMutation(CheckUserApiService, {
+    onSuccess: (res: AxiosResponse<IResponse<null>>) => {
+      const { success } = res.data;
+      if (success) {
+        updateSignupState(inputs);
+        history.push(Page.verify);
+      }
+    },
+    onError: (error) => {
+      const { response, message = null } = handleError(error);
+      console.log(response);
+    },
+  });
+
+  const submit = () => mutate(inputs);
+  const { inputs, handleChange, handleSubmit } = useForm<ISignup>(
+    signUpState,
+    submit
+  );
+
   return (
     <div>
       <div className="text-center">
         <h2>Join Rabbi</h2>
       </div>
-      <form className="mt-40">
+      <form className="mt-40" onSubmit={handleSubmit}>
         <div className="form-group">
-          <input placeholder="Email Address" />
+          <input
+            name="email"
+            type="email"
+            required
+            placeholder="Email Address"
+            defaultValue={signUpState.email}
+            onChange={handleChange}
+          />
         </div>
         <div className="flex justify-content-end mt-40">
-          <Button>Continue</Button>
+          <Button type="submit">{isLoading ? <Loading /> : 'Continue'}</Button>
         </div>
       </form>
     </div>
