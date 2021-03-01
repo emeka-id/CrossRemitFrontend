@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent } from 'react';
 import { useState } from 'react';
 
-const useForm = <T>(callback: () => void, initState: T) => {
+const useForm = <T>(initState: T, callback: () => void) => {
   const [inputs, setInputs] = useState<T>(initState);
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     if (e) e.preventDefault();

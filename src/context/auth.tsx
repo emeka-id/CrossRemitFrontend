@@ -33,7 +33,7 @@ interface Props {
 
 export const AuthProviderContainer: FC<Props> = ({ children }) => {
   const defaultAuth = getDefaultAuth()
-  const [auth, setAuth] = useState<string | null>(defaultAuth)
+  const [auth, setAuth] = useState<string | null>(defaultAuth);
 
   const setAuthAndCache = (value: string) => {
     value

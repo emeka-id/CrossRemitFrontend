@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Switch, Redirect } from 'react-router-dom';
 import Loader from '../loader';
 import GuardRoute from './guard';
 import PrivateRoute from './protected';

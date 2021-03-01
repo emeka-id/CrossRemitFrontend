@@ -1,4 +1,5 @@
 import { Loading } from 'assets/svg';
+import { AxiosResponse } from 'axios';
 import { Button } from 'components';
 import AuthContext from 'context/auth';
 import UserContext from 'context/user';
@@ -7,6 +8,7 @@ import { Page } from 'core/utils/constants';
 import { handleError } from 'core/utils/error-handler';
 import useForm from 'core/utils/use-form';
 import React, { useContext, useEffect, useState } from 'react';
+import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import { IResponse } from 'types/response';
 import { IAuth, ISignup } from 'types/user';
@@ -15,38 +17,30 @@ import styles from './setup.module.scss';
 const Setup = () => {
   const { signUpState } = useContext(UserContext);
   const { setAuthAndCache } = useContext(AuthContext);
-  const [loading, setLoading] = useState(false);
   let history = useHistory();
 
   useEffect(() => {
     if (!signUpState.email) history.push(Page.signup);
   }, []);
 
-  const submit =  async() => {
-    setLoading(true);
-    try {
-      const res = await SignupApiService(inputs);
-      setLoading(false);
-      const {success, data}:IResponse<IAuth> = res.data;
-      if(success) {
+  const { mutate, isLoading } = useMutation(SignupApiService, {
+    onSuccess: (res: AxiosResponse<IResponse<IAuth>>) => {
+      const { success, data } = res.data;
+      if (success) {
         setAuthAndCache(`${data?.type} ${data?.token}`);
         history.push(Page.dashboard);
         return;
       }
-    } catch (error) {
-      setLoading(false);
-      //TODO: Type response
+    },
+    onError: (error) => {
       const { response, message = null } = handleError(error);
-    }
-  };
-
-  useEffect(() => {
-    console.log(inputs);
-  }, []);
-
+      console.log(response);
+    },
+  });
+  const submit = () => mutate(inputs);
   const { inputs, handleChange, handleSubmit } = useForm<ISignup>(
-    submit,
-    signUpState
+    signUpState,
+    submit
   );
 
   return (
@@ -93,7 +87,9 @@ const Setup = () => {
             </label>
           </div>
           <div className=" text-right">
-            <Button className="mt-40">{loading ? <Loading />: 'Finish'}</Button>
+            <Button className="mt-40">
+              {isLoading ? <Loading /> : 'Finish'}
+            </Button>
           </div>
         </div>
       </form>

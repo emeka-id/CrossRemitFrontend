@@ -10,32 +10,30 @@ import { IAuth, ILogin } from 'types/user';
 import { IResponse } from 'types/response';
 import styles from './login.module.scss';
 import { Loading } from 'assets/svg';
+import { useMutation } from 'react-query';
+import { AxiosResponse } from 'axios';
 
 const Login = () => {
   const { setAuthAndCache } = useContext(AuthContext);
-  const [loading, setLoading] = useState(false);
-  let history = useHistory();
-  
-  const submit = async () => {
-    setLoading(true);
-    try {
-      const res = await LoginApiService(inputs);
-      setLoading(false);
-      const {success, data}:IResponse<IAuth> = res.data;
-      if(success) {
+  const { mutate, isLoading } = useMutation(LoginApiService, {
+    onSuccess: (res: AxiosResponse<IResponse<IAuth>>) => {
+      const { success, data } = res.data;
+      if (success) {
         setAuthAndCache(`${data?.type} ${data?.token}`);
         history.push(Page.dashboard);
         return;
       }
-    } catch (error) {
-      setLoading(false);
-      //TODO: Type response
+    },
+    onError: error => {
       const { response, message = null } = handleError(error);
-    } 
-  };
+      console.log(response);
+    },
+  });
+  let history = useHistory();
 
-  const initState = {email: '', password: ''};
-  const { inputs, handleChange, handleSubmit } = useForm<ILogin>(submit, initState);
+  const submit = () => mutate(inputs)
+  const initState = { email: '', password: '' };
+  const { inputs, handleChange, handleSubmit } = useForm<ILogin>(initState, submit);
 
   return (
     <div>
@@ -68,7 +66,7 @@ const Login = () => {
               <input type="checkbox" className="mr-5" /> Remember me
             </label>
           </div>
-          <Button type="submit">{loading ? <Loading/>: 'Login'}</Button>
+          <Button type="submit">{isLoading ? <Loading /> : 'Login'}</Button>
         </div>
       </form>
     </div>
