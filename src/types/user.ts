@@ -1,11 +1,11 @@
-import { Role } from 'core/utils/enum';
+import { Role } from "core/utils/enum";
 
 export interface IAuth {
   type: string;
   token: string;
 }
 
-export interface ILogin  extends IEmail{
+export interface ILogin extends IEmail {
   password: string;
 }
 
