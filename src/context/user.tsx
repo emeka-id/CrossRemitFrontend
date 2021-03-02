@@ -11,15 +11,9 @@ import React, {
 import { ISignup, IUser } from "types/user";
 
 const initState = {
-  signUpState: {
-    email: "",
-    firstName: "",
-    lastName: "",
-    password: "",
-    role: Role.Individual,
-  },
+  signUpState: {} as ISignup,
   updateSignupState: (value: object) => {},
-  currentUser: {} || null,
+  currentUser: {} as IUser,
   updateCurrentUser: (value: IUser) => {},
 };
 
@@ -35,7 +29,12 @@ export const UserProviderContainer: FC<Props> = ({ children }) => {
   const [signUpState, setSignUpState] = useState<ISignup>(
     initState.signUpState
   );
-  const [currentUser, setCurrentUser] = useState<IUser | null>(null);
+  const [currentUser, setCurrentUser] = useState<IUser>(initState.currentUser);
+
+  useEffect(() => {
+    let storedUser = secureStorage.getItem(Constants.currentUser);
+    if (typeof storedUser === "string") setCurrentUser(JSON.parse(storedUser));
+  }, []);
 
   const updateSignupState = (value: object) =>
     setSignUpState((signUpState) => ({ ...signUpState, ...value }));
