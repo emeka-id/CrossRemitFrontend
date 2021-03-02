@@ -1,5 +1,5 @@
 import { Button, Card, CustomInput } from "components";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./profile.module.scss";
 import profile from "../../../../assets/img/profile.png";
 
@@ -8,22 +8,16 @@ import Axios from "../../../../core/services/axios";
 import { Loading } from "assets/svg";
 import { UserDetails, States } from "./defaults";
 
-const Profile = () => {
-  const [res, setRes] = useState(UserDetails);
+import UserContext from "../../../../context/user";
 
+const Profile = () => {
   const baseUrl = "https://rabbi-capital-api.herokuapp.com/api/v1/user/me";
 
   const mutation = useMutation((updateUser) =>
     Axios.patch(baseUrl, updateUser)
   );
 
-  const { isLoading, isError, data, error } = useQuery(
-    "getExistingUserInfo",
-    async () => {
-      const { data } = await Axios.get(`${baseUrl}`);
-      setRes({ ...res, ...data.data });
-    }
-  );
+  const user: any = useContext(UserContext);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -32,6 +26,7 @@ const Profile = () => {
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
   const [town, setTown] = useState("");
+  const [imageString, setImageString] = useState<File | string>("");
 
   const update = {
     firstName: firstName,
@@ -41,6 +36,21 @@ const Profile = () => {
     country: country,
     state: state,
     town: town,
+    pic: imageString,
+  };
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let file = e.target.files;
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = _handleReader.bind(this);
+      reader.readAsBinaryString(file[0]);
+    }
+  };
+
+  const _handleReader = (readerEvent: any) => {
+    let binaryString = readerEvent.target.result;
+    setImageString(btoa(binaryString));
   };
 
   const handleSubmit = () => {
@@ -55,13 +65,11 @@ const Profile = () => {
           <div className={styles.name_grid}>
             <input
               type="text"
-              defaultValue={res.firstName}
               placeholder="First name"
               onChange={(e) => setFirstName(e.currentTarget.value)}
             />
             <input
               type="text"
-              defaultValue={res.lastName}
               placeholder="Last name"
               onChange={(e) => setLastName(e.currentTarget.value)}
             />
@@ -71,7 +79,6 @@ const Profile = () => {
           <label htmlFor="date_of_birth">Date of Birth</label>
           <input
             type="date"
-            defaultValue={res.dob}
             name="date_of_birth"
             id=""
             onChange={(e) => setDob(e.currentTarget.value)}
@@ -80,7 +87,6 @@ const Profile = () => {
         <div className="form-group">
           <label htmlFor="gender">Gender</label>
           <select
-            defaultValue={res.gender}
             onChange={(e) => setGender(e.currentTarget.value)}
             name="select_gender"
             id=""
@@ -93,7 +99,6 @@ const Profile = () => {
         <div className="form-group">
           <label htmlFor="country">Country</label>
           <select
-            defaultValue={res.country}
             onChange={(e) => setCountry(e.currentTarget.value)}
             name="select_country"
             id=""
@@ -105,7 +110,6 @@ const Profile = () => {
         <div className="form-group">
           <label htmlFor="state">State</label>
           <select
-            defaultValue={res.state}
             onChange={(e) => setState(e.currentTarget.value)}
             name="select_state"
             id=""
@@ -130,7 +134,7 @@ const Profile = () => {
           {mutation.isLoading ? <Loading /> : "Save Settings"}
         </Button>
         {mutation.isLoading ? <label>Saving...</label> : null}
-        {mutation.isError ? <label>An error occured {error}...</label> : null}
+        {mutation.isError ? <label>An error occured...</label> : null}
         {mutation.isSuccess ? <label>Saved...</label> : null}
       </div>
       <div className="right-column">
@@ -139,11 +143,18 @@ const Profile = () => {
           <Card variant="outline">
             <div className="flex">
               <div className={styles.image_box}>
-                <img src={profile} alt="" />
+                <img src={`data:image/png;base64,${imageString}`} alt="" />
               </div>
-              <Button variant="outline" className="ml-30">
+              <input
+                name="profile-pic"
+                type="file"
+                accept=".png, .jpeg, .jpg"
+                className="ml-30"
+                onChange={handleImageUpload}
+              />
+              {/*<Button variant="outline" className="ml-30">
                 Add New
-              </Button>
+              </Button>*/}
             </div>
           </Card>
         </div>

@@ -1,11 +1,11 @@
-import { Button, Card, CustomInput, Tabs } from 'components';
-import React from 'react';
-import styles from './settings.module.scss';
-import Tab from '../../../components/tabs/tab'
-import BankDetails from './bank-details';
-import Verification from './verification';
-import Profile from './profile';
-import Password from './password';
+import { Button, Card, CustomInput, Tabs } from "components";
+import React from "react";
+import styles from "./settings.module.scss";
+import Tab from "../../../components/tabs/tab";
+import BankDetails from "./bank-details";
+import Verification from "./verification";
+import Profile from "./profile";
+import Password from "./password";
 
 const Settings = () => {
   return (
@@ -19,7 +19,7 @@ const Settings = () => {
           <Tab title="Verification">
             <Verification />
           </Tab>
-          <Tab title='Profile'>
+          <Tab title="Profile">
             <Profile />
           </Tab>
           <Tab title="Password">
