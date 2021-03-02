@@ -11,7 +11,6 @@ const Password = () => {
           <input
             type="password"
             name="old_password"
-            id=""
             placeholder="Old Password"
           />
         </div>
@@ -19,7 +18,6 @@ const Password = () => {
           <input
             type="password"
             name="new_password"
-            id=""
             placeholder="New Password"
           />
         </div>
