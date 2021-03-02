@@ -30,8 +30,22 @@ const Profile = () => {
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState("");
   const [country, setCountry] = useState("");
+  const [state, setState] = useState("");
+  const [town, setTown] = useState("");
 
-  console.log(res);
+  const update = {
+    firstName: firstName,
+    lastName: lastName,
+    dob: dob,
+    gender: gender,
+    country: country,
+    state: state,
+    town: town,
+  };
+
+  const handleSubmit = () => {
+    console.log(update);
+  };
 
   return (
     <div className={styles.profile}>
@@ -43,11 +57,13 @@ const Profile = () => {
               type="text"
               defaultValue={res.firstName}
               placeholder="First name"
+              onChange={(e) => setFirstName(e.currentTarget.value)}
             />
             <input
               type="text"
               defaultValue={res.lastName}
               placeholder="Last name"
+              onChange={(e) => setLastName(e.currentTarget.value)}
             />
           </div>
         </div>
@@ -58,39 +74,59 @@ const Profile = () => {
             defaultValue={res.dob}
             name="date_of_birth"
             id=""
+            onChange={(e) => setDob(e.currentTarget.value)}
           />
         </div>
         <div className="form-group">
           <label htmlFor="gender">Gender</label>
-          <select defaultValue={res.gender} name="select_gender" id="">
+          <select
+            defaultValue={res.gender}
+            onChange={(e) => setGender(e.currentTarget.value)}
+            name="select_gender"
+            id=""
+          >
             <option value="default">Select your gender</option>
-            <option value="gender_male">Male</option>
-            <option value="gender_female">Female</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
           </select>
         </div>
         <div className="form-group">
           <label htmlFor="country">Country</label>
-          <select defaultValue={res.country} name="select_country" id="">
+          <select
+            defaultValue={res.country}
+            onChange={(e) => setCountry(e.currentTarget.value)}
+            name="select_country"
+            id=""
+          >
             <option value="default">Select your country</option>
-            <option value="country_nigeria">Nigeria</option>
+            <option value="Nigeria">Nigeria</option>
           </select>
         </div>
         <div className="form-group">
           <label htmlFor="state">State</label>
-          <select defaultValue={res.state} name="select_state" id="">
+          <select
+            defaultValue={res.state}
+            onChange={(e) => setState(e.currentTarget.value)}
+            name="select_state"
+            id=""
+          >
             <option value="default">Select your state</option>
-            <option value="state_abia">Abia</option>
+            <option value="Abia">Abia</option>
           </select>
         </div>
         <div className="form-group">
           <label htmlFor="town">Town</label>
-          <select defaultValue={res.town} name="select_town" id="">
+          <select
+            onChange={(e) => setTown(e.currentTarget.value)}
+            name="select_town"
+            id=""
+          >
             <option value="default">Enter your town/city</option>
-            <option value="town">Aba</option>
+            <option value="Aba">Aba</option>
           </select>
         </div>
 
-        <Button type="submit">
+        <Button type="submit" onClick={handleSubmit}>
           {mutation.isLoading ? <Loading /> : "Save Settings"}
         </Button>
         {mutation.isLoading ? <label>Saving...</label> : null}

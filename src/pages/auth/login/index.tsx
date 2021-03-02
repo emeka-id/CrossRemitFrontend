@@ -4,7 +4,7 @@ import { LoginApiService } from "core/services/user";
 import { Page } from "core/utils/constants";
 import { handleError } from "core/utils/error-handler";
 import useForm from "core/utils/use-form";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { IAuth, ILogin } from "types/user";
 import { IResponse } from "types/response";
@@ -12,14 +12,18 @@ import styles from "./login.module.scss";
 import { Loading } from "assets/svg";
 import { useMutation } from "react-query";
 import { AxiosResponse } from "axios";
+import UserContext from "context/user";
 
 const Login = () => {
   const { setAuthAndCache } = useContext(AuthContext);
+  const { updateCurrentUser } = useContext(UserContext);
+
   const { mutate, isLoading } = useMutation(LoginApiService, {
     onSuccess: (res: AxiosResponse<IResponse<IAuth>>) => {
       const { success, data } = res.data;
       if (success) {
         setAuthAndCache(`${data?.type} ${data?.token}`);
+        updateCurrentUser(data?.user);
         history.push(Page.dashboard);
         return;
       }
