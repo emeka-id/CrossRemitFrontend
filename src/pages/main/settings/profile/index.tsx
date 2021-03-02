@@ -57,6 +57,8 @@ const Profile = () => {
     console.log(update);
   };
 
+  const { currentUser } = user;
+
   return (
     <div className={styles.profile}>
       <div className="left-column">
@@ -66,11 +68,13 @@ const Profile = () => {
             <input
               type="text"
               placeholder="First name"
+              defaultValue={user.currentUser.firstName}
               onChange={(e) => setFirstName(e.currentTarget.value)}
             />
             <input
               type="text"
               placeholder="Last name"
+              defaultValue={user.currentUser.lastName}
               onChange={(e) => setLastName(e.currentTarget.value)}
             />
           </div>
@@ -143,7 +147,14 @@ const Profile = () => {
           <Card variant="outline">
             <div className="flex">
               <div className={styles.image_box}>
-                <img src={`data:image/png;base64,${imageString}`} alt="" />
+                <img
+                  src={
+                    user.currentUser.pic
+                      ? `data:image/png;base64,${imageString}`
+                      : profile
+                  }
+                  alt=""
+                />
               </div>
               <input
                 name="profile-pic"
