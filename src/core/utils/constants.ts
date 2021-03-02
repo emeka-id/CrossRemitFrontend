@@ -1,6 +1,7 @@
 export const Constants = {
     token: 'Token',
     type: 'Type',
+    currentUser: 'currentUser'
 }
 
 export const Page = {

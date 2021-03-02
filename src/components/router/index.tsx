@@ -1,3 +1,4 @@
+import { UserProviderContainer } from 'context/user';
 import React, { lazy, Suspense } from 'react';
 
 import { Switch, Redirect } from 'react-router-dom';
@@ -9,6 +10,7 @@ const Auth = lazy(() => import(/* webpackChunkName: "Auth" */ 'pages/auth'));
 const Main = lazy(() => import(/* webpackChunkName: "Main" */ 'pages/main'));
 
 const AppRouter = () => (
+  <UserProviderContainer>
     <Suspense fallback={<Loader />}>
       <Switch>
         <GuardRoute path="/auth" component={Auth} />
@@ -20,5 +22,6 @@ const AppRouter = () => (
         />
       </Switch>
     </Suspense>
+  </UserProviderContainer>
 );
 export default AppRouter;
