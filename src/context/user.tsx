@@ -1,19 +1,19 @@
 import { Constants } from 'core/utils/constants';
 import { Role } from 'core/utils/enum';
 import { SecureStorage } from 'core/utils/storage';
-import React, { createContext, FC, ReactChild, useState } from 'react';
+import React, {
+  createContext,
+  FC,
+  ReactChild,
+  useEffect,
+  useState,
+} from 'react';
 import { ISignup, IUser } from 'types/user';
 
 const initState = {
-  signUpState: {
-    email: '',
-    firstName: '',
-    lastName: '',
-    password: '',
-    role: Role.Individual,
-  },
+  signUpState: {} as ISignup,
   updateSignupState: (value: object) => {},
-  currentUser: {} || null,
+  currentUser: {} as IUser,
   updateCurrentUser: (value: IUser) => {},
 };
 
@@ -29,13 +29,19 @@ export const UserProviderContainer: FC<Props> = ({ children }) => {
   const [signUpState, setSignUpState] = useState<ISignup>(
     initState.signUpState
   );
-  const [currentUser, setCurrentUser] = useState<IUser | null>(null);
+  const [currentUser, setCurrentUser] = useState<IUser>(initState.currentUser);
+
+  useEffect(() => {
+    let storedUser = secureStorage.getItem(Constants.currentUser);
+    if (typeof storedUser === 'string') setCurrentUser(JSON.parse(storedUser));
+  }, []);
 
   const updateSignupState = (value: object) =>
     setSignUpState((signUpState) => ({ ...signUpState, ...value }));
 
   const updateCurrentUser = (value: IUser) => {
-    if (value) secureStorage.storeItem(Constants.currentUser, JSON.stringify(value));
+    if (value)
+      secureStorage.storeItem(Constants.currentUser, JSON.stringify(value));
     setCurrentUser((currentUser) => ({ ...currentUser, ...value }));
   };
 
