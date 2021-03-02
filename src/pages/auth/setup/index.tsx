@@ -7,7 +7,7 @@ import { SignupApiService } from 'core/services/user';
 import { Page } from 'core/utils/constants';
 import { handleError } from 'core/utils/error-handler';
 import useForm from 'core/utils/use-form';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import { IResponse } from 'types/response';
@@ -15,7 +15,7 @@ import { IAuth, ISignup } from 'types/user';
 import styles from './setup.module.scss';
 
 const Setup = () => {
-  const { signUpState } = useContext(UserContext);
+  const { signUpState, updateCurrentUser } = useContext(UserContext);
   const { setAuthAndCache } = useContext(AuthContext);
   let history = useHistory();
 
@@ -27,6 +27,7 @@ const Setup = () => {
     onSuccess: (res: AxiosResponse<IResponse<IAuth>>) => {
       const { success, data } = res.data;
       if (success) {
+        updateCurrentUser(data?.user);
         setAuthAndCache(`${data?.type} ${data?.token}`);
         history.push(Page.dashboard);
         return;
