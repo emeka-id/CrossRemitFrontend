@@ -1,4 +1,4 @@
-import { Role } from 'core/utils/enum';
+import { Role } from "core/utils/enum";
 
 export interface IAuth {
   type: string;

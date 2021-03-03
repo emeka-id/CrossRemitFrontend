@@ -1,14 +1,14 @@
-import { Constants } from 'core/utils/constants';
-import { Role } from 'core/utils/enum';
-import { SecureStorage } from 'core/utils/storage';
+import { Constants } from "core/utils/constants";
+import { Role } from "core/utils/enum";
+import { SecureStorage } from "core/utils/storage";
 import React, {
   createContext,
   FC,
   ReactChild,
   useEffect,
   useState,
-} from 'react';
-import { ISignup, IUser } from 'types/user';
+} from "react";
+import { ISignup, IUser } from "types/user";
 
 const initState = {
   signUpState: {} as ISignup,
@@ -33,7 +33,7 @@ export const UserProviderContainer: FC<Props> = ({ children }) => {
 
   useEffect(() => {
     let storedUser = secureStorage.getItem(Constants.currentUser);
-    if (typeof storedUser === 'string') setCurrentUser(JSON.parse(storedUser));
+    if (typeof storedUser === "string") setCurrentUser(JSON.parse(storedUser));
   }, []);
 
   const updateSignupState = (value: object) =>
