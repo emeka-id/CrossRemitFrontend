@@ -1,5 +1,5 @@
 import { Button, Card, CustomInput } from "components";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import styles from "./profile.module.scss";
 import profile from "../../../../assets/img/profile.png";
 
@@ -10,15 +10,13 @@ import { IUser } from "../../../../types/user";
 
 import UserContext from "../../../../context/user";
 import useForm from "core/utils/use-form";
-import { UpdateUserService } from "core/services/user";
+import { UpdateUserApiService } from "core/services/user";
 import { IResponse } from "../../../../types/response";
 import { AxiosResponse } from "axios";
 import { handleError } from "core/utils/error-handler";
 
 const Profile = () => {
-  const baseUrl = "https://rabbi-capital-api.herokuapp.com/api/v1/user/me";
-
-  const { mutate, isLoading } = useMutation(UpdateUserService, {
+  const { mutate, isLoading } = useMutation(UpdateUserApiService, {
     onSuccess: (res: AxiosResponse<IResponse<IUser>>) => {
       const { data } = res.data;
       if (data) {
@@ -34,23 +32,6 @@ const Profile = () => {
 
   const { currentUser, updateCurrentUser } = useContext(UserContext);
 
-  // const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   let file = e.target.files;
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onload = _handleReader.bind(this);
-  //     reader.readAsBinaryString(file[0]);
-  //   }
-  // };
-
-  // const _handleReader = (readerEvent: any) => {
-  //   let binaryString = readerEvent.target.result;
-  //   setImageString(btoa(binaryString));
-  // };
-
-  // const handleSubmit = () => {
-  //   console.log(update);
-  // };
   const submit = () => mutate(inputs);
   const { inputs, handleChange, handleSubmit } = useForm<IUser>(
     currentUser,

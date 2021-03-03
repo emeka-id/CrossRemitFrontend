@@ -1,6 +1,6 @@
-import { Button } from 'components';
-import React from 'react';
-import styles from './password.module.scss';
+import { Button } from "components";
+import React from "react";
+import styles from "./password.module.scss";
 
 const Password = () => {
   return (

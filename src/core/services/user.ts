@@ -13,6 +13,6 @@ export const SignupApiService = (credientials: ISignup) => {
   return Axios.post("/auth", credientials);
 };
 
-export const UpdateUserService = (credentials: IUser) => {
+export const UpdateUserApiService = (credentials: IUser) => {
   return Axios.patch("/user/me", credentials);
 };
