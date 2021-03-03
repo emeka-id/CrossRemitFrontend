@@ -1,5 +1,5 @@
-import { ChangeEvent, FormEvent } from 'react';
-import { useState } from 'react';
+import { ChangeEvent, FormEvent } from "react";
+import { useState } from "react";
 
 const useForm = <T>(initState: T, callback: () => void) => {
   const [inputs, setInputs] = useState<T>(initState);
@@ -8,7 +8,9 @@ const useForm = <T>(initState: T, callback: () => void) => {
     callback();
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
+  ) => {
     e.persist();
     setInputs((inputs) => ({ ...inputs, [e.target.name]: e.target.value }));
   };

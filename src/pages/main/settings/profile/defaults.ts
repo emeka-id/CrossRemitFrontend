@@ -1,18 +1,3 @@
-export let UserDetails = {
-  phone: "",
-  firstName: "",
-  lastName: "",
-  dob: "",
-  pic: "",
-  gender: "",
-  email: "",
-  country: "",
-  state: "",
-  town: "",
-  street: "",
-  role: "",
-};
-
 export let States = [
   "Abia",
   "Adamawa",
