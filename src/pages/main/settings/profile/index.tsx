@@ -1,19 +1,19 @@
-import { Button, Card, CustomInput } from "components";
-import React, { useContext } from "react";
-import styles from "./profile.module.scss";
-import profile from "../../../../assets/img/profile.png";
+import { Button, Card, CustomInput } from 'components';
+import React, { useContext } from 'react';
+import styles from './profile.module.scss';
+import profile from '../../../../assets/img/profile.png';
 
-import { useMutation } from "react-query";
-import { Loading } from "assets/svg";
-import { States } from "./defaults";
-import { IUser } from "../../../../types/user";
+import { useMutation } from 'react-query';
+import { Loading } from 'assets/svg';
+import { States } from './defaults';
+import { IUser } from '../../../../types/user';
 
-import UserContext from "../../../../context/user";
-import useForm from "core/utils/use-form";
-import { UpdateUserApiService } from "core/services/user";
-import { IResponse } from "../../../../types/response";
-import { AxiosResponse } from "axios";
-import { handleError } from "core/utils/error-handler";
+import UserContext from '../../../../context/user';
+import useForm from 'core/utils/use-form';
+import { UpdateUserApiService } from 'core/services/user';
+import { IResponse } from '../../../../types/response';
+import { AxiosResponse } from 'axios';
+import { handleError } from 'core/utils/error-handler';
 
 const Profile = () => {
   const { mutate, isLoading } = useMutation(UpdateUserApiService, {
@@ -143,7 +143,7 @@ const Profile = () => {
           </div>
 
           <Button type="submit">
-            {isLoading ? <Loading /> : "Save Settings"}
+            {isLoading ? <Loading /> : 'Save Settings'}
           </Button>
         </div>
         <div className="right-column">
