@@ -1,4 +1,4 @@
-export interface IBank {
+export interface IBankDetails {
   name: string;
   slug: string;
   code: string;
@@ -12,4 +12,10 @@ export interface IBank {
   id: number;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface IBankResolve {
+  account_number: string;
+  account_name: string;
+  bank_id: number;
 }

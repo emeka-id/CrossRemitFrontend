@@ -4,15 +4,18 @@ import styles from './bank-details.module.scss';
 
 import useForm from '../../../../core/utils/use-form';
 import { IBank, IUser } from 'types/user';
+import { IBankDetails } from 'types/bank';
 import UserContext from 'context/user';
 import { useMutation, useQuery } from 'react-query';
 import { UpdateUserApiService } from '../../../../core/services/user';
 import { AxiosResponse } from 'axios';
-import Axios from 'core/services/axios';
 import { IResponse } from 'types/response';
 import { handleError } from 'core/utils/error-handler';
 import { Loading } from 'assets/svg';
-import { BankListApiService } from 'core/services/bank';
+import {
+  BankListApiService,
+  VerifyAccountNameApiService,
+} from 'core/services/bank';
 
 const BankDetails = () => {
   const { currentUser, updateCurrentUser } = useContext(UserContext);
@@ -46,18 +49,12 @@ const BankDetails = () => {
   );
 
   const bankList = useQuery('getBankList', BankListApiService);
-
-  const verifyAcc = useQuery(
-    'accName',
-    async () => {
-      const baseURL = 'https://rabbi-capital-api.herokuapp.com/api/v1';
-      const { accountNumber, sortCode } = inputs;
-      const { data } = await Axios.get(
-        `${baseURL}/bank/resolve/${accountNumber}/${sortCode}`
-      );
-      return data;
-    },
-    { enabled: inputs.accountNumber?.length == 10 }
+  const verifyAccountName = useQuery(
+    ['bankResolve', inputs],
+    () => VerifyAccountNameApiService(inputs),
+    {
+      enabled: inputs.accountNumber?.length === 10 && inputs.sortCode != '',
+    }
   );
 
   return (
@@ -73,11 +70,13 @@ const BankDetails = () => {
             >
               {bankList.isLoading
                 ? ''
-                : bankList.data.data.map((el: Object | any, index: number) => (
-                    <option key={index} value={el.code}>
-                      {el.name}
-                    </option>
-                  ))}
+                : bankList?.data?.data.map(
+                    (el: IBankDetails, index: number) => (
+                      <option key={index} value={el.code}>
+                        {el.name}
+                      </option>
+                    )
+                  )}
             </select>
           </div>
           <div className="form-group">
@@ -88,20 +87,35 @@ const BankDetails = () => {
               type="text"
               onChange={handleChange}
             />
+            {!verifyAccountName.data?.success && (
+              <small className="text-red">
+                {verifyAccountName.data?.message}
+              </small>
+            )}
           </div>
 
-          <div className="form-group">
-            <label>Account name</label>
-            <input
-              type="text"
-              defaultValue={
-                verifyAcc.isSuccess ? verifyAcc.data.data.account_name : null
-              }
-              name="account_name"
-              disabled
-            />
-          </div>
-          <Button className="mt-20">
+          {verifyAccountName.isLoading ? (
+            <div>
+              <Loading />
+            </div>
+          ) : (
+            verifyAccountName.isSuccess &&
+            verifyAccountName.data?.success && (
+              <div className="form-group">
+                <label>Account name</label>
+                <input
+                  type="text"
+                  defaultValue={verifyAccountName.data?.data?.account_name}
+                  name="account_name"
+                  disabled
+                />
+              </div>
+            )
+          )}
+          <Button
+            className="mt-20"
+            disabled={!inputs.accountNumber || !inputs.sortCode ? true : false}
+          >
             {updateBank.isLoading ? <Loading /> : 'Save'}
           </Button>
         </form>

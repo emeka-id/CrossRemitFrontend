@@ -1,16 +1,17 @@
-$spaceamounts: (5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 75, 100); 
+$spaceamounts: (5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 75, 100);
 $sides: (top, bottom, left, right);
 $alignment: (left, right, center);
 $colors: (
-    primary-color, 
-    primary-color-light, 
-    dark, 
-    light,
-    grey,
-    base-color,
-    secondary-color, 
-    secondary-color-light,
-    border-color
+  primary-color,
+  primary-color-light,
+  dark,
+  light,
+  grey,
+  base-color,
+  secondary-color,
+  secondary-color-light,
+  border-color,
+  red
 );
 
 @each $space in $spaceamounts {
@@ -20,33 +21,30 @@ $colors: (
     }
 
     .m-#{$space} {
-        margin: #{$space}px !important;
-      }
-  
-  
+      margin: #{$space}px !important;
+    }
+
     .p#{str-slice($side, 0, 1)}-#{$space} {
       padding-#{$side}: #{$space}px !important;
     }
 
     .p-#{$space} {
-        padding: #{$space}px !important;
-      }
-  
+      padding: #{$space}px !important;
+    }
   }
 }
 
 @each $color in $colors {
-    .#{$color}{
-        background-color: var(--#{$color}) !important;
-    }
-    .text-#{$color}{
-        color: var(--#{$color}) !important;
-    }
-}
-
-@each $align in $alignment {
-  .text-#{$align}{
-      text-align: #{$align} !important;
+  .#{$color} {
+    background-color: var(--#{$color}) !important;
+  }
+  .text-#{$color} {
+    color: var(--#{$color}) !important;
   }
 }
 
+@each $align in $alignment {
+  .text-#{$align} {
+    text-align: #{$align} !important;
+  }
+}
