@@ -1,4 +1,4 @@
-import { Role } from "core/utils/enum";
+import { Role } from 'core/utils/enum';
 
 export interface IAuth {
   type: string;
@@ -34,16 +34,20 @@ export interface IUser {
   state?: string;
   town?: string;
   street?: string;
-  bank?: {
-    accountNumber: string;
-    bankName: string;
-  };
-  idCard: {
-    image?: string;
-    type?: string;
-    status: 'Pending' | 'Verified' | 'Not Verified';
-  };
+  bank: IBank;
+  idCard: ICard;
   password?: string;
   role: string;
   validation?: string;
+}
+
+export interface ICard {
+  image?: string;
+  type?: string;
+  status: 'Pending' | 'Verified' | 'Not Verified';
+}
+export interface IBank {
+  accountNumber?: string;
+  bankName?: string;
+  sortCode?: string;
 }

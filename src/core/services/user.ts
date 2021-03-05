@@ -1,4 +1,4 @@
-import { IEmail, ILogin, ISignup, IUser } from 'types/user';
+import { IEmail, ILogin, ISignup, IUser, IBank } from 'types/user';
 import Axios from './axios';
 
 export const LoginApiService = (credentials: ILogin) => {
@@ -19,4 +19,9 @@ export const UpdateUserApiService = (credentials: IUser) => {
 
 export const ChangePasswordApiService = (credentials: IUser) => {
   return Axios.post('/user/change-password', credentials);
+};
+
+export const UpdateBankDetailsApiService = (credentials: IBank) => {
+  const { accountNumber, sortCode } = credentials;
+  return Axios.get(`/bank/resolve/${accountNumber}/${sortCode}`);
 };

@@ -3,7 +3,7 @@ import { AuthProviderContainer } from 'context/auth';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
-
+import { ReactQueryDevtools } from 'react-query/devtools';
 function App() {
   const queryClient = new QueryClient();
   return (
@@ -13,6 +13,7 @@ function App() {
           <AppRouter />
         </BrowserRouter>
       </AuthProviderContainer>
+      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 }

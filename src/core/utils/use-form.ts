@@ -1,5 +1,5 @@
-import { ChangeEvent, FormEvent } from "react";
-import { useState } from "react";
+import { ChangeEvent, FormEvent } from 'react';
+import { useState } from 'react';
 
 const useForm = <T>(initState: T, callback: () => void) => {
   const [inputs, setInputs] = useState<T>(initState);
