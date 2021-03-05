@@ -1,0 +1,18 @@
+.customUpload{
+    label{
+        display: flex;
+        padding: 0rem 2rem;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--body-font) !important;
+        color: var(--dark);
+        background: var(--primary-color);
+        border-radius: 5px;
+        border:1px solid var(--primary-color);
+        box-shadow: none;
+        cursor: pointer;
+        outline: none;
+        min-height: 45px;
+      }
+      
+}
