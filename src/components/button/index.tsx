@@ -4,7 +4,7 @@ import styles from './button.module.scss';
 type Props = {
   type?: 'button' | 'submit' | 'reset' | undefined;
   children?: ReactChild | ReactChild[];
-  variant?: 'outline' | 'block';
+  variant?: 'outline' | 'block' | 'stripped';
   className?: string;
   disabled?: boolean;
   onClick?: () => void;
