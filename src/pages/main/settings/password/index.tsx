@@ -10,6 +10,7 @@ import { useContext } from 'react';
 import UserContext from 'context/user';
 import { IUser } from 'types/user';
 import { Loading } from 'assets/svg';
+import toast from 'react-hot-toast';
 
 const Password = () => {
   const { currentUser } = useContext(UserContext);
@@ -20,6 +21,7 @@ const Password = () => {
     },
     onError: (error) => {
       const { response, message = null } = handleError(error);
+      toast.error(response.message);
     },
   });
 

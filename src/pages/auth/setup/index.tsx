@@ -1,18 +1,19 @@
-import { Loading } from "assets/svg";
-import { AxiosResponse } from "axios";
-import { Button } from "components";
-import AuthContext from "context/auth";
-import UserContext from "context/user";
-import { SignupApiService } from "core/services/user";
-import { Page } from "core/utils/constants";
-import { handleError } from "core/utils/error-handler";
-import useForm from "core/utils/use-form";
-import React, { useContext, useEffect } from "react";
-import { useMutation } from "react-query";
-import { useHistory } from "react-router-dom";
-import { IResponse } from "types/response";
-import { IAuth, ISignup } from "types/user";
-import styles from "./setup.module.scss";
+import { Loading } from 'assets/svg';
+import { AxiosResponse } from 'axios';
+import { Button } from 'components';
+import AuthContext from 'context/auth';
+import UserContext from 'context/user';
+import { SignupApiService } from 'core/services/user';
+import { Page } from 'core/utils/constants';
+import { handleError } from 'core/utils/error-handler';
+import useForm from 'core/utils/use-form';
+import React, { useContext, useEffect } from 'react';
+import { useMutation } from 'react-query';
+import { useHistory } from 'react-router-dom';
+import { IResponse } from 'types/response';
+import { IAuth, ISignup } from 'types/user';
+import toast from 'react-hot-toast';
+import styles from './setup.module.scss';
 
 const Setup = () => {
   const { signUpState, updateCurrentUser } = useContext(UserContext);
@@ -35,7 +36,7 @@ const Setup = () => {
     },
     onError: (error) => {
       const { response, message = null } = handleError(error);
-      console.log(response);
+      toast.error(response.message);
     },
   });
 
@@ -84,13 +85,13 @@ const Setup = () => {
         <div>
           <div>
             <label className="flex">
-              <input type="checkbox" className="mr-5" />{" "}
+              <input type="checkbox" className="mr-5" />{' '}
               <small>I agree to Rabbi terms & privacy policy</small>
             </label>
           </div>
           <div className=" text-right">
             <Button className="mt-40">
-              {isLoading ? <Loading /> : "Finish"}
+              {isLoading ? <Loading /> : 'Finish'}
             </Button>
           </div>
         </div>

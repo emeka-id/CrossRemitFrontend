@@ -11,6 +11,7 @@ import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import { IResponse } from 'types/response';
 import { ISignup } from 'types/user';
+import toast from 'react-hot-toast';
 
 const Signup = () => {
   const { signUpState, updateSignupState } = useContext(UserContext);
@@ -25,7 +26,7 @@ const Signup = () => {
     },
     onError: (error) => {
       const { response, message = null } = handleError(error);
-      console.log(response);
+      toast.error(response.message);
     },
   });
 

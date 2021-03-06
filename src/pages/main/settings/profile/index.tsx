@@ -14,6 +14,7 @@ import { UpdateUserApiService } from 'core/services/user';
 import { IResponse } from '../../../../types/response';
 import { AxiosResponse } from 'axios';
 import { handleError } from 'core/utils/error-handler';
+import toast from 'react-hot-toast';
 
 const Profile = () => {
   const { mutate, isLoading } = useMutation(UpdateUserApiService, {
@@ -26,7 +27,7 @@ const Profile = () => {
     },
     onError: (error) => {
       const { response, message = null } = handleError(error);
-      console.log(response);
+      toast.error(response.message);
     },
   });
 

@@ -16,6 +16,7 @@ import {
   BankListApiService,
   VerifyAccountNameApiService,
 } from 'core/services/bank';
+import toast from 'react-hot-toast';
 
 const BankDetails = () => {
   const { currentUser, updateCurrentUser } = useContext(UserContext);
@@ -30,6 +31,7 @@ const BankDetails = () => {
     },
     onError: (error) => {
       const { response, message = null } = handleError(error);
+      toast.error(response?.message);
     },
   });
 

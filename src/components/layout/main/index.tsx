@@ -11,7 +11,6 @@ type Props = {
 };
 
 const AppLayout = ({ children }: Props) => {
-
   const location = useLocation();
   const [toggle, setToggle] = useState(false);
 
@@ -19,37 +18,37 @@ const AppLayout = ({ children }: Props) => {
     {
       icon: <Analytics />,
       name: 'Dashboard',
-      link: '/app/home'
+      link: '/app/home',
     },
     {
       icon: <Analytics />,
       name: 'Invest',
-      link: '/app/invest'
+      link: '/app/invest',
     },
     {
       icon: <Analytics />,
       name: 'Deposit',
-      link: '/app/deposit'
+      link: '/app/deposit',
     },
     {
       icon: <Analytics />,
       name: 'My Investment',
-      link: '/app/my-investment'
+      link: '/app/my-investment',
     },
     {
       icon: <Analytics />,
       name: 'Transaction',
-      link: '/app/transaction'
+      link: '/app/transaction',
     },
     {
       icon: <Analytics />,
       name: 'Settings',
-      link: '/app/settings'
+      link: '/app/settings',
     },
     {
       icon: <Analytics />,
       name: 'Logout',
-      link: '/app/invest'
+      link: '/app/invest',
     },
   ];
 
@@ -61,20 +60,27 @@ const AppLayout = ({ children }: Props) => {
         <aside className={toggle ? 'showMobileNav' : 'hideMobileNav'}>
           <Card>
             <>
-              <i onClick={() => setToggle(!toggle)}><Close /></i>
+              <i onClick={() => setToggle(!toggle)}>
+                <Close />
+              </i>
               <ul>
                 {data.map((item, index) => (
-                  <li key={index} className={`flex${location.pathname === item.link ? ' activeLink' : ''}`}>
-                    <Link to={item.link} onClick={() => setToggle(false)}>{item.icon} <span className="ml-15">{item.name}</span></Link>
+                  <li
+                    key={index}
+                    className={`flex${
+                      location.pathname === item.link ? ' activeLink' : ''
+                    }`}
+                  >
+                    <Link to={item.link} onClick={() => setToggle(false)}>
+                      {item.icon} <span className="ml-15">{item.name}</span>
+                    </Link>
                   </li>
                 ))}
               </ul>
             </>
           </Card>
         </aside>
-        <main>
-          {children}
-        </main>
+        <main>{children}</main>
       </div>
     </div>
   );
