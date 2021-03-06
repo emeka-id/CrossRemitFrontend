@@ -1,9 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { Bell, Hamburger, Logo } from '../../assets/svg';
 import profile from '../../assets/img/profile-avatar.png';
 import styles from './navigation.module.scss';
 import Button from 'components/button';
 import { Link } from 'react-router-dom';
+import UserContext from 'context/user';
 
 type Props = {
   onClick?: () => void;
@@ -11,6 +12,7 @@ type Props = {
 
 const Navigation: FC<Props> = ({ onClick }) => {
   const local = localStorage.getItem('currentUser') ? true : false;
+  const { currentUser } = useContext(UserContext);
 
   return (
     <nav className={styles.navbar}>
@@ -39,6 +41,11 @@ const Navigation: FC<Props> = ({ onClick }) => {
               <div className={styles.badge}>0</div>
             </div>
             <img src={profile} alt="" className={styles.profileImg} />
+            <div className="ml-30 text-light">
+              {currentUser
+                ? `${currentUser.firstName} ${currentUser.lastName}`
+                : null}
+            </div>
           </div>
         )}
       </div>
