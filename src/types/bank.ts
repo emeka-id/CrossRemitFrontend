@@ -14,13 +14,7 @@ export interface IBankDetails {
   updatedAt: string;
 }
 
-export interface IBankResolve extends INameResolve {
-  data: INameResolve;
-  message: string;
-  success: boolean;
-}
-
-export interface INameResolve {
+export interface IBankResolve {
   account_number: string;
   account_name: string;
   bank_id: number;

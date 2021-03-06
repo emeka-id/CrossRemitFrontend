@@ -16,7 +16,7 @@ import {
   BankListApiService,
   VerifyAccountNameApiService,
 } from 'core/services/bank';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 const BankDetails = () => {
   const { currentUser, updateCurrentUser } = useContext(UserContext);
@@ -31,7 +31,7 @@ const BankDetails = () => {
     },
     onError: (error) => {
       const { response, message = null } = handleError(error);
-      toast.error(response?.message, { duration: 6000 });
+      toast.error(response?.message);
     },
   });
 
@@ -61,7 +61,6 @@ const BankDetails = () => {
 
   return (
     <div className={styles.bankDetails}>
-      <Toaster />
       <div>
         <form onSubmit={handleSubmit}>
           <div className="form-group">

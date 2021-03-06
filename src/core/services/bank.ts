@@ -18,7 +18,7 @@ export const VerifyAccountNameApiService = async (inputs: IBank) => {
     `/bank/resolve/${accountNumber}/${sortCode}`
   );
   !res.data.success
-    ? toast.error(`${res.data?.message}`, { duration: 6000 })
-    : toast.success(`${res.data.message}`, { duration: 6000 });
+    ? toast.error(`${res.data?.message}`)
+    : toast.success(`${res.data.message}`);
   return res.data;
 };

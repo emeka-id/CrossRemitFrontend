@@ -13,7 +13,7 @@ import { Loading } from 'assets/svg';
 import { useMutation } from 'react-query';
 import { AxiosResponse } from 'axios';
 import UserContext from 'context/user';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 const Login = () => {
   const { setAuthAndCache } = useContext(AuthContext);
@@ -31,7 +31,7 @@ const Login = () => {
     },
     onError: (error) => {
       const { response, message = null } = handleError(error);
-      toast.error(response?.message, { duration: 6000 });
+      toast.error(response?.message);
     },
   });
   let history = useHistory();
@@ -45,7 +45,6 @@ const Login = () => {
 
   return (
     <div>
-      <Toaster />
       <div className="text-center">
         <h2>Login To Rabbi</h2>
       </div>

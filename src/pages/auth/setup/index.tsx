@@ -12,7 +12,7 @@ import { useMutation } from 'react-query';
 import { useHistory } from 'react-router-dom';
 import { IResponse } from 'types/response';
 import { IAuth, ISignup } from 'types/user';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import styles from './setup.module.scss';
 
 const Setup = () => {
@@ -36,7 +36,7 @@ const Setup = () => {
     },
     onError: (error) => {
       const { response, message = null } = handleError(error);
-      toast.error(response.message, { duration: 6000 });
+      toast.error(response.message);
     },
   });
 
