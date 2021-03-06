@@ -16,6 +16,5 @@ export const VerifyAccountNameApiService = async (inputs: IBank) => {
   const res: AxiosResponse<IResponse<IBankResolve>> = await Axios.get(
     `/bank/resolve/${accountNumber}/${sortCode}`
   );
-  console.log(inputs);
   return res.data;
 };
