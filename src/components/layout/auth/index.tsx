@@ -20,11 +20,9 @@ const AuthLayout: FC<Props> = ({ children }) => {
         </div>
       </div>
       <div className={styles.main}>
-          <div className="container flex justify-content-center">
-            <Card className={styles.card}>
-                {children}
-            </Card>
-          </div>
+        <div className="container flex justify-content-center">
+          <Card className={styles.card}>{children}</Card>
+        </div>
       </div>
     </div>
   );
