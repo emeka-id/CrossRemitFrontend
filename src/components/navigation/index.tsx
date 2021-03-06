@@ -5,13 +5,16 @@ import styles from './navigation.module.scss';
 import Button from 'components/button';
 import { Link } from 'react-router-dom';
 import UserContext from 'context/user';
+import { SecureStorage } from 'core/utils/storage';
+import { Constants } from 'core/utils/constants';
 
 type Props = {
   onClick?: () => void;
 };
 
 const Navigation: FC<Props> = ({ onClick }) => {
-  const local = localStorage.getItem('currentUser') ? true : false;
+  const secureStorage = new SecureStorage();
+  const isLoggedIn = secureStorage.getItem(Constants.token);
   const { currentUser } = useContext(UserContext);
 
   return (
@@ -21,7 +24,7 @@ const Navigation: FC<Props> = ({ onClick }) => {
           <Hamburger onClick={onClick} />
           <Logo />
         </div>
-        {!local ? (
+        {!isLoggedIn ? (
           <div className="flex">
             <div className="mr-10">
               <Link to="/auth/login">
@@ -42,9 +45,7 @@ const Navigation: FC<Props> = ({ onClick }) => {
             </div>
             <img src={profile} alt="" className={styles.profileImg} />
             <div className="ml-30 text-light">
-              {currentUser
-                ? `${currentUser.firstName} ${currentUser.lastName}`
-                : null}
+              {`${currentUser?.firstName} ${currentUser?.lastName}`}
             </div>
           </div>
         )}
