@@ -1,4 +1,4 @@
-import { Analytics, Close, Invest, Investment } from 'assets/svg';
+import { Analytics, Close } from 'assets/svg';
 import Button from 'components/button';
 import Card from 'components/card';
 import { Constants, Page } from 'core/utils/constants';
