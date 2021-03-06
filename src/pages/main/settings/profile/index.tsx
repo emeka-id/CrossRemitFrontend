@@ -51,6 +51,7 @@ const Profile = () => {
                 placeholder="First name"
                 defaultValue={currentUser.firstName}
                 onChange={handleChange}
+                id="firstName"
               />
               <input
                 type="text"
@@ -58,6 +59,7 @@ const Profile = () => {
                 placeholder="Last name"
                 defaultValue={currentUser.lastName}
                 onChange={handleChange}
+                id="lastName"
               />
             </div>
           </div>
@@ -66,7 +68,7 @@ const Profile = () => {
             <input
               type="date"
               name="dob"
-              id=""
+              id="dob"
               defaultValue={currentUser.dob}
               onChange={handleChange}
             />
@@ -77,7 +79,7 @@ const Profile = () => {
               type="text"
               name="phone"
               defaultValue={currentUser.phone}
-              id=""
+              id="phone"
               onChange={handleChange}
             />
           </div>
@@ -87,7 +89,7 @@ const Profile = () => {
               defaultValue={currentUser.gender}
               onChange={handleChange}
               name="gender"
-              id=""
+              id="gender"
             >
               <option value="default">Select your gender</option>
               <option value="Male">Male</option>
@@ -100,7 +102,7 @@ const Profile = () => {
               defaultValue={currentUser.country}
               onChange={handleChange}
               name="country"
-              id=""
+              id="country"
             >
               <option value="default">Select your country</option>
               <option value="Nigeria">Nigeria</option>
@@ -112,7 +114,7 @@ const Profile = () => {
               defaultValue={currentUser.state}
               onChange={handleChange}
               name="state"
-              id=""
+              id="state"
             >
               <option value="default">Select your state</option>
               <option value="Abia">Abia</option>
@@ -124,7 +126,7 @@ const Profile = () => {
               defaultValue={currentUser.town}
               onChange={handleChange}
               name="town"
-              id=""
+              id="town"
             >
               <option value="default">Enter your town/city</option>
               <option value="Aba">Aba</option>
@@ -136,7 +138,7 @@ const Profile = () => {
               type="text"
               name="street"
               defaultValue={currentUser.street}
-              id=""
+              id="street"
               onChange={handleChange}
               placeholder="Enter street address"
             />
