@@ -1,22 +1,30 @@
-import React, { FC } from 'react'
-import styles from './custom-upload.module.scss'
+import { Button } from 'components'
+import React, { FC, useRef } from 'react'
 
-
+interface Function {
+    (selectedFile: React.ChangeEvent<HTMLInputElement>): void;
+}
 type Props = {
-    onFileChange?: any;
+    onFileChange: Function;
+    label?: string;
     [otherProps: string]: any
 }
 
-const CustomUpload: FC<Props> = ({
+const CustomUploadFlows: FC<Props> = ({
+    label,
     onFileChange,
     ...otherProps
 }) => {
+
+    const inputFile = useRef<HTMLInputElement>(null);
+
     return (
-        <div className={styles.customUpload}>
-            <input onChange={onFileChange} id={otherProps.id && otherProps.id} {...otherProps} />
-            <label htmlFor={otherProps.id && otherProps.id}>Choose file</label>
+        <div>
+            <input {...otherProps} ref={inputFile} type='file' hidden accept="image/*" onChange={(file) => onFileChange(file)} />
+            <Button type="button" onClick={() => inputFile?.current?.click()}>{label}</Button>
         </div>
     )
 }
 
-export default CustomUpload
+export default CustomUploadFlows
+
