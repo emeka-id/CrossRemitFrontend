@@ -1,4 +1,4 @@
-@import "../../../../styles/breakpoint";
+@import '../../../../styles/breakpoint';
 
 .verification {
   display: grid;
@@ -6,11 +6,10 @@
   .v_details {
     display: block;
 
-    @include sm{
+    @include sm {
       display: grid;
       grid-template-columns: auto 1fr auto;
       gap: 20px;
-       
     }
 
     .icon,
@@ -25,6 +24,16 @@
     .status_verified {
       background-color: green;
       color: white;
+      height: fit-content;
+      border-radius: 20px;
+      padding: 5px 40px;
+      font-size: 10px;
+      margin: auto;
+    }
+
+    .status_pending {
+      background-color: #ffd200;
+      color: black;
       height: fit-content;
       border-radius: 20px;
       padding: 5px 40px;

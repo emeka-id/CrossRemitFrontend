@@ -22,7 +22,7 @@ const Profile = () => {
     onSuccess: (res: AxiosResponse<IResponse<IUser>>) => {
       const { data } = res.data;
       if (data) {
-        toast.success('Profile updated')
+        toast.success('Profile updated');
         updateCurrentUser(data);
         return;
       }
@@ -119,7 +119,11 @@ const Profile = () => {
               id="state"
             >
               <option value="default">Select your state</option>
-              <option value="Abia">Abia</option>
+              {States.map((el: string, index: number) => (
+                <option key={index} value={el}>
+                  {el}
+                </option>
+              ))}
             </select>
           </div>
           <div className="form-group">
@@ -155,14 +159,11 @@ const Profile = () => {
             <label htmlFor="profile_pic">Profile Picture</label>
             <Card variant="outline">
               <div className="flex">
-                  <img
-                    src={
-                      inputs.pic ? inputs.pic :
-                      currentUser.pic || placeholder
-                    }
-                    alt="Rabbi profile"
-                    className="profile-img medium mr-10"
-                  />
+                <img
+                  src={inputs.pic ? inputs.pic : currentUser.pic || placeholder}
+                  alt="Rabbi profile"
+                  className="profile-img medium mr-10"
+                />
                 <CustomUpload
                   name="pic"
                   type="file"
