@@ -10,7 +10,7 @@ type Props = {
     [otherProps: string]: any
 }
 
-const CustomUploadFlows: FC<Props> = ({
+const CustomUpload: FC<Props> = ({
     label,
     onFileChange,
     ...otherProps
@@ -20,11 +20,11 @@ const CustomUploadFlows: FC<Props> = ({
 
     return (
         <div>
-            <input {...otherProps} ref={inputFile} type='file' hidden accept="image/*" onChange={(file) => onFileChange(file)} />
+            <input {...otherProps} ref={inputFile}  hidden onChange={(file) => onFileChange(file)} />
             <Button type="button" onClick={() => inputFile?.current?.click()}>{label}</Button>
         </div>
     )
 }
 
-export default CustomUploadFlows
+export default CustomUpload
 
