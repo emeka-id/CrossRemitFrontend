@@ -22,6 +22,7 @@ const Profile = () => {
     onSuccess: (res: AxiosResponse<IResponse<IUser>>) => {
       const { data } = res.data;
       if (data) {
+        toast.success('Profile updated')
         updateCurrentUser(data);
         return;
       }
@@ -38,10 +39,6 @@ const Profile = () => {
     currentUser,
     submit
   );
-
-  useEffect(() => {
-    console.log(currentUser.pic)
-  }, [inputs])
 
   return (
     <form onSubmit={handleSubmit}>
