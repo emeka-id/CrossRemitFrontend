@@ -110,3 +110,58 @@ input, select {
 .form-group {
     margin-bottom: 15px;
 }
+
+
+.pic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    float: left;
+    object-fit: cover;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+  
+    &.small {
+      height: 36px;
+      width: 36px;
+    }
+  
+    &.medium {
+      height: 50px;
+      width: 50px;
+    }
+  
+    &.big {
+      height: 80px;
+      width: 80px;
+    }
+  
+    &.round {
+      border-radius: 50%;
+    }
+  
+    img {
+      flex: none;
+      height: 100%;
+    }
+}
+
+.profile-img {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+
+    &.small {
+      height: 36px;
+      width: 36px;
+    }
+
+    &.medium {
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }

@@ -1,30 +1,30 @@
-import { Button } from 'components'
-import React, { FC, useRef } from 'react'
+import { Button } from 'components';
+import React, { DetailedHTMLProps, FC, InputHTMLAttributes, useRef } from 'react';
 
-interface Function {
-    (selectedFile: React.ChangeEvent<HTMLInputElement>): void;
-}
-type Props = {
-    onFileChange: Function;
-    label?: string;
-    [otherProps: string]: any
-}
+interface Props extends Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, ""> {
+  label: string;
+  variant?: 'outline' | 'block' | 'stripped';
+};
 
 const CustomUpload: FC<Props> = ({
-    label,
-    onFileChange,
-    ...otherProps
+  label,
+  variant = 'outline',
+  ...rest
 }) => {
+  const inputFile = useRef<HTMLInputElement>(null);
 
-    const inputFile = useRef<HTMLInputElement>(null);
+  return (
+    <div>
+      <input {...rest} ref={inputFile} hidden />
+      <Button
+        type="button"
+        variant={variant}
+        onClick={() => inputFile?.current?.click()}
+      >
+        {label}
+      </Button>
+    </div>
+  );
+};
 
-    return (
-        <div>
-            <input {...otherProps} ref={inputFile}  hidden onChange={(file) => onFileChange(file)} />
-            <Button type="button" onClick={() => inputFile?.current?.click()}>{label}</Button>
-        </div>
-    )
-}
-
-export default CustomUpload
-
+export default CustomUpload;

@@ -55,7 +55,7 @@ const BankDetails = () => {
     ['bankResolve', inputs],
     () => VerifyAccountNameApiService(inputs),
     {
-      enabled: inputs.accountNumber?.length === 10 && inputs.sortCode != '',
+      enabled: inputs.accountNumber?.length === 10 && inputs.sortCode !== '',
     }
   );
 
@@ -67,7 +67,7 @@ const BankDetails = () => {
             <label>Beneficiary Bank</label>
             <select
               onChange={handleChange}
-              value={inputs.sortCode}
+              defaultValue={inputs.sortCode}
               name="sortCode"
             >
               {bankList.isLoading

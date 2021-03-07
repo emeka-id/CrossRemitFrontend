@@ -43,10 +43,7 @@ const Navigation: FC<Props> = ({ onClick }) => {
               <Bell />
               <div className={styles.badge}>0</div>
             </div>
-            <img src={profile} alt="" className={styles.profileImg} />
-            <div className="ml-30 text-light">
-              {`${currentUser?.firstName} ${currentUser?.lastName}`}
-            </div>
+            <img src={currentUser.pic || profile} alt="" className="profile-img medium" />
           </div>
         )}
       </div>
