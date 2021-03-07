@@ -1,7 +1,10 @@
 import { Analytics, Close } from 'assets/svg';
+import Button from 'components/button';
 import Card from 'components/card';
+import { Constants, Page } from 'core/utils/constants';
+import { SecureStorage } from 'core/utils/storage';
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import Navigation from '../../navigation';
 import styles from './main.module.scss';
 
@@ -12,6 +15,7 @@ type Props = {
 
 const AppLayout = ({ children }: Props) => {
   const location = useLocation();
+  const history = useHistory();
   const [toggle, setToggle] = useState(false);
 
   const data = [
@@ -45,12 +49,13 @@ const AppLayout = ({ children }: Props) => {
       name: 'Settings',
       link: '/app/settings',
     },
-    {
-      icon: <Analytics />,
-      name: 'Logout',
-      link: '/app/invest',
-    },
   ];
+
+  const handleLogOut = () => {
+    const secureStorage = new SecureStorage();
+    secureStorage.removeItem(Constants.token);
+    history.push('/auth/login');
+  };
 
   return (
     <div className={styles.layout}>
@@ -77,6 +82,7 @@ const AppLayout = ({ children }: Props) => {
                   </li>
                 ))}
               </ul>
+              <Button onClick={handleLogOut}>Logout</Button>
             </>
           </Card>
         </aside>
