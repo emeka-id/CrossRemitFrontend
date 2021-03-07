@@ -1,7 +1,7 @@
 import { Button, Card, CustomInput } from 'components';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styles from './profile.module.scss';
-import profile from '../../../../assets/img/profile.png';
+import placeholder from '../../../../assets/img/profile-avatar.png';
 
 import { useMutation } from 'react-query';
 import { Loading } from 'assets/svg';
@@ -15,12 +15,14 @@ import { IResponse } from '../../../../types/response';
 import { AxiosResponse } from 'axios';
 import { handleError } from 'core/utils/error-handler';
 import toast from 'react-hot-toast';
+import CustomUpload from 'components/custom-upload';
 
 const Profile = () => {
   const { mutate, isLoading } = useMutation(UpdateUserApiService, {
     onSuccess: (res: AxiosResponse<IResponse<IUser>>) => {
       const { data } = res.data;
       if (data) {
+        toast.success('Profile updated')
         updateCurrentUser(data);
         return;
       }
@@ -32,7 +34,6 @@ const Profile = () => {
   });
 
   const { currentUser, updateCurrentUser } = useContext(UserContext);
-
   const submit = () => mutate(inputs);
   const { inputs, handleChange, handleSubmit } = useForm<IUser>(
     currentUser,
@@ -154,25 +155,21 @@ const Profile = () => {
             <label htmlFor="profile_pic">Profile Picture</label>
             <Card variant="outline">
               <div className="flex">
-                <div className={styles.image_box}>
                   <img
                     src={
-                      currentUser.pic
-                        ? `data:image/png;base64,${currentUser.pic}`
-                        : profile
+                      inputs.pic ? inputs.pic :
+                      currentUser.pic || placeholder
                     }
-                    alt=""
+                    alt="Rabbi profile"
+                    className="profile-img medium mr-10"
                   />
-                </div>
-                <input
-                  name="profile-pic"
+                <CustomUpload
+                  name="pic"
                   type="file"
-                  accept=".png, .jpeg, .jpg"
-                  className="ml-30"
+                  onChange={handleChange}
+                  accept="image/*"
+                  label="Add Image"
                 />
-                {/*<Button variant="outline" className="ml-30">
-                Add New
-              </Button>*/}
               </div>
             </Card>
           </div>
