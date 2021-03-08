@@ -1,12 +1,13 @@
 import { Loading, Wallet } from 'assets/svg';
 import { AxiosResponse } from 'axios';
-import { Button, Card } from 'components';
+import { Button, Card, Modal } from 'components';
 import CustomUpload from 'components/custom-upload';
+import { IModalRef } from 'components/modal';
 import UserContext from 'context/user';
 import { UpdateUserApiService } from 'core/services/user';
 import { handleError } from 'core/utils/error-handler';
 import useForm from 'core/utils/use-form';
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import toast from 'react-hot-toast';
 import { useMutation } from 'react-query';
 import { IResponse } from 'types/response';
@@ -14,12 +15,15 @@ import { ICard, IUser } from 'types/user';
 import styles from './verification.module.scss';
 
 const Verification = () => {
+  const modal = useRef<IModalRef>(null);
+
   const { isLoading, mutate } = useMutation(UpdateUserApiService, {
     onSuccess: (res: AxiosResponse<IResponse<IUser>>) => {
       const { data } = res.data;
       if (data) {
         toast.success('ID Sent Successfully');
         updateCurrentUser(data);
+        modal?.current?.close();
         return;
       }
     },
@@ -67,24 +71,51 @@ const Verification = () => {
                 ) : currentUser.idCard.status == 'Verified' ? (
                   <span>{currentUser.idCard.status}</span>
                 ) : (
-                  <CustomUpload
-                    name="image"
-                    type="file"
-                    accept="image/*"
-                    variant="outline"
-                    onChange={handleChange}
-                    label="Upload ID"
-                  />
+                  <Button
+                    type="button"
+                    onClick={() => {
+                      modal?.current?.open();
+                    }}
+                  >
+                    Upload
+                  </Button>
                 )}
               </div>
             </div>
           </Card>
+
+          <Modal ref={modal}>
+            Please select type of identification and upload it
+            <div className="form-group mt-30">
+              <select
+                name="type"
+                onChange={handleChange}
+                defaultValue="Select your identification type"
+              >
+                <option value="drivers_license">Driver's License</option>
+                <option value="international_passport">
+                  International Passport
+                </option>
+                <option value="national_id_card">National ID Card</option>
+              </select>
+            </div>
+            <div className="form-group flex justify-content-between">
+              <CustomUpload
+                name="image"
+                type="file"
+                accept="image/*"
+                variant="outline"
+                onChange={handleChange}
+                label="Upload ID"
+              />
+              {currentUser.idCard.status && (
+                <Button type="submit">
+                  {isLoading ? <Loading /> : 'Send Identification'}
+                </Button>
+              )}
+            </div>
+          </Modal>
         </div>
-        {currentUser.idCard.status ? (
-          <></>
-        ) : (
-          <Button type="submit">{isLoading ? <Loading /> : 'Send ID'}</Button>
-        )}
       </form>
     </div>
   );
