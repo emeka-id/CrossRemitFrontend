@@ -80,7 +80,11 @@ const Verification = () => {
             </div>
           </Card>
         </div>
-        <Button type="submit">{isLoading ? <Loading /> : 'Send ID'}</Button>
+        {currentUser.idCard.status ? (
+          <></>
+        ) : (
+          <Button type="submit">{isLoading ? <Loading /> : 'Send ID'}</Button>
+        )}
       </form>
     </div>
   );
