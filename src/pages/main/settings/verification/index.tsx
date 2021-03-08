@@ -23,7 +23,6 @@ const Verification = () => {
       if (data) {
         toast.success('ID Sent Successfully');
         updateCurrentUser(data);
-        modal?.current?.close();
         return;
       }
     },
@@ -34,9 +33,10 @@ const Verification = () => {
   });
 
   const { currentUser, updateCurrentUser } = useContext(UserContext);
-  const submit = () => mutate({ ...currentUser, idCard: { ...inputs } });
+  const submit = () =>
+    mutate({ ...currentUser, idCard: { ...inputs, status: 'Pending' } });
 
-  const { image, type, status = 'Pending' }: ICard = currentUser.idCard;
+  const { image, type, status }: ICard = currentUser.idCard;
   const initIDCard = {
     image,
     type,
@@ -69,7 +69,9 @@ const Verification = () => {
                     {currentUser.idCard.status}
                   </span>
                 ) : currentUser.idCard.status == 'Verified' ? (
-                  <span>{currentUser.idCard.status}</span>
+                  <span className={styles.status_verified}>
+                    {currentUser.idCard.status}
+                  </span>
                 ) : (
                   <Button
                     type="button"
@@ -87,11 +89,7 @@ const Verification = () => {
           <Modal ref={modal}>
             Please select type of identification and upload it
             <div className="form-group mt-30">
-              <select
-                name="type"
-                onChange={handleChange}
-                defaultValue="Select your identification type"
-              >
+              <select name="type" onChange={handleChange}>
                 <option value="drivers_license">Driver's License</option>
                 <option value="international_passport">
                   International Passport
@@ -108,14 +106,14 @@ const Verification = () => {
                 onChange={handleChange}
                 label="Upload ID"
               />
-              {currentUser.idCard.status && (
-                <Button type="submit">
-                  {isLoading ? <Loading /> : 'Send Identification'}
-                </Button>
-              )}
             </div>
           </Modal>
         </div>
+        {currentUser.idCard.status === 'Not Verified' && (
+          <Button type="submit">
+            {isLoading ? <Loading /> : 'Send Identification'}
+          </Button>
+        )}
       </form>
     </div>
   );
