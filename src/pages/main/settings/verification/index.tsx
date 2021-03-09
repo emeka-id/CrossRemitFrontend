@@ -110,9 +110,16 @@ const Verification = () => {
           </Modal>
         </div>
         {currentUser.idCard.status === 'Not Verified' && (
-          <Button type="submit">
-            {isLoading ? <Loading /> : 'Send Identification'}
-          </Button>
+          <div>
+            <Button type="submit">
+              {isLoading ? <Loading /> : 'Send Identification'}
+            </Button>
+            {!currentUser.idCard && (
+              <span className="ml-30">
+                <img src={inputs.image} className="profile-img medium mr-10" />
+              </span>
+            )}
+          </div>
         )}
       </form>
     </div>
