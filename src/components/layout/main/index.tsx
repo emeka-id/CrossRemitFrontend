@@ -54,6 +54,7 @@ const AppLayout = ({ children }: Props) => {
   const handleLogOut = () => {
     const secureStorage = new SecureStorage();
     secureStorage.removeItem(Constants.token);
+    secureStorage.removeItem(Constants.currentUser);
     history.push('/auth/login');
   };
 

@@ -1,4 +1,4 @@
-@import "../../../../styles/breakpoint";
+@import '../../../../styles/breakpoint';
 
 .verification {
   display: grid;
@@ -6,11 +6,10 @@
   .v_details {
     display: block;
 
-    @include sm{
+    @include sm {
       display: grid;
       grid-template-columns: auto 1fr auto;
       gap: 20px;
-       
     }
 
     .icon,
@@ -32,8 +31,41 @@
       margin: auto;
     }
 
+    .status_pending {
+      background-color: #ffd200;
+      color: black;
+      height: fit-content;
+      border-radius: 20px;
+      padding: 5px 40px;
+      font-size: 10px;
+      margin: auto;
+    }
+
     .status_not_verified {
       margin: auto;
     }
   }
+}
+
+.id_card_form label {
+  display: inline-block;
+  text-align: center;
+  width: 250px;
+  padding: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border: solid 2.5px #838595;
+  transition: all 0.3s;
+  border-radius: 10px;
+  align-self: center;
+  justify-content: center;
+}
+
+.id_card_form input[type='radio'] {
+  display: none;
+}
+
+.id_card_form input[type='radio']:checked + label {
+  border: solid 3.5px #ffd200;
+  color: #12161c;
 }

@@ -6,10 +6,10 @@ import React, {
   useCallback,
   Ref,
   ReactChild,
-} from "react";
-import { createPortal } from "react-dom";
-import styles from "./modal.module.scss";
-import Card from "../card";
+} from 'react';
+import { createPortal } from 'react-dom';
+import styles from './modal.module.scss';
+import Card from '../card';
 
 type Props = {
   children?: ReactChild | ReactChild[];
@@ -22,7 +22,7 @@ export interface IModalRef {
   close: () => void;
 }
 
-const modalElement = document.getElementById("modal-root")!;
+const modalElement = document.getElementById('modal-root')!;
 
 const Modal = (
   { children, defaultOpened = false, fade = false }: Props,
@@ -49,15 +49,15 @@ const Modal = (
   );
 
   useEffect(() => {
-    if (isOpen) document.addEventListener("keydown", handleEscape, false);
+    if (isOpen) document.addEventListener('keydown', handleEscape, false);
     return () => {
-      document.removeEventListener("keydown", handleEscape, false);
+      document.removeEventListener('keydown', handleEscape, false);
     };
   }, [handleEscape, isOpen]);
 
   return createPortal(
     isOpen ? (
-      <div className={`${styles.modal} ${fade ? `${styles.modal_fade}` : ""}`}>
+      <div className={`${styles.modal} ${fade ? `${styles.modal_fade}` : ''}`}>
         <div className={styles.modal_overlay} onClick={close} />
         <span
           role="button"
