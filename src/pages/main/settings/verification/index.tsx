@@ -12,6 +12,7 @@ import toast from 'react-hot-toast';
 import { useMutation } from 'react-query';
 import { IResponse } from 'types/response';
 import { ICard, IUser } from 'types/user';
+import { IDCardTypes } from './defaults';
 import styles from './verification.module.scss';
 
 const Verification = () => {
@@ -49,7 +50,7 @@ const Verification = () => {
 
   return (
     <div className={styles.verification}>
-      <form onSubmit={handleSubmit}>
+      <form className={styles.id_card_form} onSubmit={handleSubmit}>
         <div>
           <Card variant="outline">
             <div className={styles.v_details}>
@@ -88,16 +89,23 @@ const Verification = () => {
 
           <Modal ref={modal}>
             Please select type of identification and upload it
-            <div className="form-group mt-30">
-              <select name="type" onChange={handleChange}>
-                <option value="drivers_license">Driver's License</option>
-                <option value="international_passport">
-                  International Passport
-                </option>
-                <option value="national_id_card">National ID Card</option>
-              </select>
+            <div className="mt-30">
+              <div className={styles.id_card_form}>
+                {IDCardTypes.map((el: string, index: number) => (
+                  <div key={index} className="mt-10">
+                    <input
+                      type="radio"
+                      name="type"
+                      id={el}
+                      value={el}
+                      onChange={handleChange}
+                    />
+                    <label htmlFor={el}>{el}</label>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="form-group flex justify-content-between">
+            <div className="form-group mt-30 flex justify-content-between">
               <CustomUpload
                 name="image"
                 type="file"
