@@ -51,3 +51,13 @@ export interface IBank {
   bankName?: string;
   sortCode?: string;
 }
+export interface IInvest {
+  duration: number;
+  name: string;
+  _id: string;
+}
+export interface IUserInvestment {
+  investment: string;
+  amount: number;
+  percent: number;
+}
