@@ -91,16 +91,16 @@ const Verification = () => {
             Please select type of identification and upload it
             <div className="mt-30">
               <div className={styles.id_card_form}>
-                {IDCardTypes.map((el: string, index: number) => (
+                {IDCardTypes.map((idCardTypes: string, index: number) => (
                   <div key={index} className="mt-10">
                     <input
                       type="radio"
                       name="type"
-                      id={el}
-                      value={el}
+                      id={idCardTypes}
+                      value={idCardTypes}
                       onChange={handleChange}
                     />
-                    <label htmlFor={el}>{el}</label>
+                    <label htmlFor={idCardTypes}>{idCardTypes}</label>
                   </div>
                 ))}
               </div>
