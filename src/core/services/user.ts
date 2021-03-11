@@ -1,4 +1,14 @@
-import { IEmail, ILogin, ISignup, IUser, IBank, IInvest } from 'types/user';
+import {
+  IEmail,
+  ILogin,
+  ISignup,
+  IUser,
+  IBank,
+  IInvest,
+  IUserInvestment,
+  IUserTransactions,
+  ITransactions,
+} from 'types/user';
 import { IResponse } from 'types/response';
 import Axios from './axios';
 import { AxiosResponse } from 'axios';
@@ -33,4 +43,15 @@ export const GetListOfInvestApiService = async () => {
     `/investment`
   );
   return res.data;
+};
+
+export const StartNewInvestmentApiService = (credentials: IUserInvestment) => {
+  return Axios.post('/user/investment', credentials);
+};
+
+export const GetTransactionsApiService = async () => {
+  const res: AxiosResponse<IResponse<ITransactions>> = await Axios.get(
+    `/transaction/me`
+  );
+  return res.data.data;
 };

@@ -60,4 +60,24 @@ export interface IUserInvestment {
   investment: string;
   amount: number;
   percent: number;
+  investmentName?: string;
+}
+
+export interface IUserTransactions {
+  user: string;
+  ref: string;
+  amount: number;
+  purpose: string;
+  type: string;
+  createdAt: string;
+  investmentName: string;
+}
+
+export interface ITransactions {
+  pagination: {
+    total: number;
+    currentPage: number;
+    size: number;
+  };
+  response: [];
 }
