@@ -1,5 +1,7 @@
 import { DepositSvg } from 'assets/svg';
 import { InvestWidthdraw } from 'assets/svg';
+import { Widthdrawal } from 'assets/svg';
+import { Pending } from 'assets/svg';
 import { Card } from 'components';
 import UserContext from 'context/user';
 import { GetTransactionsApiService } from 'core/services/user';
@@ -35,6 +37,10 @@ const Transaction = () => {
                       <InvestWidthdraw />
                     ) : Transaction.type === 'Deposit' ? (
                       <DepositSvg />
+                    ) : Transaction.purpose === 'Cashout' ? (
+                      <Widthdrawal />
+                    ) : Transaction.type === 'Pending' ? (
+                      <Pending />
                     ) : null}
                     <div className="ml-10">
                       <b>

@@ -32,7 +32,8 @@ const Invest = () => {
     },
   });
 
-  const submit = () => mutate(inputs);
+  const submit = () =>
+    mutate({ ...inputs, investmentName: selectedInvestment?.name });
 
   const initInvestment: IUserInvestment = {
     investment: '',

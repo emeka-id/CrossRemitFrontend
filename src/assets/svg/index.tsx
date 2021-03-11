@@ -12,3 +12,5 @@ export { ReactComponent as EmailNotification } from './emailNotification.svg';
 export { ReactComponent as Close } from './close.svg';
 export { ReactComponent as Loading } from './loading.svg';
 export { ReactComponent as InvestWidthdraw } from './invest-withdraw.svg';
+export { ReactComponent as Widthdrawal } from './widthdrawal.svg';
+export { ReactComponent as Pending } from './pending.svg';
