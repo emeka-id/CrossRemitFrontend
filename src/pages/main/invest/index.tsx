@@ -23,7 +23,6 @@ const Invest = () => {
   const { isLoading, mutate } = useMutation(StartNewInvestmentApiService, {
     onSuccess: (res: AxiosResponse<IResponse<IUserInvestment>>) => {
       const { data } = res.data;
-      console.log(data);
       return;
     },
     onError: (error) => {
