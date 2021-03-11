@@ -10,7 +10,7 @@ type Props = {
 };
 
 const CustomDropdown: FC<Props> = ({
-  dropdownOption,
+  dropdownOption = [],
   placeHolderText = "Select an option",
   handleChange,
   selectedOption,
@@ -29,7 +29,7 @@ const CustomDropdown: FC<Props> = ({
             <div className="arrow"></div>
           </div>
           <div className="custom-options">
-            {dropdownOption?.map((option: Iselect, index: number) => (
+            {dropdownOption.map((option: Iselect, index: number) => (
               <span
                 key={option?.value}
                 onClick={() => handleChange(option.value)}

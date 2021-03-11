@@ -8,8 +8,6 @@
         position: relative;
         display: flex;
         flex-direction: column;
-        border-width: 0 2px 0 2px;
-        border-style: solid;
         border-color: #DFE1EB;
    }
     .custom-select__trigger {
@@ -24,9 +22,10 @@
         line-height: 60px;
         background: #ffffff;
         cursor: pointer;
-        border-width: 2px 0 2px 0;
+        border-width: 1px;
         border-style: solid;
-        border-color: #DFE1EB;
+        border-radius: 5px;
+        border-color: var(--border-color);
    }
     .custom-options {
         position: absolute;
