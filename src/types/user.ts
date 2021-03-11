@@ -81,3 +81,18 @@ export interface ITransactions {
   };
   response: [];
 }
+
+export interface IMyInvestment {
+  user: string;
+  investment: {
+    duration: number;
+    name: string;
+    _id: string;
+    createdAt: string;
+  };
+  transaction: string;
+  amount: number;
+  percent: number;
+  interest: [];
+  active: boolean;
+}
