@@ -1,30 +1,54 @@
+import { Loading } from 'assets/svg';
+import { AxiosResponse } from 'axios';
 import { Button, Card, CustomInput } from 'components';
 import UserContext from 'context/user';
-import { GetListOfInvestApiService } from 'core/services/user';
+import {
+  GetListOfInvestApiService,
+  StartNewInvestmentApiService,
+} from 'core/services/user';
+import { handleError } from 'core/utils/error-handler';
 import useForm from 'core/utils/use-form';
-import React, { useContext } from 'react';
-import { useQuery } from 'react-query';
+import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
+import { useMutation, useQuery } from 'react-query';
+import { IResponse } from 'types/response';
 import { IInvest, IUserInvestment } from 'types/user';
 import styles from './invest.module.scss';
 
 const Invest = () => {
   //TODO To use settings for percentage calculation
+  const [investmentName, setInvestmentName] = useState('');
   const InvestList = useQuery('investList', GetListOfInvestApiService);
-  const submit = () => {
-    return;
-  };
 
-  const initInvestment = {
+  const { isLoading, mutate } = useMutation(StartNewInvestmentApiService, {
+    onSuccess: (res: AxiosResponse<IResponse<IUserInvestment>>) => {
+      const { data } = res.data;
+      console.log(data);
+      return;
+    },
+    onError: (error) => {
+      const { response, message = null } = handleError(error);
+      toast.error(response?.message);
+    },
+  });
+
+  const submit = () => mutate(inputs);
+
+  const initInvestment: IUserInvestment = {
     investment: '',
     amount: 0,
-    percent: 0,
+    percent: 20,
+    investmentName: '',
   };
 
-  const { inputs, handleChange } = useForm(initInvestment, submit);
+  const { inputs, handleChange, handleSubmit } = useForm<IUserInvestment>(
+    initInvestment,
+    submit
+  );
 
-  const duration = InvestList.data?.data.find((data) => {
-    return data._id === inputs.investment;
-  });
+  const selectedInvestment = InvestList.data?.data.find(
+    (data) => data._id === inputs.investment
+  );
 
   return (
     <>
@@ -40,29 +64,34 @@ const Invest = () => {
       </div>
       <Card>
         Investment Amount
-        <div className={styles.invest}>
-          <CustomInput
-            name="amount"
-            label="Enter Amount to invest"
-            onChange={handleChange}
-          />
-          <CustomInput
-            defaultValue={
-              duration && Number(inputs.amount) * 0.2 * duration?.duration
-            }
-            label="Total Interest based on 20%"
-            disable={true}
-          />
-          <select name="investment" onChange={handleChange}>
-            <option>Select an investment plan</option>
-            {InvestList.data?.data.map((Invest: IInvest, index: number) => (
-              <option key={index} value={Invest._id}>
-                {Invest.name} - {Invest.duration} months
-              </option>
-            ))}
-          </select>
-        </div>
-        <Button className="mt-40">Deposit</Button>
+        <form onSubmit={handleSubmit}>
+          <div className={styles.invest}>
+            <CustomInput
+              name="amount"
+              label="Enter Amount to invest"
+              onChange={handleChange}
+            />
+            <CustomInput
+              defaultValue={
+                selectedInvestment &&
+                Number(inputs.amount) * 0.2 * selectedInvestment?.duration
+              }
+              label="Total Interest based on 20%"
+              disable={true}
+            />
+            <select name="investment" onChange={handleChange}>
+              <option>Select an investment plan</option>
+              {InvestList.data?.data.map((Invest: IInvest, index: number) => (
+                <option key={index} value={Invest._id}>
+                  {Invest.name} - {Invest.duration} months
+                </option>
+              ))}
+            </select>
+          </div>
+          <Button className="mt-40">
+            {isLoading ? <Loading /> : 'Deposit'}
+          </Button>
+        </form>
       </Card>
     </>
   );
