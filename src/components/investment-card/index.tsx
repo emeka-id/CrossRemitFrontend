@@ -8,11 +8,11 @@ type Props = {
   icon?: any;
   name: String;
   duration: string;
-  amount?: string;
-  interestPaid?: number;
-  interest?: number;
-  progress?: number;
-  timeLeft?: string;
+  amount: string;
+  interestPaid: number;
+  interest: number;
+  progress: number;
+  timeLeft: string;
 };
 
 const InvestmentCard: FC<Props> = ({
@@ -37,7 +37,7 @@ const InvestmentCard: FC<Props> = ({
       <div className={styles.stats}>
         <div className="flex justify-content-between mb-15">
           <div>Invested: ₦ {amount}</div>
-          <div>~ {timeLeft} months left</div>
+          <div>{timeLeft} months left</div>
         </div>
         <ProgressBar percentage={progress} />
         <div className="flex justify-content-between mt-10">

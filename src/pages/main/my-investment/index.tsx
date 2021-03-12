@@ -3,8 +3,8 @@ import { Button, Card, InvestmentCard } from 'components';
 import { GetMyInvestmentsApiService } from 'core/services/user';
 import React from 'react';
 import { useQuery } from 'react-query';
-import { IMyInvestment } from 'types/user';
-import { remainingMonths, reduceFunction } from '../helper';
+import { IMyInvestment, ITransactions } from 'types/user';
+import { returnInvestmentData } from '../helper';
 
 const MyInvestment = () => {
   const MyInvestments = useQuery(
@@ -26,26 +26,15 @@ const MyInvestment = () => {
                 <InvestmentCard
                   key={index}
                   icon={Investment}
-                  name={Investments.investment.name}
-                  duration={`${Investments.investment.duration} months`}
-                  timeLeft={`${Math.floor(
-                    remainingMonths(
-                      Investments.investment.createdAt,
-                      Investments.investment.duration
-                    )
-                  )}`}
+                  name={returnInvestmentData(Investments).name}
+                  duration={`${
+                    returnInvestmentData(Investments).duration
+                  } months`}
+                  timeLeft={`${returnInvestmentData(Investments).timeLeft}`}
                   amount={`${Investments.amount}`}
-                  interest={
-                    Investments.amount *
-                      (Investments.percent / 100) *
-                      Investments.investment.duration -
-                    Investments.interest.reduce(reduceFunction, 0)
-                  }
-                  interestPaid={Investments.interest.reduce(reduceFunction, 0)}
-                  progress={
-                    (Investments.interest.reduce(reduceFunction, 0) * 100) /
-                    Investments.amount
-                  }
+                  interest={returnInvestmentData(Investments).interest}
+                  interestPaid={returnInvestmentData(Investments).interestPaid}
+                  progress={returnInvestmentData(Investments).progress}
                 />
               )
             )

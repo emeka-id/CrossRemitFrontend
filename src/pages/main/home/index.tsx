@@ -7,7 +7,7 @@ import { useQuery } from 'react-query';
 import { IMyInvestment } from 'types/user';
 import styles from './home.module.scss';
 import Withdrawal from './withdrawal';
-import { remainingMonths, reduceFunction } from '../helper';
+import { returnInvestmentData } from '../helper';
 
 const Home = () => {
   const modal = useRef<IModalRef>(null);
@@ -53,29 +53,17 @@ const Home = () => {
                   <InvestmentCard
                     key={index}
                     icon={Investment}
-                    name={Investments.investment.name}
-                    duration={`${Investments.investment.duration} months`}
-                    timeLeft={`${Math.floor(
-                      remainingMonths(
-                        Investments.investment.createdAt,
-                        Investments.investment.duration
-                      )
-                    )}`}
+                    name={returnInvestmentData(Investments).name}
+                    duration={`${
+                      returnInvestmentData(Investments).duration
+                    } months`}
+                    timeLeft={`${returnInvestmentData(Investments).timeLeft}`}
                     amount={`${Investments.amount}`}
-                    interest={
-                      Investments.amount *
-                        (Investments.percent / 100) *
-                        Investments.investment.duration -
-                      Investments.interest.reduce(reduceFunction, 0)
+                    interest={returnInvestmentData(Investments).interest}
+                    interestPaid={
+                      returnInvestmentData(Investments).interestPaid
                     }
-                    interestPaid={Investments.interest.reduce(
-                      reduceFunction,
-                      0
-                    )}
-                    progress={
-                      (Investments.interest.reduce(reduceFunction, 0) * 100) /
-                      Investments.amount
-                    }
+                    progress={returnInvestmentData(Investments).progress}
                   />
                 )
               )}
