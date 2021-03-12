@@ -8,6 +8,7 @@ import {
   IUserInvestment,
   IUserTransactions,
   ITransactions,
+  IMyInvestment,
 } from 'types/user';
 import { IResponse } from 'types/response';
 import Axios from './axios';
@@ -52,6 +53,20 @@ export const StartNewInvestmentApiService = (credentials: IUserInvestment) => {
 export const GetTransactionsApiService = async () => {
   const res: AxiosResponse<IResponse<ITransactions>> = await Axios.get(
     `/transaction/me`
+  );
+  return res.data.data;
+};
+
+export const GetMyInvestmentsApiService = async () => {
+  const res: AxiosResponse<IResponse<ITransactions>> = await Axios.get(
+    `/user/investment/me`
+  );
+  return res.data.data;
+};
+
+export const GetMyActiveInvestmentsApiService = async () => {
+  const res: AxiosResponse<IResponse<ITransactions>> = await Axios.get(
+    `/user/investment/me?active=true`
   );
   return res.data.data;
 };
