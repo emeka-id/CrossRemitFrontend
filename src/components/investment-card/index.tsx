@@ -31,7 +31,7 @@ const InvestmentCard: FC<Props> = ({
         <Icon />
         <div className="ml-30">
           <div>{name}</div>
-          <div>{duration}</div>
+          <div>{duration} months</div>
         </div>
       </div>
       <div className={styles.stats}>

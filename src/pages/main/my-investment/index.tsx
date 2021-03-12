@@ -27,9 +27,7 @@ const MyInvestment = () => {
                   key={index}
                   icon={Investment}
                   name={returnInvestmentData(Investments).name}
-                  duration={`${
-                    returnInvestmentData(Investments).duration
-                  } months`}
+                  duration={`${returnInvestmentData(Investments).duration}`}
                   timeLeft={`${returnInvestmentData(Investments).timeLeft}`}
                   amount={`${Investments.amount}`}
                   interest={returnInvestmentData(Investments).interest}
