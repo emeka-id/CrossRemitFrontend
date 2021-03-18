@@ -6,9 +6,10 @@ import {
   IBank,
   IInvest,
   IUserInvestment,
-  IUserTransactions,
   ITransactions,
-  IMyInvestment,
+  IVerifyDeposit,
+  IDeposit,
+  IWithdrawal,
 } from 'types/user';
 import { IResponse } from 'types/response';
 import Axios from './axios';
@@ -41,7 +42,7 @@ export const UpdateBankDetailsApiService = (credentials: IBank) => {
 
 export const GetListOfInvestApiService = async () => {
   const res: AxiosResponse<IResponse<IInvest[]>> = await Axios.get(
-    `/investment`
+    '/investment'
   );
   return res.data;
 };
@@ -52,21 +53,47 @@ export const StartNewInvestmentApiService = (credentials: IUserInvestment) => {
 
 export const GetTransactionsApiService = async () => {
   const res: AxiosResponse<IResponse<ITransactions>> = await Axios.get(
-    `/transaction/me`
+    '/transaction/me?size=200'
   );
   return res.data.data;
 };
 
 export const GetMyInvestmentsApiService = async () => {
   const res: AxiosResponse<IResponse<ITransactions>> = await Axios.get(
-    `/user/investment/me`
+    '/user/investment/me'
   );
   return res.data.data;
 };
 
 export const GetMyActiveInvestmentsApiService = async () => {
   const res: AxiosResponse<IResponse<ITransactions>> = await Axios.get(
-    `/user/investment/me?active=true`
+    '/user/investment/me?active=true'
   );
   return res.data.data;
+};
+
+export const VerifyDespositApiService = (credentials: IVerifyDeposit) => {
+  return Axios.post('/transaction/paystack/verify', credentials);
+};
+
+export const InitializePaystackPayment = (credentials: IDeposit) => {
+  return Axios.post('transaction/paystack/initialize', credentials);
+};
+
+export const GetMyInvestmentTotalApiService = async () => {
+  const res: AxiosResponse<IResponse> = await Axios.get(
+    '/user/investment/me/total'
+  );
+  return res.data;
+};
+
+export const GetMyAccountBalanceApiService = async () => {
+  const res: AxiosResponse<IResponse> = await Axios.get(
+    '/transaction/me/balance/total'
+  );
+  return res.data;
+};
+
+export const WithdrawalApiSerive = (credentials: IWithdrawal) => {
+  return Axios.post('/transaction/me/withdrawal', credentials);
 };

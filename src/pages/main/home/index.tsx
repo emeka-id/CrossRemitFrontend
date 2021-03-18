@@ -1,13 +1,18 @@
 import { Invest, Investment, Wallet } from 'assets/svg';
 import { AccountCard, Button, Card, InvestmentCard, Modal } from 'components';
 import { IModalRef } from 'components/modal';
-import { GetMyActiveInvestmentsApiService } from 'core/services/user';
+import {
+  GetMyAccountBalanceApiService,
+  GetMyActiveInvestmentsApiService,
+  GetMyInvestmentTotalApiService,
+} from 'core/services/user';
 import React, { useRef } from 'react';
 import { useQuery } from 'react-query';
 import { IMyInvestment } from 'types/user';
 import styles from './home.module.scss';
 import Withdrawal from './withdrawal';
 import { returnInvestmentData } from '../helper';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const modal = useRef<IModalRef>(null);
@@ -15,6 +20,16 @@ const Home = () => {
   const MyActiveInvestments = useQuery(
     'getMyActiveInvestments',
     GetMyActiveInvestmentsApiService
+  );
+
+  const GetInvestmentBalance = useQuery(
+    'getInvestmentBalance',
+    GetMyInvestmentTotalApiService
+  );
+
+  const GetAccountBalance = useQuery(
+    'getAccountBalance',
+    GetMyAccountBalanceApiService
   );
 
   return (
@@ -25,20 +40,37 @@ const Home = () => {
           <div className={styles.accounting}>
             <AccountCard
               icon={Wallet}
-              amount="220,000.00"
+              amount={
+                GetAccountBalance.isLoading
+                  ? 'loading...'
+                  : new Intl.NumberFormat().format(
+                      Number(GetAccountBalance.data?.data)
+                    )
+              }
               title="Available Balance"
             >
-              <Button>Deposit</Button>
+              <Link to="/app/deposit">
+                <Button>Deposit</Button>
+              </Link>
+
               <Button variant="outline" onClick={() => modal?.current?.open()}>
                 Withdraw
               </Button>
             </AccountCard>
             <AccountCard
               icon={Invest}
-              amount="220,000.00"
+              amount={
+                GetInvestmentBalance.isLoading
+                  ? 'loading...'
+                  : new Intl.NumberFormat().format(
+                      Number(GetInvestmentBalance.data?.data)
+                    )
+              }
               title="Total Money Invested"
             >
-              <Button>Invest More</Button>
+              <Link to="/app/invest">
+                <Button>Invest More</Button>
+              </Link>
             </AccountCard>
           </div>
           <div>
@@ -46,17 +78,17 @@ const Home = () => {
           </div>
           {MyActiveInvestments.isLoading ? (
             <div>Loading active investments</div>
+          ) : MyActiveInvestments.data?.response.length === 0 ? (
+            <div>No active investments yet</div>
           ) : (
-            <div>
+            <div className="mt-20">
               {MyActiveInvestments.data?.response.map(
                 (Investments: IMyInvestment, index: number) => (
                   <InvestmentCard
                     key={index}
                     icon={Investment}
                     name={returnInvestmentData(Investments).name}
-                    duration={`${
-                      returnInvestmentData(Investments).duration
-                    } months`}
+                    duration={`${returnInvestmentData(Investments).duration}`}
                     timeLeft={`${returnInvestmentData(Investments).timeLeft}`}
                     amount={`${Investments.amount}`}
                     interest={returnInvestmentData(Investments).interest}

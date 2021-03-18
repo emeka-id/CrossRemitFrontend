@@ -1,13 +1,18 @@
 @import '../../../styles/breakpoint';
 
 .deposit {
-    display: block;
+  display: block;
 
-    @include sm {
-        display: grid;
-        grid-template-columns: 1.1fr 0.9fr;
-        grid-template-rows: auto;
-        gap: 1rem;
-    }
+  @include sm {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-rows: auto;
+    gap: 1rem;
+  }
+}
 
-} 
+input[type='radio'] {
+  display: inline-flex;
+  width: 100%;
+  height: 2em;
+}
