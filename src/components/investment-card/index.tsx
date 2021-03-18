@@ -36,13 +36,19 @@ const InvestmentCard: FC<Props> = ({
       </div>
       <div className={styles.stats}>
         <div className="flex justify-content-between mb-15">
-          <div>Invested: ₦ {amount}</div>
+          <div>
+            Invested: ₦ {new Intl.NumberFormat().format(Number(amount))}
+          </div>
           <div>{timeLeft} months left</div>
         </div>
         <ProgressBar percentage={progress} />
         <div className="flex justify-content-between mt-10">
-          <div>Paid: ₦ {interestPaid}</div>
-          <div>Unpaid: ₦ {interest}</div>
+          <div>
+            Paid: ₦ {new Intl.NumberFormat().format(Number(interestPaid))}
+          </div>
+          <div>
+            Unpaid: ₦ {new Intl.NumberFormat().format(Number(interest))}
+          </div>
         </div>
       </div>
     </div>

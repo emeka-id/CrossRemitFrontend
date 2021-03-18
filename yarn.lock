@@ -9383,6 +9383,11 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
 
+react-paystack@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/react-paystack/-/react-paystack-3.0.3.tgz#016f4279e937cc844da0214d2d10a61c22471adb"
+  integrity sha512-w3mHQvCAHplOKode6cKxxSOwS6XNVWgOF3bjxmevFkcpHIvcuYBUOHqLlK8h3Pw7O7wqdfssm8bLPhYkvaNkRQ==
+
 react-query-devtools@^2.6.3:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/react-query-devtools/-/react-query-devtools-2.6.3.tgz#f7c982839d4b0001cee4d5ddfa826493c2f6341f"

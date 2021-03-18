@@ -96,3 +96,39 @@ export interface IMyInvestment {
   interest: [];
   active: boolean;
 }
+
+export interface IDeposit {
+  amount: number;
+  email: string;
+}
+
+export interface IVerifyDepositResponse {
+  message: string;
+  sucess: boolean;
+}
+
+export interface IVerifyDeposit {
+  ref?: string;
+  amount: number;
+  purpose: string;
+  type: string;
+}
+
+export interface IInitializeResponse {
+  data: {
+    authorization_url: string;
+    reference: string;
+    access_code: string;
+  };
+  message: string;
+  success: boolean;
+}
+
+export interface IWithdrawal {
+  amount: number;
+}
+
+export interface IBalanceResponse {
+  data: number;
+  success: boolean;
+}

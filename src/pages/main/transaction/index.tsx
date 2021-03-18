@@ -8,6 +8,7 @@ import { GetTransactionsApiService } from 'core/services/user';
 import React, { useContext } from 'react';
 import { useQuery } from 'react-query';
 import { IUserTransactions } from 'types/user';
+import Withdrawal from '../home/withdrawal';
 import styles from './transaction.module.scss';
 
 const Transaction = () => {
@@ -21,6 +22,8 @@ const Transaction = () => {
       <Card>
         {Transactions.isLoading ? (
           <div>Loading transactions...</div>
+        ) : Transactions.data?.response.length === 0 ? (
+          <div>No transactions yet...</div>
         ) : (
           <div>
             {Transactions.data?.response.map(
@@ -37,15 +40,16 @@ const Transaction = () => {
                       <InvestWidthdraw />
                     ) : Transaction.type === 'Deposit' ? (
                       <DepositSvg />
-                    ) : Transaction.purpose === 'Cashout' ? (
-                      <Widthdrawal />
-                    ) : Transaction.type === 'Pending' ? (
+                    ) : Transaction.purpose === 'Cashout' ||
+                      Transaction.type === 'Pending' ? (
                       <Pending />
+                    ) : Transaction.purpose === 'Cashout' ||
+                      Transaction.type !== 'Pending' ? (
+                      <Withdrawal />
                     ) : null}
                     <div className="ml-10">
                       <b>
-                        {Transaction.purpose} - {Transaction.investmentName}{' '}
-                        Plan
+                        {Transaction.purpose} {Transaction.investmentName}
                       </b>
                       <br />
                       <small>
@@ -54,7 +58,12 @@ const Transaction = () => {
                     </div>
                   </div>
                   <div className={styles.ref}>
-                    <b>&#8358; {Transaction.amount}</b>
+                    <b>
+                      &#8358;{' '}
+                      {new Intl.NumberFormat().format(
+                        Number(Transaction.amount)
+                      )}
+                    </b>
                     <br />
                     <small>{Transaction.ref}</small>
                   </div>
