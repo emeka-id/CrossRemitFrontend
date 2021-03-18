@@ -1,11 +1,11 @@
-import { DepositSvg } from 'assets/svg';
+import { DepositSvg, Loading } from 'assets/svg';
 import { InvestWidthdraw } from 'assets/svg';
 import { Widthdrawal } from 'assets/svg';
 import { Pending } from 'assets/svg';
-import { Card } from 'components';
+import { Button, Card } from 'components';
 import UserContext from 'context/user';
 import { GetTransactionsApiService } from 'core/services/user';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useQuery } from 'react-query';
 import { IUserTransactions } from 'types/user';
 import Withdrawal from '../home/withdrawal';
@@ -13,8 +13,17 @@ import styles from './transaction.module.scss';
 
 const Transaction = () => {
   const { currentUser } = useContext(UserContext);
-  const Transactions = useQuery('getTransactions', GetTransactionsApiService);
   let date = new Date();
+
+  const [size, setSize] = useState(5);
+  const Transactions = useQuery(['getTransactions', size], () =>
+    GetTransactionsApiService(size)
+  );
+
+  const handlePagination = () => {
+    setSize(size + 5);
+    Transactions.refetch();
+  };
 
   return (
     <>
@@ -53,7 +62,7 @@ const Transaction = () => {
                       </b>
                       <br />
                       <small>
-                        {new Date(Transaction.createdAt).toDateString()}
+                        {new Date(Transaction.createdAt).toUTCString()}
                       </small>
                     </div>
                   </div>
@@ -72,6 +81,15 @@ const Transaction = () => {
             )}
           </div>
         )}
+        <div>
+          {Number(Transactions.data?.pagination.total) > size ? (
+            <Button onClick={handlePagination}>
+              {Transactions.isLoading ? <Loading /> : 'Load more'}
+            </Button>
+          ) : Number(Transactions.data?.pagination.total) < size ? (
+            ''
+          ) : null}
+        </div>
       </Card>
     </>
   );

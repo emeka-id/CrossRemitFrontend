@@ -48,9 +48,7 @@ const Payment = ({ inputs, reference, closeCB }: any) => {
     closeCB(false);
   }, []);
 
-  initializePayment(onSuccess, onClose);
-
-  return <></>;
+  return <>{initializePayment(onSuccess, onClose)}</>;
 };
 
 export default Payment;

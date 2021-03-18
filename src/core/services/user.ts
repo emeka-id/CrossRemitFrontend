@@ -51,9 +51,9 @@ export const StartNewInvestmentApiService = (credentials: IUserInvestment) => {
   return Axios.post('/user/investment', credentials);
 };
 
-export const GetTransactionsApiService = async () => {
+export const GetTransactionsApiService = async (credentials: number) => {
   const res: AxiosResponse<IResponse<ITransactions>> = await Axios.get(
-    '/transaction/me?size=200'
+    `/transaction/me?size=${credentials}`
   );
   return res.data.data;
 };
