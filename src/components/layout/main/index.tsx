@@ -1,4 +1,13 @@
-import { Analytics, Close } from 'assets/svg';
+import {
+  Analytics,
+  Close,
+  InvestRouteIcon,
+  SettingsRouteIcon,
+  TransactionsRouteIcon,
+  DepositRouteIcon,
+  MyInvestmentRouteIcon,
+  LogoutRouteIcon,
+} from 'assets/svg';
 import Button from 'components/button';
 import Card from 'components/card';
 import { Constants, Page } from 'core/utils/constants';
@@ -25,27 +34,27 @@ const AppLayout = ({ children }: Props) => {
       link: '/app/home',
     },
     {
-      icon: <Analytics />,
+      icon: <InvestRouteIcon />,
       name: 'Invest',
       link: '/app/invest',
     },
     {
-      icon: <Analytics />,
+      icon: <DepositRouteIcon />,
       name: 'Deposit',
       link: '/app/deposit',
     },
     {
-      icon: <Analytics />,
+      icon: <MyInvestmentRouteIcon />,
       name: 'My Investment',
       link: '/app/my-investment',
     },
     {
-      icon: <Analytics />,
+      icon: <TransactionsRouteIcon />,
       name: 'Transaction',
       link: '/app/transaction',
     },
     {
-      icon: <Analytics />,
+      icon: <SettingsRouteIcon />,
       name: 'Settings',
       link: '/app/settings',
     },
@@ -83,7 +92,10 @@ const AppLayout = ({ children }: Props) => {
                   </li>
                 ))}
               </ul>
-              <Button onClick={handleLogOut}>Logout</Button>
+              <hr />
+              <div className={styles.logout} onClick={handleLogOut}>
+                <LogoutRouteIcon /> <span className="ml-15">Logout</span>
+              </div>
             </>
           </Card>
         </aside>

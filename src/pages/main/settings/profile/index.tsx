@@ -22,8 +22,8 @@ const Profile = () => {
     onSuccess: (res: AxiosResponse<IResponse<IUser>>) => {
       const { data } = res.data;
       if (data) {
-        toast.success('Profile updated');
         updateCurrentUser(data);
+        toast.success('Profile updated');
         return;
       }
     },
@@ -83,6 +83,7 @@ const Profile = () => {
               defaultValue={currentUser.phone}
               id="phone"
               onChange={handleChange}
+              placeholder="Enter phone number"
             />
           </div>
           <div className="form-group">
@@ -128,15 +129,13 @@ const Profile = () => {
           </div>
           <div className="form-group">
             <label htmlFor="town">Town</label>
-            <select
+            <input
               defaultValue={currentUser.town}
               onChange={handleChange}
               name="town"
               id="town"
-            >
-              <option value="default">Enter your town/city</option>
-              <option value="Aba">Aba</option>
-            </select>
+              placeholder="Enter town"
+            />
           </div>
           <div className="form-group">
             <label htmlFor="street">Street</label>
