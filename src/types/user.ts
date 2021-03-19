@@ -55,6 +55,17 @@ export interface IInvest {
   duration: number;
   name: string;
   _id: string;
+  createdAt: string;
+}
+
+export interface ITransactions {
+  user: string;
+  ref: string;
+  amount: number;
+  purpose: string;
+  type: string;
+  createdAt: string;
+  investmentName?: string;
 }
 export interface IUserInvestment {
   investment: string;
@@ -63,38 +74,21 @@ export interface IUserInvestment {
   investmentName?: string;
 }
 
-export interface IUserTransactions {
-  user: string;
-  ref: string;
-  amount: number;
-  purpose: string;
-  type: string;
-  createdAt: string;
-  investmentName: string;
-}
-
-export interface ITransactions {
-  pagination: {
-    total: number;
-    currentPage: number;
-    size: number;
-  };
-  response: [];
-}
-
+//TODO Find a way to merge IUserInvestment and IInvest types
 export interface IMyInvestment {
   user: string;
-  investment: {
-    duration: number;
-    name: string;
-    _id: string;
-    createdAt: string;
-  };
+  investment: IInvest;
   transaction: string;
   amount: number;
   percent: number;
-  interest: [];
+  interest: IInterest[];
   active: boolean;
+}
+
+export interface IInterest {
+  ref: string;
+  amount: number;
+  date: string;
 }
 
 export interface IDeposit {

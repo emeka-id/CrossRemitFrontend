@@ -18,6 +18,7 @@ const Password = () => {
   const { mutate, isLoading } = useMutation(ChangePasswordApiService, {
     onSuccess: (res) => {
       const { data } = res.data;
+      toast.success('Changed password successfully');
     },
     onError: (error) => {
       const { response, message = null } = handleError(error);

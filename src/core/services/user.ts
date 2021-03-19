@@ -6,12 +6,12 @@ import {
   IBank,
   IInvest,
   IUserInvestment,
-  ITransactions,
   IVerifyDeposit,
   IDeposit,
   IWithdrawal,
+  IMyInvestment,
 } from 'types/user';
-import { IResponse } from 'types/response';
+import { IList, IPagination, IResponse } from 'types/response';
 import Axios from './axios';
 import { AxiosResponse } from 'axios';
 
@@ -51,24 +51,27 @@ export const StartNewInvestmentApiService = (credentials: IUserInvestment) => {
   return Axios.post('/user/investment', credentials);
 };
 
-export const GetTransactionsApiService = async () => {
-  const res: AxiosResponse<IResponse<ITransactions>> = await Axios.get(
-    '/transaction/me?size=200'
+export const GetTransactionsApiService = async (
+  credentials: Partial<IPagination>
+) => {
+  return await Axios.get(
+    `/transaction/me?currentPage=${credentials.currentPage}&size=${credentials.size}`
   );
-  return res.data.data;
 };
 
+//TODO Merge InvestmentApiServices
 export const GetMyInvestmentsApiService = async () => {
-  const res: AxiosResponse<IResponse<ITransactions>> = await Axios.get(
+  const res: AxiosResponse<IResponse<IList<IMyInvestment>>> = await Axios.get(
     '/user/investment/me'
   );
   return res.data.data;
 };
 
 export const GetMyActiveInvestmentsApiService = async () => {
-  const res: AxiosResponse<IResponse<ITransactions>> = await Axios.get(
+  const res: AxiosResponse<IResponse<IList<IMyInvestment>>> = await Axios.get(
     '/user/investment/me?active=true'
   );
+  console.log(res);
   return res.data.data;
 };
 

@@ -8,7 +8,7 @@ import {
 } from 'core/services/user';
 import React, { useRef } from 'react';
 import { useQuery } from 'react-query';
-import { IMyInvestment } from 'types/user';
+import { IMyInvestment, ITransactions, IUserInvestment } from 'types/user';
 import styles from './home.module.scss';
 import Withdrawal from './withdrawal';
 import { returnInvestmentData } from '../helper';

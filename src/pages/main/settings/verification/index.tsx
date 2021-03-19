@@ -106,14 +106,25 @@ const Verification = () => {
               </div>
             </div>
             <div className="form-group mt-30 flex justify-content-between">
-              <CustomUpload
-                name="image"
-                type="file"
-                accept="image/*"
-                variant="outline"
-                onChange={handleChange}
-                label="Upload ID"
-              />
+              {inputs.type && (
+                <CustomUpload
+                  name="image"
+                  type="file"
+                  accept="image/*"
+                  variant="block"
+                  onChange={handleChange}
+                  label="Upload ID"
+                />
+              )}
+              <span className="ml-20">
+                {inputs.image ? (
+                  <img
+                    className={styles.idPreview}
+                    src={inputs.image}
+                    width="100px"
+                  />
+                ) : null}
+              </span>
             </div>
           </Modal>
         </div>

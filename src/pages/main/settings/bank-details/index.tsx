@@ -26,6 +26,7 @@ const BankDetails = () => {
       const { data } = res.data;
       if (data) {
         updateCurrentUser(data);
+        toast.success('Account details saved successfully');
         return;
       }
     },
