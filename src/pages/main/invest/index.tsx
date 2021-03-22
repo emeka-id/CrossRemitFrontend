@@ -1,6 +1,7 @@
 import { Loading } from 'assets/svg';
 import { AxiosResponse } from 'axios';
 import { Button, Card, CustomInput } from 'components';
+import CustomDropdown from 'components/custom-dropdown';
 import UserContext from 'context/user';
 import {
   GetListOfInvestApiService,
@@ -13,6 +14,7 @@ import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useMutation, useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
+import { Iselect } from 'types/inputs';
 import { IResponse } from 'types/response';
 import { IBalanceResponse, IInvest, IUserInvestment } from 'types/user';
 import styles from './invest.module.scss';
@@ -21,10 +23,23 @@ const Invest = () => {
   //TODO To use settings for percentage calculation
   const [investmentName, setInvestmentName] = useState('');
   const InvestList = useQuery('investList', GetListOfInvestApiService);
+  let InvestmentSelectList: Array<{ name: string; value: string }> = [];
+
+  const [investmentPlan, setInvestmentPlan] = useState('');
+
+  InvestList.data?.data.forEach((Invest: IInvest) => {
+    InvestmentSelectList.push({
+      name: Invest.name + ' - ' + Invest.duration + ' months',
+      value: Invest._id,
+    });
+  });
+
   const GetAccountBalance = useQuery(
     'getAccountBalance',
     GetMyAccountBalanceApiService
   );
+
+  const tempInvestmentList: Array<Iselect> = [];
 
   const { isLoading, mutate } = useMutation(StartNewInvestmentApiService, {
     onSuccess: (res: AxiosResponse<IResponse<IUserInvestment>>) => {
@@ -41,7 +56,6 @@ const Invest = () => {
       ) as HTMLSelectElement;
       investInterest.value = '';
       investAmount.value = '';
-      selectInvest.selectedIndex = 0;
       return;
     },
     onError: (error) => {
@@ -57,11 +71,15 @@ const Invest = () => {
     if (Number(inputs.amount) > Number(GetAccountBalance.data?.data)) {
       toast.error("You don't have sufficient balance to make this investment");
     }
-    if (inputs.investment === '') {
+    if (investmentPlan === '') {
       toast.error('Please select an investment plan');
     }
     if (Number(inputs.amount) < Number(GetAccountBalance.data?.data)) {
-      mutate({ ...inputs, investmentName: selectedInvestment?.name });
+      mutate({
+        ...inputs,
+        investment: investmentPlan,
+        investmentName: selectedInvestment?.name,
+      });
     }
   };
 
@@ -78,7 +96,7 @@ const Invest = () => {
   );
 
   const selectedInvestment = InvestList.data?.data.find(
-    (data) => data._id === inputs.investment
+    (data) => data._id === investmentPlan
   );
 
   return (
@@ -123,14 +141,12 @@ const Invest = () => {
               id="investInterest"
               disable={true}
             />
-            <select name="investment" id="selectInvest" onChange={handleChange}>
-              <option defaultChecked>Select an investment plan</option>
-              {InvestList.data?.data.map((Invest: IInvest, index: number) => (
-                <option key={index} value={Invest._id}>
-                  {Invest.name} - {Invest.duration} months
-                </option>
-              ))}
-            </select>
+            <CustomDropdown
+              dropdownOption={InvestmentSelectList}
+              placeHolderText="Select an investment option"
+              selectedOption={investmentPlan}
+              handleChange={(e: string) => setInvestmentPlan(e)}
+            />
           </div>
           <Button className="mt-40">
             {isLoading ? <Loading /> : 'Invest'}

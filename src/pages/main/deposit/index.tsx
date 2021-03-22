@@ -16,6 +16,7 @@ import { calculateCharges } from './helper';
 import { IDeposit, IInitializeResponse } from 'types/user';
 import styles from './deposit.module.scss';
 import Payment from './payments';
+import { usePaystackPayment } from 'react-paystack';
 
 const Deposit = () => {
   const { currentUser } = useContext(UserContext);

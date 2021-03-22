@@ -71,7 +71,6 @@ export const GetMyActiveInvestmentsApiService = async () => {
   const res: AxiosResponse<IResponse<IList<IMyInvestment>>> = await Axios.get(
     '/user/investment/me?active=true'
   );
-  console.log(res);
   return res.data.data;
 };
 
