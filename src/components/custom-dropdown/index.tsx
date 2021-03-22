@@ -25,10 +25,6 @@ const CustomDropdown: FC<Props> = ({
 }) => {
   const [openDropdown, setOpenDropdown] = useState(false);
 
-  // useEffect(() => {
-  //   generateNameFromID(dropdownOption || [], selectedOption || '');
-  // }, [dropdownOption, selectedOption]);
-
   return (
     <div className="custom-dropdown">
       <div

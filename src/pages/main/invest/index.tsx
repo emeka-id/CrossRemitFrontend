@@ -41,21 +41,25 @@ const Invest = () => {
 
   const tempInvestmentList: Array<Iselect> = [];
 
+  const investAmount = document.getElementById(
+    'investAmount'
+  ) as HTMLInputElement;
+  const investInterest = document.getElementById(
+    'investInterest'
+  ) as HTMLInputElement;
+  const selectInvest = document.getElementById(
+    'selectInvest'
+  ) as HTMLSelectElement;
+
   const { isLoading, mutate } = useMutation(StartNewInvestmentApiService, {
     onSuccess: (res: AxiosResponse<IResponse<IUserInvestment>>) => {
       const { data } = res.data;
       GetAccountBalance.refetch();
-      const investAmount = document.getElementById(
-        'investAmount'
-      ) as HTMLInputElement;
-      const investInterest = document.getElementById(
-        'investInterest'
-      ) as HTMLInputElement;
-      const selectInvest = document.getElementById(
-        'selectInvest'
-      ) as HTMLSelectElement;
       investInterest.value = '';
       investAmount.value = '';
+      toast.success(
+        `Investment of N ${inputs.amount} on ${selectedInvestment?.name} Plan was successful`
+      );
       return;
     },
     onError: (error) => {
@@ -65,21 +69,22 @@ const Invest = () => {
   });
 
   const submit = () => {
-    if (Number(inputs.amount) < 1000) {
-      toast.error('You have to invest a minimum of N1,000');
-    }
-    if (Number(inputs.amount) > Number(GetAccountBalance.data?.data)) {
-      toast.error("You don't have sufficient balance to make this investment");
-    }
-    if (investmentPlan === '') {
-      toast.error('Please select an investment plan');
-    }
-    if (Number(inputs.amount) < Number(GetAccountBalance.data?.data)) {
+    if (
+      Number(inputs.amount) < Number(GetAccountBalance.data?.data) &&
+      inputs.amount &&
+      investmentPlan
+    ) {
       mutate({
         ...inputs,
         investment: investmentPlan,
         investmentName: selectedInvestment?.name,
       });
+    } else if (Number(inputs.amount) < 1000) {
+      toast.error('You have to invest a minimum of N1,000');
+    } else if (Number(inputs.amount) > Number(GetAccountBalance.data?.data)) {
+      toast.error("You don't have sufficient balance to make this investment");
+    } else if (investmentPlan === '') {
+      toast.error('Please select an investment plan');
     }
   };
 
