@@ -1,6 +1,7 @@
-import { IMyInvestment, IUserInvestment } from 'types/user';
+import { IInterest, IMyInvestment } from 'types/user';
 
-const interestTotal = (prev: any, current: any) => prev + current.amount;
+const interestTotal = (prev: number, current: IInterest): number =>
+  prev + current.amount;
 
 const remainingMonths = (createdAt: string, duration: number): number => {
   const date1 = new Date(createdAt);
@@ -26,5 +27,6 @@ export const returnInvestmentData = (investment: IMyInvestment) => {
   const interestPaid = investment.interest.reduce(interestTotal, 0);
   const progress =
     (investment.interest.reduce(interestTotal, 0) * 100) / investment.amount;
+
   return { name, duration, timeLeft, interest, interestPaid, progress };
 };

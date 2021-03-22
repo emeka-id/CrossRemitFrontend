@@ -1,6 +1,14 @@
-import React, { FC, useState } from "react";
-import { Iselect } from "types/inputs";
-import "./custom-dropdown.styles.scss";
+import React, { FC, useEffect, useState } from 'react';
+import { Iselect } from 'types/inputs';
+import './custom-dropdown.styles.scss';
+
+const generateNameFromValue = (
+  array: Array<Iselect>,
+  value: string
+): Array<Iselect> => {
+  const result = array.filter((e) => value === e.value);
+  return result;
+};
 
 type Props = {
   dropdownOption: Iselect[];
@@ -11,7 +19,7 @@ type Props = {
 
 const CustomDropdown: FC<Props> = ({
   dropdownOption = [],
-  placeHolderText = "Select an option",
+  placeHolderText = 'Select an option',
   handleChange,
   selectedOption,
 }) => {
@@ -23,9 +31,12 @@ const CustomDropdown: FC<Props> = ({
         className="custom-select-wrapper"
         onClick={() => setOpenDropdown(!openDropdown)}
       >
-        <div className={`custom-select ${openDropdown ? "open" : ""}`}>
+        <div className={`custom-select ${openDropdown ? 'open' : ''}`}>
           <div className="custom-select__trigger">
-            <span>{selectedOption || placeHolderText}</span>
+            <span>
+              {generateNameFromValue(dropdownOption, selectedOption)[0]?.name ||
+                placeHolderText}
+            </span>
             <div className="arrow"></div>
           </div>
           <div className="custom-options">
@@ -35,8 +46,8 @@ const CustomDropdown: FC<Props> = ({
                 onClick={() => handleChange(option.value)}
                 className={`custom-option ${
                   selectedOption.toLowerCase() === option.value.toLowerCase()
-                    ? "selected"
-                    : ""
+                    ? 'selected'
+                    : ''
                 }`}
               >
                 {option.name}
