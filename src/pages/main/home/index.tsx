@@ -104,7 +104,7 @@ const Home = () => {
         </div>
       </Card>
       <Modal ref={modal}>
-        <Withdrawal />
+        <Withdrawal modal={modal} />
       </Modal>
     </>
   );

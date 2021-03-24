@@ -14,14 +14,14 @@ type Props = {
   dropdownOption: Iselect[];
   placeHolderText: string;
   handleChange: Function;
-  selectedOption: string;
+  selectedOption?: string;
 };
 
 const CustomDropdown: FC<Props> = ({
   dropdownOption = [],
   placeHolderText = 'Select an option',
   handleChange,
-  selectedOption,
+  selectedOption = '',
 }) => {
   const [openDropdown, setOpenDropdown] = useState(false);
 

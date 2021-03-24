@@ -9,7 +9,13 @@ import {
 } from 'core/services/user';
 import { handleError } from 'core/utils/error-handler';
 import useForm from 'core/utils/use-form';
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import toast from 'react-hot-toast';
 import { useMutation, useQuery } from 'react-query';
 import { calculateCharges } from './helper';
@@ -22,6 +28,8 @@ const Deposit = () => {
   const { currentUser } = useContext(UserContext);
   const [initialize, setInitialize] = useState(false);
   const [reference, setReference] = useState('');
+
+  const childRef = useRef<any>();
 
   const initState: IDeposit = {
     amount: 0,
@@ -53,6 +61,7 @@ const Deposit = () => {
         'depositAmount'
       ) as HTMLInputElement;
       depositAmount.value = '';
+      childRef?.current?.getAlert();
     },
     onError: (error) => {
       const { message = null } = handleError(error);
@@ -81,6 +90,7 @@ const Deposit = () => {
       </Card>
       {initialize && (
         <Payment
+          ref={childRef}
           inputs={inputs}
           reference={reference}
           closeCB={setInitialize}

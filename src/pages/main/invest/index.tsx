@@ -69,7 +69,9 @@ const Invest = () => {
   });
 
   const submit = () => {
-    if (
+    if (Number(inputs.amount) < 100000) {
+      toast.error('You have to invest a minimum of N 100,000');
+    } else if (
       Number(inputs.amount) < Number(GetAccountBalance.data?.data) &&
       inputs.amount &&
       investmentPlan
@@ -79,8 +81,6 @@ const Invest = () => {
         investment: investmentPlan,
         investmentName: selectedInvestment?.name,
       });
-    } else if (Number(inputs.amount) < 1000) {
-      toast.error('You have to invest a minimum of N1,000');
     } else if (Number(inputs.amount) > Number(GetAccountBalance.data?.data)) {
       toast.error("You don't have sufficient balance to make this investment");
     } else if (investmentPlan === '') {
