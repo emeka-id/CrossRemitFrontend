@@ -15,7 +15,6 @@ import React, {
 import toast from 'react-hot-toast';
 import { usePaystackPayment } from 'react-paystack';
 import { calculateCharges } from './helper';
-import { debounce, initial } from 'lodash';
 
 //TODO change any
 const Payment = forwardRef(({ inputs, reference, closeCB }: any, ref) => {
