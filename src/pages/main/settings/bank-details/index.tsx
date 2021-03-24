@@ -4,7 +4,7 @@ import styles from './bank-details.module.scss';
 
 import useForm from '../../../../core/utils/use-form';
 import { IBank, IUser } from 'types/user';
-import { IBankDetails } from 'types/bank';
+import { IBankDetails, IBankResolve } from 'types/bank';
 import UserContext from 'context/user';
 import { useMutation, useQuery } from 'react-query';
 import { UpdateUserApiService } from '../../../../core/services/user';
@@ -17,9 +17,12 @@ import {
   VerifyAccountNameApiService,
 } from 'core/services/bank';
 import toast from 'react-hot-toast';
+import CustomDropdown from 'components/custom-dropdown';
+import { Iselect } from 'types/inputs';
 
 const BankDetails = () => {
   const { currentUser, updateCurrentUser } = useContext(UserContext);
+  const [sort, setSort] = useState(currentUser.bank.sortCode);
 
   const updateBank = useMutation(UpdateUserApiService, {
     onSuccess: (res: AxiosResponse<IResponse<IUser>>) => {
@@ -37,7 +40,7 @@ const BankDetails = () => {
   });
 
   const submit = () =>
-    updateBank.mutate({ ...currentUser, bank: { ...inputs } });
+    updateBank.mutate({ ...currentUser, bank: { ...inputs, sortCode: sort } });
 
   const { bankName, accountNumber, sortCode }: IBank = currentUser.bank;
   let initBank = {
@@ -54,11 +57,17 @@ const BankDetails = () => {
   const bankList = useQuery('getBankList', BankListApiService);
   const verifyAccountName = useQuery(
     ['bankResolve', inputs],
-    () => VerifyAccountNameApiService(inputs),
+    () => VerifyAccountNameApiService({ ...inputs, sortCode: sort }),
     {
       enabled: inputs.accountNumber?.length === 10 && inputs.sortCode !== '',
     }
   );
+
+  const Banks: Array<Iselect> = [];
+
+  bankList.data?.data.forEach((bank: IBankDetails) => {
+    Banks.push({ name: bank.name, value: bank.code });
+  });
 
   return (
     <div className={styles.bankDetails}>
@@ -66,21 +75,12 @@ const BankDetails = () => {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Beneficiary Bank</label>
-            <select
-              onChange={handleChange}
-              defaultValue={inputs.sortCode}
-              name="sortCode"
-            >
-              {bankList.isLoading
-                ? ''
-                : bankList?.data?.data.map(
-                    (el: IBankDetails, index: number) => (
-                      <option key={index} value={el.code}>
-                        {el.name}
-                      </option>
-                    )
-                  )}
-            </select>
+            <CustomDropdown
+              handleChange={(e: string) => setSort(e)}
+              dropdownOption={Banks}
+              selectedOption={sort}
+              placeHolderText="Select bank"
+            />
           </div>
           <div className="form-group">
             <label>Account Number</label>
@@ -99,6 +99,7 @@ const BankDetails = () => {
 
           {verifyAccountName.isLoading ? (
             <div>
+              verifying...
               <Loading />
             </div>
           ) : (

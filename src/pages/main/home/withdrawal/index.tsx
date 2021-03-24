@@ -1,6 +1,7 @@
 import { Loading } from 'assets/svg';
 import { AxiosAdapter, AxiosResponse } from 'axios';
 import { Button, Card, CustomInput } from 'components';
+import { IModalRef } from 'components/modal';
 import UserContext from 'context/user';
 import {
   GetMyAccountBalanceApiService,
@@ -8,16 +9,16 @@ import {
 } from 'core/services/user';
 import { handleError } from 'core/utils/error-handler';
 import useForm from 'core/utils/use-form';
-import React, { useContext, useState } from 'react';
+import React, { RefObject, useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useMutation, useQuery } from 'react-query';
 import { IResponse } from 'types/response';
 import { IWithdrawal } from 'types/user';
 import styles from './withdrawal.module.scss';
 
-const Withdrawal = () => {
-  const [withdrawMessage, setWithdrawMessage] = useState('');
+const Withdrawal = ({ modal }: any) => {
   const { currentUser } = useContext(UserContext);
+  const [withdrawMessage, setWithdrawMessage] = useState('');
 
   const GetAccountBalance = useQuery(
     'getAccountBalance',
@@ -28,11 +29,8 @@ const Withdrawal = () => {
     onSuccess: (res: AxiosResponse<IResponse>) => {
       const { data } = res;
       GetAccountBalance.refetch();
-      const input = document.getElementById(
-        'withdrawAmount'
-      ) as HTMLInputElement;
-      input.value = '';
-      setWithdrawMessage('');
+      modal.current.close();
+      toast.success(`${data.message}`);
       return;
     },
     onError: (error) => {
@@ -77,7 +75,6 @@ const Withdrawal = () => {
               )}
             </div>
           </div>
-          <Button variant="block">Withdraw All</Button>
         </Card>
       </div>
 
@@ -92,7 +89,7 @@ const Withdrawal = () => {
             label="Enter amount"
           />
           <small className="text-red">
-            {withdrawMessage !== '' ? withdrawMessage : null}
+            {withdrawMessage ? withdrawMessage : null}
           </small>
         </div>
 

@@ -1,11 +1,11 @@
 import { Button, Card, CustomInput } from 'components';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styles from './profile.module.scss';
 import placeholder from '../../../../assets/img/profile-avatar.png';
 
 import { useMutation } from 'react-query';
 import { Loading } from 'assets/svg';
-import { States } from './defaults';
+import { States, Gender, Country } from './defaults';
 import { IUser } from '../../../../types/user';
 
 import UserContext from '../../../../context/user';
@@ -16,6 +16,8 @@ import { AxiosResponse } from 'axios';
 import { handleError } from 'core/utils/error-handler';
 import toast from 'react-hot-toast';
 import CustomUpload from 'components/custom-upload';
+import CustomDropdown from 'components/custom-dropdown';
+import { Iselect } from 'types/inputs';
 
 const Profile = () => {
   const { mutate, isLoading } = useMutation(UpdateUserApiService, {
@@ -34,11 +36,32 @@ const Profile = () => {
   });
 
   const { currentUser, updateCurrentUser } = useContext(UserContext);
-  const submit = () => mutate(inputs);
+  const submit = () =>
+    mutate({ ...inputs, gender: gender, country: country, state: state });
   const { inputs, handleChange, handleSubmit } = useForm<IUser>(
     currentUser,
     submit
   );
+
+  const StateArr: Array<Iselect> = [];
+  const CountryArr: Array<Iselect> = [];
+  const GenderArr: Array<Iselect> = [];
+
+  const [gender, setGender] = useState(currentUser.gender);
+  const [country, setCountry] = useState(currentUser.country);
+  const [state, setState] = useState(currentUser.state);
+
+  States.forEach((State: string) => {
+    StateArr.push({ name: State, value: State });
+  });
+
+  Country.forEach((Country: string) => {
+    CountryArr.push({ name: Country, value: Country });
+  });
+
+  Gender.forEach((Gender: string) => {
+    GenderArr.push({ name: Gender, value: Gender });
+  });
 
   return (
     <form onSubmit={handleSubmit}>
@@ -88,44 +111,30 @@ const Profile = () => {
           </div>
           <div className="form-group">
             <label htmlFor="gender">Gender</label>
-            <select
-              defaultValue={currentUser.gender}
-              onChange={handleChange}
-              name="gender"
-              id="gender"
-            >
-              <option value="default">Select your gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
+            <CustomDropdown
+              dropdownOption={GenderArr}
+              selectedOption={gender}
+              handleChange={(e: string) => setGender(e)}
+              placeHolderText="Select gender"
+            />
           </div>
           <div className="form-group">
             <label htmlFor="country">Country</label>
-            <select
-              defaultValue={currentUser.country}
-              onChange={handleChange}
-              name="country"
-              id="country"
-            >
-              <option value="default">Select your country</option>
-              <option value="Nigeria">Nigeria</option>
-            </select>
+            <CustomDropdown
+              dropdownOption={CountryArr}
+              selectedOption={country}
+              handleChange={(e: string) => setCountry(e)}
+              placeHolderText="Select country"
+            />
           </div>
           <div className="form-group">
             <label htmlFor="state">State</label>
-            <select
-              defaultValue={currentUser.state}
-              onChange={handleChange}
-              name="state"
-              id="state"
-            >
-              <option value="default">Select your state</option>
-              {States.map((el: string, index: number) => (
-                <option key={index} value={el}>
-                  {el}
-                </option>
-              ))}
-            </select>
+            <CustomDropdown
+              dropdownOption={StateArr}
+              selectedOption={state}
+              handleChange={(e: string) => setState(e)}
+              placeHolderText="Select state"
+            />
           </div>
           <div className="form-group">
             <label htmlFor="town">Town</label>

@@ -3,14 +3,24 @@ import Button from 'components/button';
 import UserContext from 'context/user';
 import { VerifyDespositApiService } from 'core/services/user';
 import { handleError } from 'core/utils/error-handler';
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, {
+  forwardRef,
+  useCallback,
+  useContext,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 import toast from 'react-hot-toast';
 import { usePaystackPayment } from 'react-paystack';
 import { calculateCharges } from './helper';
 
-const Payment = ({ inputs, reference, closeCB }: any) => {
+//TODO change any
+const Payment = forwardRef(({ inputs, reference, closeCB }: any, ref) => {
   const { currentUser } = useContext(UserContext);
   const [removeCheckoutButton, setRemoveCheckoutButton] = useState(false);
+  const triggerRef = useRef<any>(null); //TODO change any
   //TODO Add a public key to .env
   const config = {
     reference: reference,
@@ -31,7 +41,6 @@ const Payment = ({ inputs, reference, closeCB }: any) => {
     try {
       const response = await VerifyDespositApiService(verifyDeposit);
       toast.success(response.data.message);
-      setRemoveCheckoutButton(true);
     } catch (error) {}
   };
 
@@ -51,17 +60,27 @@ const Payment = ({ inputs, reference, closeCB }: any) => {
     closeCB(false);
   }, []);
 
+  useImperativeHandle(ref, () => ({
+    getAlert() {
+      initializePayment(onSuccess, onClose);
+    },
+  }));
+
   return (
     <>
       {removeCheckoutButton ? (
         ''
       ) : (
-        <Button onClick={() => initializePayment(onSuccess, onClose)}>
+        <button
+          id="hello"
+          ref={triggerRef}
+          onClick={() => initializePayment(onSuccess, onClose)}
+        >
           Proceed to Checkout
-        </Button>
+        </button>
       )}
     </>
   );
-};
+});
 
 export default Payment;

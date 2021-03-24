@@ -91,11 +91,12 @@ const AppLayout = ({ children }: Props) => {
                     </Link>
                   </li>
                 ))}
+                <li>
+                  <Link to="" onClick={handleLogOut}>
+                    <LogoutRouteIcon /> <span className="ml-15">Logout</span>
+                  </Link>
+                </li>
               </ul>
-              <hr />
-              <div className={styles.logout} onClick={handleLogOut}>
-                <LogoutRouteIcon /> <span className="ml-15">Logout</span>
-              </div>
             </>
           </Card>
         </aside>
