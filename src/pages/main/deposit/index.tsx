@@ -29,8 +29,6 @@ const Deposit = () => {
   const [initialize, setInitialize] = useState(false);
   const [reference, setReference] = useState('');
 
-  const childRef = useRef<any>();
-
   const initState: IDeposit = {
     amount: 0,
     email: currentUser.email,
@@ -61,7 +59,6 @@ const Deposit = () => {
         'depositAmount'
       ) as HTMLInputElement;
       depositAmount.value = '';
-      childRef?.current?.getAlert();
     },
     onError: (error) => {
       const { message = null } = handleError(error);
@@ -90,7 +87,6 @@ const Deposit = () => {
       </Card>
       {initialize && (
         <Payment
-          ref={childRef}
           inputs={inputs}
           reference={reference}
           closeCB={setInitialize}

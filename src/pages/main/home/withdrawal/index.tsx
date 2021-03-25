@@ -62,7 +62,9 @@ const Withdrawal = ({ modal }: any) => {
 
   return (
     <>
-      <div className={styles.modal_header}>Funds Withdrawal</div>
+      <div className="mb-20 text-center">
+        <b>Funds Withdrawal</b>
+      </div>
 
       <div className={styles.available_balance_section}>
         <Card variant="block" color="primary-color" className={styles.card}>
