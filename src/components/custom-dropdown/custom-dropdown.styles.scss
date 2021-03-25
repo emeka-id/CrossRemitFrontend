@@ -18,7 +18,7 @@
     padding: 0 22px;
     font-weight: 300;
     color: #3b3b3b;
-    height: 60px;
+    height: 50px;
     line-height: 60px;
     background: #ffffff;
     cursor: pointer;
@@ -41,6 +41,8 @@
     visibility: hidden;
     pointer-events: none;
     z-index: 2;
+    max-height: 250px;
+    overflow-y: auto;
   }
   .custom-select.open .custom-options {
     opacity: 1;

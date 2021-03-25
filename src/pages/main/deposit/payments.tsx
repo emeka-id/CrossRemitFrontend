@@ -1,5 +1,7 @@
 import { AxiosResponse } from 'axios';
+import { CustomInput, Modal } from 'components';
 import Button from 'components/button';
+import { IModalRef } from 'components/modal';
 import UserContext from 'context/user';
 import { VerifyDespositApiService } from 'core/services/user';
 import { handleError } from 'core/utils/error-handler';
@@ -17,10 +19,10 @@ import { usePaystackPayment } from 'react-paystack';
 import { calculateCharges } from './helper';
 
 //TODO change any
-const Payment = forwardRef(({ inputs, reference, closeCB }: any, ref) => {
+const Payment = ({ inputs, reference, closeCB }: any) => {
   const { currentUser } = useContext(UserContext);
-  const [removeCheckoutButton, setRemoveCheckoutButton] = useState(false);
   const triggerRef = useRef<any>(null); //TODO change any
+  const modal = useRef<IModalRef>(null);
   //TODO Add a public key to .env
   const config = {
     reference: reference,
@@ -60,27 +62,48 @@ const Payment = forwardRef(({ inputs, reference, closeCB }: any, ref) => {
     closeCB(false);
   }, []);
 
-  useImperativeHandle(ref, () => ({
-    getAlert() {
-      initializePayment(onSuccess, onClose);
-    },
-  }));
+  const makePayment = () => {
+    modal?.current?.close();
+    initializePayment(onSuccess, onClose);
+  };
+
+  useEffect(() => {
+    modal?.current?.open();
+  }, []);
 
   return (
     <>
-      {removeCheckoutButton ? (
-        ''
-      ) : (
-        <button
-          id="hello"
-          ref={triggerRef}
-          onClick={() => initializePayment(onSuccess, onClose)}
-        >
-          Proceed to Checkout
-        </button>
-      )}
+      <Modal ref={modal}>
+        <div className="mb-20 text-center">
+          <b>Verify Transaction</b>
+        </div>
+
+        <div className="mb-10">
+          <CustomInput
+            label="Amount"
+            defaultValue={inputs.amount}
+            disable={true}
+          />
+        </div>
+        <div className="flex justify-content-between">
+          <small>Reference:</small>
+          <small>
+            <b>{reference}</b>
+          </small>
+        </div>
+        <hr className="border-color" />
+        <div className="flex justify-content-between">
+          <small>Charges: </small>
+          <small>
+            <b>{calculateCharges(inputs.amount).chargesPlus100}</b>
+          </small>
+        </div>
+        <Button className="mt-35" onClick={makePayment}>
+          Proceed
+        </Button>
+      </Modal>
     </>
   );
-});
+};
 
 export default Payment;
