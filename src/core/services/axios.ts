@@ -3,7 +3,7 @@ import { getDefaultAuth } from 'context/auth';
 
 //TODO: use env for baseURL
 const Axios = axios.create({
-  baseURL: 'https://rabbi-capital-api.herokuapp.com/api/v1',
+  baseURL: `${process.env.REACT_APP_BASE_URL}`,
 });
 Axios.interceptors.request.use(
   (config) => {

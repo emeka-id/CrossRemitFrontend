@@ -15,7 +15,7 @@ function App() {
           <AppRouter />
         </BrowserRouter>
       </AuthProviderContainer>
-      <ReactQueryDevtools />
+      {process.env.REACT_APP_ENVIRONMENT === 'development' && <ReactQueryDevtools />}
     </QueryClientProvider>
   );
 }

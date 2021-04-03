@@ -28,7 +28,7 @@ const Payment = ({ inputs, reference, closeCB }: any) => {
     reference: reference,
     amount: calculateCharges(inputs.amount).finalAmount,
     email: currentUser.email,
-    publicKey: 'pk_test_d266be5596c74d3a3721c222d59a8defe87d7c12',
+    publicKey: `${process.env.REACT_APP_PUBLIC_KEY}`,
   };
 
   const verifyDeposit = {
