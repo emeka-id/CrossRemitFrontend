@@ -10,8 +10,8 @@ import Password from './password';
 const Settings = () => {
   return (
     <>
-      Settings
-      <Card>
+      <h3 className="mt-5 mb-5 font-weight-normal">Settings</h3>
+      <Card className="mt-15">
         <Tabs>
           <Tab title="Bank Details">
             <BankDetails />

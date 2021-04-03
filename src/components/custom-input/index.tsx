@@ -19,7 +19,7 @@ const CustomInput: FC<Props> = ({ label, disable = false, ...props }) => {
     >
       <label>{label}</label>
       <div className={styles.suffix}>
-        <span className="text-border-color">NGN</span>
+        <span className={styles.placeholder_text}>NGN</span>
         <input readOnly={disable} {...props} />
       </div>
     </Card>

@@ -106,19 +106,19 @@ const Invest = () => {
 
   return (
     <>
-      Invest
-      <div className="mb-20">
+      <h3 className="mt-5 mb-5 font-weight-normal">Invest</h3>
+      <div className="mb-20 mt-15">
         <Card color="primary-color" className="flex justify-content-between">
           <div>
-            <div>Available Balance</div>
-            <div>
+            <h3 className="font-weight-normal mb-10">Available Balance</h3>
+            <h2 className="font-weight-normal mt-5 mb-5">
               &#x20A6;{' '}
               {GetAccountBalance.isLoading
                 ? '...loading'
                 : new Intl.NumberFormat().format(
                     Number(GetAccountBalance.data?.data)
                   )}
-            </div>
+            </h2>
           </div>
           <Link to="/app/deposit">
             <Button className="dark text-light">Deposit</Button>
@@ -127,7 +127,7 @@ const Invest = () => {
       </div>
       <Card>
         Investment Amount
-        <form onSubmit={handleSubmit}>
+        <form className="mt-20" onSubmit={handleSubmit}>
           <div className={styles.invest}>
             <CustomInput
               name="amount"

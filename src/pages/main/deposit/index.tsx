@@ -68,8 +68,8 @@ const Deposit = () => {
 
   return (
     <>
-      Deposit
-      <Card>
+      <h3 className="mt-5 mb-5 font-weight-normal">Deposit</h3>
+      <Card className="mt-15">
         Deposit Amount
         <form onSubmit={handleSubmit} className="mt-20">
           <div className={styles.deposit}>

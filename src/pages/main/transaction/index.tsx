@@ -45,8 +45,8 @@ const Transaction = () => {
 
   return (
     <>
-      Transaction
-      <Card>
+      <h3 className="mt-5 mb-5 font-weight-normal">Transaction</h3>
+      <Card className="mt-15">
         {loading && !data.length ? (
           <div>Loading transactions...</div>
         ) : !data.length ? (
@@ -78,7 +78,7 @@ const Transaction = () => {
                       {Transaction.purpose} {Transaction.investmentName}
                     </b>
                     <br />
-                    <small>
+                    <small className="grey-text">
                       {new Date(Transaction.createdAt).toUTCString()}
                     </small>
                   </div>
@@ -89,7 +89,7 @@ const Transaction = () => {
                     {new Intl.NumberFormat().format(Number(Transaction.amount))}
                   </b>
                   <br />
-                  <small>{Transaction.ref}</small>
+                  <small className="grey-text">{Transaction.ref}</small>
                 </div>
               </div>
             ))}

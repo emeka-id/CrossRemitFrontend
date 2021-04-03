@@ -16,6 +16,14 @@ body {
     line-height: 1.6;
 }
 
+.font-weight-normal {
+    font-weight: var(--normal-font-weight);
+}
+
+.grey-text {
+    color: var(--base-color);
+}
+
 .container {
     max-width: var(--container-size);
     margin: 0 auto;
