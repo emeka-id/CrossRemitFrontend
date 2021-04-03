@@ -34,8 +34,8 @@ const Home = () => {
 
   return (
     <>
-      Dashboard
-      <Card>
+      <h3 className="mt-5 mb-5 font-weight-normal">Dashboard</h3>
+      <Card className="mt-15">
         <div className={styles.home}>
           <div className={styles.accounting}>
             <AccountCard
@@ -74,7 +74,7 @@ const Home = () => {
             </AccountCard>
           </div>
           <div>
-            <p>Active Investments</p>
+            <p className="mb-5">Active Investments</p>
           </div>
           {MyActiveInvestments.isLoading ? (
             <div>Loading active investments</div>

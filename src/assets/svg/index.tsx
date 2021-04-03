@@ -20,3 +20,4 @@ export { ReactComponent as TransactionsRouteIcon } from './transactions-route-ic
 export { ReactComponent as DepositRouteIcon } from './deposit-route-icon.svg';
 export { ReactComponent as LogoutRouteIcon } from './logout-route-icon.svg';
 export { ReactComponent as MyInvestmentRouteIcon } from './my-investment-route-icon.svg';
+export { ReactComponent as YellowLineIcon } from './yellow-line.svg';

@@ -70,8 +70,8 @@
 
   .arrow {
     position: relative;
-    height: 15px;
-    width: 15px;
+    height: 8px;
+    width: 8px;
   }
   .arrow::before,
   .arrow::after {
@@ -88,7 +88,7 @@
     background-color: #394a6d;
   }
   .arrow::after {
-    left: 5px;
+    left: 0;
     transform: rotate(-45deg);
     background-color: #394a6d;
   }
@@ -97,7 +97,7 @@
     transform: rotate(-45deg);
   }
   .open .arrow::after {
-    left: 5px;
+    left: 0;
     transform: rotate(45deg);
   }
 }

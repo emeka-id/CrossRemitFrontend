@@ -12,6 +12,7 @@ import { useHistory } from 'react-router-dom';
 import { IResponse } from 'types/response';
 import { ISignup } from 'types/user';
 import toast from 'react-hot-toast';
+import { YellowLineIcon } from "assets/svg";
 
 const Signup = () => {
   const { signUpState, updateSignupState } = useContext(UserContext);
@@ -39,7 +40,8 @@ const Signup = () => {
   return (
     <div>
       <div className="text-center">
-        <h2>Join Rabbi</h2>
+        <h2 className="mb-5">Join Rabbi</h2>
+        <YellowLineIcon />
       </div>
       <form className="mt-40" onSubmit={handleSubmit}>
         <div className="form-group">

@@ -15,8 +15,8 @@ const MyInvestment = () => {
 
   return (
     <>
-      My Investments
-      <Card>
+      <h3 className="mt-5 mb-5 font-weight-normal">My Investments</h3>
+      <Card className="mt-15">
         <>
           <div className="mb-20">All Investments</div>
           {MyInvestments.isLoading ? (

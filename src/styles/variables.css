@@ -9,11 +9,12 @@
   --dark: #12161c;
   --grey: #f1f1f3;
   --light: #ffffff;
+  --dark-blue: #060046;
   --red: #e0475b;
   --status-color: #191e26;
 
   /*===== TYPOGRAPHY ====*/
-  --body-font: 'Gotham', san-serif;
+  --body-font: 'Poppins', san-serif;
   --normal-font-size: 1rem;
   --normal-font-weight: 300;
 

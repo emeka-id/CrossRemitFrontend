@@ -31,22 +31,22 @@ const InvestmentCard: FC<Props> = ({
         <Icon />
         <div className="ml-30">
           <div>{name}</div>
-          <div>{duration} months</div>
+          <div className="grey-text ml-10 small">Growing for {duration} months</div>
         </div>
       </div>
       <div className={styles.stats}>
         <div className="flex justify-content-between mb-15">
-          <div>
+          <div className={styles.investment_sm_text }>
             Invested: ₦ {new Intl.NumberFormat().format(Number(amount))}
           </div>
-          <div>{timeLeft} months left</div>
+          <div className={styles.investment_sm_text }>{timeLeft} months left</div>
         </div>
         <ProgressBar percentage={progress} />
         <div className="flex justify-content-between mt-10">
-          <div>
+          <div className={styles.investment_sm_text }>
             Paid: ₦ {new Intl.NumberFormat().format(Number(interestPaid))}
           </div>
-          <div>
+          <div className={styles.investment_sm_text }>
             Unpaid: ₦ {new Intl.NumberFormat().format(Number(interest))}
           </div>
         </div>
