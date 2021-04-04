@@ -10,6 +10,11 @@
   outline: none;
   min-height: 52px;
 
+  &[disabled] {
+    opacity: 0.55;
+    cursor: default;
+  }
+
   &[data-variant='outline'] {
     background-color: transparent;
     color: var(--dark);

@@ -113,7 +113,7 @@ const Profile = () => {
             <label htmlFor="gender">Gender</label>
             <CustomDropdown
               dropdownOption={GenderArr}
-              selectedOption={gender}
+              selectedOption={gender ? gender : ''}
               handleChange={(e: string) => setGender(e)}
               placeHolderText="Select gender"
             />
@@ -122,7 +122,7 @@ const Profile = () => {
             <label htmlFor="country">Country</label>
             <CustomDropdown
               dropdownOption={CountryArr}
-              selectedOption={country}
+              selectedOption={country ? country : ''}
               handleChange={(e: string) => setCountry(e)}
               placeHolderText="Select country"
             />
@@ -131,7 +131,7 @@ const Profile = () => {
             <label htmlFor="state">State</label>
             <CustomDropdown
               dropdownOption={StateArr}
-              selectedOption={state}
+              selectedOption={state ? state : ''}
               handleChange={(e: string) => setState(e)}
               placeHolderText="Select state"
             />
@@ -158,7 +158,7 @@ const Profile = () => {
             />
           </div>
 
-          <Button type="submit">
+          <Button type="submit" disabled={isLoading ? true : false}>
             {isLoading ? <Loading /> : 'Save Settings'}
           </Button>
         </div>
