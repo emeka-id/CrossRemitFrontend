@@ -22,7 +22,17 @@ const MyInvestment = () => {
           {MyInvestments.isLoading ? (
             <div>Loading investments...</div>
           ) : MyInvestments.data?.response.length === 0 ? (
-            <div>No investments yet...</div>
+            <Card variant="outline">
+              <div className="flex justify-content-center align-item-center">
+                <div>
+                  You have no investments yet,
+                  <Link to="/app/invest">
+                    {'  '}
+                    <span className="text-primary-color">invest now</span>
+                  </Link>
+                </div>
+              </div>
+            </Card>
           ) : (
             MyInvestments.data?.response.map(
               (Investments: IMyInvestment, index: number) => (
