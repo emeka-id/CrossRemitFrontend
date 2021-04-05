@@ -27,12 +27,15 @@ const Navigation: FC<Props> = ({ onClick }) => {
     <nav className={styles.navbar}>
       <div className="container flex justify-content-between">
         <div className={styles.menu}>
-          {!path.includes('/auth') && <Hamburger onClick={onClick} />}
-          <Logo />
+          {!path.includes('/auth') && (
+            <Hamburger className={styles.hamburger} onClick={onClick} />
+          )}
+
+          <Logo className={styles.logo} />
         </div>
         {!isLoggedIn ? (
           <div className="flex">
-            <div className="mr-10">
+            <div className="">
               <Link to="/auth/login">
                 <Button variant="stripped">Login</Button>
               </Link>

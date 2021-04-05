@@ -79,7 +79,17 @@ const Home = () => {
           {MyActiveInvestments.isLoading ? (
             <div>Loading active investments</div>
           ) : MyActiveInvestments.data?.response.length === 0 ? (
-            <div>No active investments yet</div>
+            <Card variant="outline">
+              <div className="flex justify-content-center align-item-center">
+                <div>
+                  You have no investments yet,
+                  <Link to="/app/invest">
+                    {'  '}
+                    <span className="text-primary-color">invest now</span>
+                  </Link>
+                </div>
+              </div>
+            </Card>
           ) : (
             <div className="mt-20">
               {MyActiveInvestments.data?.response.map(

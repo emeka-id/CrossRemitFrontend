@@ -1,4 +1,4 @@
-import { DepositSvg, Loading } from 'assets/svg';
+import { DepositSvg, Loading, TransactionsRouteIcon } from 'assets/svg';
 import { InvestWidthdraw } from 'assets/svg';
 import { Widthdrawal } from 'assets/svg';
 import { Pending } from 'assets/svg';
@@ -10,6 +10,7 @@ import { handleError } from 'core/utils/error-handler';
 import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 import { IList, IResponse } from 'types/response';
 import { ITransactions } from 'types/user';
 import Withdrawal from '../home/withdrawal';
@@ -50,7 +51,18 @@ const Transaction = () => {
         {loading && !data.length ? (
           <div>Loading transactions...</div>
         ) : !data.length ? (
-          <div>No transactions yet...</div>
+          <div>
+            <Card variant="outline">
+              <div className="flex justify-content-center align-item-center">
+                <div>
+                  <div className="flex justify-content-center">
+                    <TransactionsRouteIcon />
+                  </div>
+                  You have no transactions yet
+                </div>
+              </div>
+            </Card>
+          </div>
         ) : (
           <div>
             {data.map((Transaction: ITransactions, index: number) => (
