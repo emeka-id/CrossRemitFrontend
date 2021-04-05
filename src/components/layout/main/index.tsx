@@ -13,7 +13,7 @@ import Card from 'components/card';
 import { Constants, Page } from 'core/utils/constants';
 import { SecureStorage } from 'core/utils/storage';
 import React, { useState } from 'react';
-import { Link, useLocation, useHistory } from 'react-router-dom';
+import { Link, useLocation, useHistory, useRouteMatch } from 'react-router-dom';
 import Navigation from '../../navigation';
 import styles from './main.module.scss';
 

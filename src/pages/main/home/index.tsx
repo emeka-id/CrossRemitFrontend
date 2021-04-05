@@ -50,7 +50,7 @@ const Home = () => {
               title="Available Balance"
             >
               <Link to="/app/deposit">
-                <Button>Deposit</Button>
+                <Button className="mb-10">Deposit</Button>
               </Link>
 
               <Button variant="outline" onClick={() => modal?.current?.open()}>
@@ -69,7 +69,7 @@ const Home = () => {
               title="Total Money Invested"
             >
               <Link to="/app/invest">
-                <Button>Invest More</Button>
+                <Button className="mb-10">Invest More</Button>
               </Link>
             </AccountCard>
           </div>

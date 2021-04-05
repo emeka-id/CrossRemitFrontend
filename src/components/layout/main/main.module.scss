@@ -44,12 +44,12 @@
 
       li {
         a {
-          opacity: 50%;
+          opacity: 0.5;
           &:hover {
-            opacity: 100%;
+            opacity: 1;
             svg {
               path {
-                opacity: 100%;
+                opacity: 1;
                 fill: var(--dark);
               }
             }
