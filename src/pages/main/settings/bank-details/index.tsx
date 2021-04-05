@@ -120,12 +120,15 @@ const BankDetails = () => {
             className="mt-20"
             disabled={
               (inputs.accountNumber?.length !== 10 && !inputs.sortCode) ||
-              updateBank.isLoading
-                ? true
-                : false
+              updateBank.isLoading ||
+              verifyAccountName.isLoading
             }
           >
-            {updateBank.isLoading ? <Loading /> : 'Save'}
+            {updateBank.isLoading || verifyAccountName.isLoading ? (
+              <Loading />
+            ) : (
+              'Save'
+            )}
           </Button>
         </form>
       </div>
