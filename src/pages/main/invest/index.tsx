@@ -153,7 +153,7 @@ const Invest = () => {
               handleChange={(e: string) => setInvestmentPlan(e)}
             />
           </div>
-          <Button className="mt-40">
+          <Button className="mt-40" disabled={isLoading ? true : false}>
             {isLoading ? <Loading /> : 'Invest'}
           </Button>
         </form>

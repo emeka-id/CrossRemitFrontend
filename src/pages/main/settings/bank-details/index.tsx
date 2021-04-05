@@ -78,7 +78,7 @@ const BankDetails = () => {
             <CustomDropdown
               handleChange={(e: string) => setSort(e)}
               dropdownOption={Banks}
-              selectedOption={sort}
+              selectedOption={sort ? sort : ''}
               placeHolderText="Select bank"
             />
           </div>
@@ -118,7 +118,12 @@ const BankDetails = () => {
           )}
           <Button
             className="mt-20"
-            disabled={!inputs.accountNumber || !inputs.sortCode ? true : false}
+            disabled={
+              (inputs.accountNumber?.length !== 10 && !inputs.sortCode) ||
+              updateBank.isLoading
+                ? true
+                : false
+            }
           >
             {updateBank.isLoading ? <Loading /> : 'Save'}
           </Button>

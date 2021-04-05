@@ -130,7 +130,7 @@ const Verification = () => {
         </div>
         {currentUser.idCard.status === 'Not Verified' && (
           <div>
-            <Button type="submit">
+            <Button type="submit" disabled={isLoading ? true : false}>
               {isLoading ? <Loading /> : 'Send Identification'}
             </Button>
             {!currentUser.idCard && (

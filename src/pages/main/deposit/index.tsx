@@ -80,7 +80,7 @@ const Deposit = () => {
               id="depositAmount"
             />
           </div>
-          <Button>
+          <Button disabled={initializePaystackPayment.isLoading ? true : false}>
             {initializePaystackPayment.isLoading ? <Loading /> : 'Deposit'}
           </Button>
         </form>

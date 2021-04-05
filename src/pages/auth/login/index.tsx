@@ -1,20 +1,20 @@
-import { Button } from "components";
-import AuthContext from "context/auth";
-import { LoginApiService } from "core/services/user";
-import { Page } from "core/utils/constants";
-import { handleError } from "core/utils/error-handler";
-import useForm from "core/utils/use-form";
-import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
-import { IAuth, ILogin } from "types/user";
-import { IResponse } from "types/response";
-import styles from "./login.module.scss";
-import { Loading } from "assets/svg";
-import { useMutation } from "react-query";
-import { AxiosResponse } from "axios";
-import UserContext from "context/user";
-import toast from "react-hot-toast";
-import { YellowLineIcon } from "assets/svg";
+import { Button } from 'components';
+import AuthContext from 'context/auth';
+import { LoginApiService } from 'core/services/user';
+import { Page } from 'core/utils/constants';
+import { handleError } from 'core/utils/error-handler';
+import useForm from 'core/utils/use-form';
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import { IAuth, ILogin } from 'types/user';
+import { IResponse } from 'types/response';
+import styles from './login.module.scss';
+import { Loading } from 'assets/svg';
+import { useMutation } from 'react-query';
+import { AxiosResponse } from 'axios';
+import UserContext from 'context/user';
+import toast from 'react-hot-toast';
+import { YellowLineIcon } from 'assets/svg';
 
 const Login = () => {
   const { setAuthAndCache } = useContext(AuthContext);
@@ -38,7 +38,7 @@ const Login = () => {
   let history = useHistory();
 
   const submit = () => mutate(inputs);
-  const initState = { email: "", password: "" };
+  const initState = { email: '', password: '' };
   const { inputs, handleChange, handleSubmit } = useForm<ILogin>(
     initState,
     submit
@@ -77,7 +77,9 @@ const Login = () => {
               <input type="checkbox" className="mr-5" /> Remember me
             </label>
           </div>
-          <Button type="submit">{isLoading ? <Loading /> : "Login"}</Button>
+          <Button type="submit" disabled={isLoading ? true : false}>
+            {isLoading ? <Loading /> : 'Login'}
+          </Button>
         </div>
       </form>
     </div>

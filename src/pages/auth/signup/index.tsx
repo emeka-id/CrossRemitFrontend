@@ -12,7 +12,7 @@ import { useHistory } from 'react-router-dom';
 import { IResponse } from 'types/response';
 import { ISignup } from 'types/user';
 import toast from 'react-hot-toast';
-import { YellowLineIcon } from "assets/svg";
+import { YellowLineIcon } from 'assets/svg';
 
 const Signup = () => {
   const { signUpState, updateSignupState } = useContext(UserContext);
@@ -55,7 +55,9 @@ const Signup = () => {
           />
         </div>
         <div className="flex justify-content-end mt-40">
-          <Button type="submit">{isLoading ? <Loading /> : 'Continue'}</Button>
+          <Button type="submit" disabled={isLoading ? true : false}>
+            {isLoading ? <Loading /> : 'Continue'}
+          </Button>
         </div>
       </form>
     </div>

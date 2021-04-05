@@ -86,11 +86,11 @@ const Setup = () => {
           <div>
             <label className="flex">
               <input type="checkbox" className="mr-5" />{' '}
-              <small>I agree to Rabbi terms & privacy policy</small>
+              <small>I agree to Rabbi terms &amp; privacy policy</small>
             </label>
           </div>
           <div className=" text-right">
-            <Button className="mt-40">
+            <Button className="mt-40" disabled={isLoading ? true : false}>
               {isLoading ? <Loading /> : 'Finish'}
             </Button>
           </div>
