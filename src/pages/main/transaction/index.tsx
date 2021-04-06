@@ -58,7 +58,7 @@ const Transaction = () => {
                   <div className="flex justify-content-center">
                     <TransactionsRouteIcon />
                   </div>
-                  You have no transactions yet
+                  <div className="mt-20">You have no transactions yet</div>
                 </div>
               </div>
             </Card>
