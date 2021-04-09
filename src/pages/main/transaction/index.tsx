@@ -49,7 +49,13 @@ const Transaction = () => {
       <h3 className="mt-5 mb-5 font-weight-normal">Transaction</h3>
       <Card className="mt-15">
         {loading && !data.length ? (
-          <div>Loading transactions...</div>
+          <Card variant="block" className="primary-color">
+            <div className="flex justify-content-center align-item-center">
+              <div className="pt-20 pb-20">
+                <Loading />
+              </div>
+            </div>
+          </Card>
         ) : !data.length ? (
           <div>
             <Card variant="outline">

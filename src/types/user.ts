@@ -39,6 +39,8 @@ export interface IUser {
   password?: string;
   role: string;
   validation?: string;
+  suspend?: boolean;
+  ban?: boolean;
 }
 
 export interface ICard {
