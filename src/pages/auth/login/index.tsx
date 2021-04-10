@@ -23,11 +23,21 @@ const Login = () => {
   const { mutate, isLoading } = useMutation(LoginApiService, {
     onSuccess: (res: AxiosResponse<IResponse<IAuth>>) => {
       const { success, data } = res.data;
-      if (success) {
+      if (success && !data.user.suspend && !data.user.ban) {
         setAuthAndCache(`${data?.type} ${data?.token}`);
         updateCurrentUser(data?.user);
         history.push(Page.dashboard);
         return;
+      } else if (success && data.user.suspend) {
+        history.push(Page.login);
+        toast.error(
+          `${data.user.firstName} ${data.user.lastName} — your account has been suspended !`
+        );
+      } else if (success && data.user.ban) {
+        history.push(Page.login);
+        toast.error(
+          `${data.user.firstName} ${data.user.lastName} — your account has been banned !`
+        );
       }
     },
     onError: (error) => {

@@ -1,4 +1,4 @@
-import { Investment } from 'assets/svg';
+import { Investment, Loading } from 'assets/svg';
 import { Button, Card, InvestmentCard } from 'components';
 import { GetMyInvestmentsApiService } from 'core/services/user';
 import React from 'react';
@@ -20,7 +20,13 @@ const MyInvestment = () => {
         <>
           <div className="mb-20">All Investments</div>
           {MyInvestments.isLoading ? (
-            <div>Loading investments...</div>
+            <Card variant="block" className="primary-color">
+              <div className="flex justify-content-center align-item-center">
+                <div className="pt-20 pb-20">
+                  <Loading />
+                </div>
+              </div>
+            </Card>
           ) : MyInvestments.data?.response.length === 0 ? (
             <Card variant="outline">
               <div className="flex justify-content-center align-item-center">

@@ -1,4 +1,4 @@
-import { Invest, Investment, Wallet } from 'assets/svg';
+import { Invest, Investment, Loading, Wallet } from 'assets/svg';
 import { AccountCard, Button, Card, InvestmentCard, Modal } from 'components';
 import { IModalRef } from 'components/modal';
 import {
@@ -77,7 +77,13 @@ const Home = () => {
             <p className="mb-5">Active Investments</p>
           </div>
           {MyActiveInvestments.isLoading ? (
-            <div>Loading active investments</div>
+            <Card variant="block" className="primary-color">
+              <div className="flex justify-content-center align-item-center">
+                <div className="pt-20 pb-20">
+                  <Loading />
+                </div>
+              </div>
+            </Card>
           ) : MyActiveInvestments.data?.response.length === 0 ? (
             <Card variant="outline">
               <div className="flex justify-content-center align-item-center">
