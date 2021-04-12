@@ -45,6 +45,20 @@ const Deposit = () => {
     }
   };
 
+  const usdt = () => {
+    const base = {
+      user_fullname: `${currentUser.firstName} ${currentUser.lastName}`,
+      user_phone_number: currentUser.phone || '07066062923',
+      user_email: currentUser.email,
+      naira_amount: Number(inputs.amount),
+    };
+    let objJsonStr = JSON.stringify(base);
+    let objJsonB64 = Buffer.from(objJsonStr).toString('base64');
+    window.open(
+      `http://165.22.78.72:5000/pay/${objJsonB64}?callback_url=https://example.com`
+    );
+  };
+
   const { inputs, handleChange, handleSubmit } = useForm<IDeposit>(
     initState,
     submit
@@ -80,9 +94,7 @@ const Deposit = () => {
               id="depositAmount"
             />
           </div>
-          <Button disabled={initializePaystackPayment.isLoading ? true : false}>
-            {initializePaystackPayment.isLoading ? <Loading /> : 'Deposit'}
-          </Button>
+          <Button onClick={() => usdt()}>Deposit</Button>
         </form>
       </Card>
       {initialize && (
