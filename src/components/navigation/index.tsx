@@ -30,8 +30,9 @@ const Navigation: FC<Props> = ({ onClick }) => {
           {!path.includes('/auth') && (
             <Hamburger className={styles.hamburger} onClick={onClick} />
           )}
-
-          <Logo className={styles.logo} />
+          <Link to={isLoggedIn ? '/app/home' : 'https://rabbicapitals.com'}>
+            <Logo className={styles.logo} />
+          </Link>
         </div>
         {!isLoggedIn ? (
           <div className="flex">
