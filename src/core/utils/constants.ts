@@ -10,4 +10,5 @@ export const Page = {
   setup: '/auth/setup',
   signup: '/auth/signup',
   login: '/auth/login',
+  set_new_password: '/auth/set-new-password',
 };

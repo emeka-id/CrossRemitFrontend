@@ -14,6 +14,10 @@ export interface IEmail {
   email: string;
 }
 
+export interface INewPassword extends ILogin {
+  otp: number;
+}
+
 export interface ISignup extends IEmail {
   firstName: string;
   lastName: string;
