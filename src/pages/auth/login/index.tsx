@@ -5,7 +5,7 @@ import { Page } from 'core/utils/constants';
 import { handleError } from 'core/utils/error-handler';
 import useForm from 'core/utils/use-form';
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { IAuth, ILogin } from 'types/user';
 import { IResponse } from 'types/response';
 import styles from './login.module.scss';
@@ -77,8 +77,12 @@ const Login = () => {
             type="password"
             required
             placeholder="Password"
+            className="pr-100"
             onChange={handleChange}
           />
+          <div className={styles.forgotPassword}>
+            <Link to="/auth/forgot-password">Forgot Password</Link>
+          </div>
         </div>
 
         <div className={styles.action}>

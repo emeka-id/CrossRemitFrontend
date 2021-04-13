@@ -30,3 +30,9 @@ export const returnInvestmentData = (investment: IMyInvestment) => {
 
   return { name, duration, timeLeft, interest, interestPaid, progress };
 };
+
+export const checkInput = (number: number) => {
+  const convertToString = new String(number);
+  const includesComma = convertToString.replace(',', '');
+  console.log(convertToString, includesComma);
+};

@@ -10,6 +10,7 @@ import {
   IDeposit,
   IWithdrawal,
   IMyInvestment,
+  INewPassword,
 } from 'types/user';
 import { IList, IPagination, IResponse } from 'types/response';
 import Axios from './axios';
@@ -98,4 +99,12 @@ export const GetMyAccountBalanceApiService = async () => {
 
 export const WithdrawalApiSerive = (credentials: IWithdrawal) => {
   return Axios.post('/transaction/me/withdrawal', credentials);
+};
+
+export const ForgotPasswordApiService = (credentials: IEmail) => {
+  return Axios.post('/auth/password/forgot', credentials);
+};
+
+export const SetNewPasswordApiService = (credentials: INewPassword) => {
+  return Axios.post('/auth/password/forgot/validate', credentials);
 };

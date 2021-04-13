@@ -17,6 +17,7 @@ import { Link } from 'react-router-dom';
 import { Iselect } from 'types/inputs';
 import { IResponse } from 'types/response';
 import { IBalanceResponse, IInvest, IUserInvestment } from 'types/user';
+import { checkInput } from '../helper';
 import styles from './invest.module.scss';
 
 const Invest = () => {
@@ -139,7 +140,9 @@ const Invest = () => {
               defaultValue={
                 selectedInvestment &&
                 new Intl.NumberFormat().format(
-                  Number(inputs.amount) * 0.2 * selectedInvestment?.duration
+                  Number(checkInput(inputs.amount)) *
+                    0.2 *
+                    selectedInvestment?.duration
                 )
               }
               label="Total Interest based on 20%"
