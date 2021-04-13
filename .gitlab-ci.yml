@@ -1,10 +1,10 @@
 image: node:14.16.0
 
 stages:
-  - staging
+  - prod
 
-staging:
-  stage: staging
+production:
+  stage: prod
   before_script:
     - export REACT_APP_BASE_URL=$REACT_APP_BASE_URL
     - export REACT_APP_PUBLIC_KEY=$REACT_APP_PUBLIC_KEY
@@ -22,11 +22,11 @@ staging:
     - ssh-keyscan $SERVER_HOST >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - ssh -p22 $SERVER_USER@$SERVER_HOST "rm -rf /var/www/_tmp"
-    - ssh -p22 $SERVER_USER@$SERVER_HOST "mkdir /var/www/_tmp"
-    - rsync -avuz --exclude=".*" --exclude="node_modules" build/* $SERVER_USER@$SERVER_HOST:/var/www/_tmp
-    - ssh -p22 $SERVER_USER@$SERVER_HOST "mv /var/www/html /var/www/_old && mv /var/www/_tmp /var/www/html"
-    - ssh -p22 $SERVER_USER@$SERVER_HOST "rm -rf /var/www/_old"
+    - ssh -p22 $SERVER_USER@$SERVER_HOST "rm -rf /var/www/app.rabbicapitals.com/_tmp"
+    - ssh -p22 $SERVER_USER@$SERVER_HOST "mkdir /var/www/app.rabbicapitals.com/_tmp"
+    - rsync -avuz --exclude=".*" --exclude="node_modules" build/* $SERVER_USER@$SERVER_HOST:/var/www/app.rabbicapitals.com/_tmp
+    - ssh -p22 $SERVER_USER@$SERVER_HOST "mv /var/www/app.rabbicapitals.com/html /var/www/app.rabbicapitals.com/_old && mv /var/www/app.rabbicapitals.com/_tmp /var/www/app.rabbicapitals.com/html"
+    - ssh -p22 $SERVER_USER@$SERVER_HOST "rm -rf /var/www/app.rabbicapitals.com/_old"
   artifacts:
     paths:
     - build/
