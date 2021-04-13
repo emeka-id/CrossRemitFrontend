@@ -1,4 +1,4 @@
-image: node:12
+image: node:14.16.0
 
 stages:
   - staging
@@ -31,4 +31,4 @@ staging:
     paths:
     - build/
   only:
-    - snapshot
+    - master
