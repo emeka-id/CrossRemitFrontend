@@ -1,11 +1,21 @@
-import React from 'react'
+import { Loading } from 'assets/svg';
+import React from 'react';
+import loadingIcon from '../../assets/img/loading-icon.png';
+import styles from './loader.module.scss';
 
 const Loader = () => {
-    return (
+  return (
+    <div className={styles.loadingScreen}>
+      <div>
         <div>
-            Loading ....
+          <img src={loadingIcon} />
         </div>
-    )
-}
+        <div className={styles.loading}>
+          <Loading className="dark-loader" />
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default Loader
+export default Loader;
