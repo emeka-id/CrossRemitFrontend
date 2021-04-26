@@ -32,7 +32,8 @@ export const returnInvestmentData = (investment: IMyInvestment) => {
 };
 
 export const checkInput = (number: number) => {
+  const regex = new RegExp(/[,]/g);
   const convertToString = new String(number);
   const includesComma = convertToString.replace(',', '');
-  console.log(convertToString, includesComma);
+  return new Number(includesComma.replace(regex, ''));
 };

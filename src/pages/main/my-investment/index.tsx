@@ -20,10 +20,10 @@ const MyInvestment = () => {
         <>
           <div className="mb-20">All Investments</div>
           {MyInvestments.isLoading ? (
-            <Card variant="block" className="primary-color">
+            <Card variant="block">
               <div className="flex justify-content-center align-item-center">
                 <div className="pt-20 pb-20">
-                  <Loading />
+                  <Loading className="dark-loader" />
                 </div>
               </div>
             </Card>

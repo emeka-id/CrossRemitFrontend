@@ -177,3 +177,8 @@ select {
     object-fit: cover;
   }
 }
+
+.dark-loader {
+  fill: var(--dark) !important;
+  stroke: var(--dark) !important;
+}
