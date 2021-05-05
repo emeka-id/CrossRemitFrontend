@@ -43,10 +43,30 @@ ul {
   padding: 0;
 }
 
+li {
+  & > a {
+    color: var(--light) !important;
+    opacity: 0.7 !important;
+  }
+
+  svg {
+    path {
+      fill: var(--light) !important;
+      opacity: 0.7 !important;
+    }
+  }
+}
+
 li.activeLink {
   & > a {
-    color: var(--dark);
+    color: var(--primary-color) !important;
     opacity: 1 !important;
+
+    svg {
+      path {
+        fill: var(--primary-color) !important;
+      }
+    }
   }
 }
 

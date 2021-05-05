@@ -34,94 +34,55 @@ const Home = () => {
 
   return (
     <>
-      <h3 className="mt-5 mb-5 font-weight-normal">Dashboard</h3>
-      <Card className="mt-15">
-        <div className={styles.home}>
-          <div className={styles.accounting}>
-            <AccountCard
-              icon={Wallet}
-              amount={
-                GetAccountBalance.isLoading
-                  ? 'loading...'
-                  : new Intl.NumberFormat().format(
-                      Number(GetAccountBalance.data?.data)
-                    )
-              }
-              title="Available Balance"
-            >
-              <Link to="/app/deposit">
-                <Button className="mb-10">Deposit</Button>
-              </Link>
-
-              <Button variant="outline" onClick={() => modal?.current?.open()}>
-                Withdraw
-              </Button>
-            </AccountCard>
-            <AccountCard
-              icon={Invest}
-              amount={
-                GetInvestmentBalance.isLoading
-                  ? 'loading...'
-                  : new Intl.NumberFormat().format(
-                      Number(GetInvestmentBalance.data?.data)
-                    )
-              }
-              title="Total Money Invested"
-            >
-              <Link to="/app/invest">
-                <Button className="mb-10">Invest More</Button>
-              </Link>
-            </AccountCard>
-          </div>
-          <div>
-            <p className="mb-5">Active Investments</p>
-          </div>
-          {MyActiveInvestments.isLoading ? (
-            <Card variant="block">
-              <div className="flex justify-content-center align-item-center">
-                <div className="pt-20 pb-20">
-                  <Loading className="dark-loader" />
-                </div>
-              </div>
-            </Card>
-          ) : MyActiveInvestments.data?.response.length === 0 ? (
-            <Card variant="outline">
-              <div className="flex justify-content-center align-item-center">
-                <div>
-                  You have no investments yet,
-                  <Link to="/app/invest">
-                    {'  '}
-                    <span className="text-primary-color">invest now</span>
-                  </Link>
-                </div>
-              </div>
-            </Card>
-          ) : (
-            <div className="mt-20">
-              {MyActiveInvestments.data?.response.map(
-                (Investments: IMyInvestment, index: number) => (
-                  <InvestmentCard
-                    key={index}
-                    icon={Investment}
-                    name={returnInvestmentData(Investments).name}
-                    duration={`${returnInvestmentData(Investments).duration}`}
-                    timeLeft={`${returnInvestmentData(Investments).timeLeft}`}
-                    amount={`${Investments.amount}`}
-                    interest={returnInvestmentData(Investments).interest}
-                    interestPaid={
-                      returnInvestmentData(Investments).interestPaid
-                    }
-                    progress={returnInvestmentData(Investments).progress}
-                  />
-                )
-              )}
-            </div>
-          )}
+      <div>
+        <div className="flex justify-content-between">
+          <h2 className="mt-5 mb-5 font-weight-bold">Dashboard</h2>
+          <Button>Invest</Button>
         </div>
-      </Card>
-      <Modal ref={modal}>
-        <Withdrawal modal={modal} />
-      </Modal>
+
+        <div className={styles.amounts}>
+          <Card>
+            <small>Total Investment</small>
+            <h3>N 200,000</h3>
+          </Card>
+          <Card>
+            <small>Total Returns</small>
+            <h3>N 1,400,000</h3>
+          </Card>
+          <Card>
+            <small>Active Investment</small>
+            <h3>N 800,000</h3>
+          </Card>
+          <Card>
+            <small>Expected Returns</small>
+            <h3>N 940,000</h3>
+          </Card>
+        </div>
+
+        <div className={styles.investment}>
+          <Card>
+            <h3>Returns</h3>
+          </Card>
+          <Card>
+            <div>
+              <h3>Active Investments</h3>
+
+              <InvestmentCard
+                key={0}
+                icon={Investment}
+                name={'Starter'}
+                duration={`3`}
+                timeLeft={`1`}
+                amount={`300000`}
+                interest={1000000}
+                interestPaid={0}
+                progress={85}
+                hideIcon={true}
+              />
+            </div>
+          </Card>
+        </div>
+      </div>
     </>
   );
 };

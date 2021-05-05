@@ -5,12 +5,11 @@
 
   .main {
     display: block;
-    margin-top: 2.625rem;
     min-height: calc(100vh - var(--navbar-height) - 0.7rem);
 
     @include xl {
       display: grid;
-      grid-template-columns: 16.75rem 1fr;
+      grid-template-columns: 18.75rem 1fr;
       grid-template-rows: auto;
       column-gap: 4rem;
       min-height: calc(100vh - var(--navbar-height) - 2.625rem);
@@ -19,11 +18,13 @@
     aside {
       // display: none;
       line-height: 4;
-      position: fixed;
+      position: sticky;
       top: 0;
       z-index: 2;
       height: 100vh;
       transition: 0.3s;
+      padding: 15px;
+      background-color: var(--side-nav-dark);
 
       & i {
         display: block;
@@ -43,14 +44,15 @@
       }
 
       li {
+        margin-left: 20px;
         a {
           opacity: 0.5;
           &:hover {
             opacity: 1;
+            color: var(--light);
             svg {
               path {
                 opacity: 1;
-                fill: var(--dark);
               }
             }
           }
@@ -58,6 +60,11 @@
       }
     }
   }
+}
+
+.mainContainer {
+  margin-top: 2.625rem;
+  margin-right: 2.3rem;
 }
 
 .logout {

@@ -24,8 +24,18 @@ const Navigation: FC<Props> = ({ onClick }) => {
   let { path }: routing = useRouteMatch();
 
   return (
-    <nav className={styles.navbar}>
-      <div className="container flex justify-content-between">
+    <nav
+      className={
+        isLoggedIn ? [styles.navbar, 'light'].join(' ') : styles.navbar
+      }
+    >
+      <div
+        className={
+          !isLoggedIn
+            ? ['container', 'flex justify-content-between pr-50'].join(' ')
+            : 'flex justify-content-between pr-50'
+        }
+      >
         <div className={styles.menu}>
           {!path.includes('/auth') && (
             <Hamburger className={styles.hamburger} onClick={onClick} />
@@ -59,7 +69,7 @@ const Navigation: FC<Props> = ({ onClick }) => {
             <img
               src={currentUser.pic || profile}
               alt=""
-              className="profile-img medium"
+              className="profile-img small"
             />
           </div>
         )}
