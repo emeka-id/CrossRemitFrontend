@@ -70,8 +70,6 @@ const AppLayout = ({ children }: Props) => {
 
   return (
     <div className={styles.layout}>
-      <Navigation onClick={() => setToggle(!toggle)} />
-
       <div className={[styles.main].join(' ')}>
         <aside className={toggle ? 'showMobileNav' : 'hideMobileNav'}>
           <>
@@ -108,7 +106,10 @@ const AppLayout = ({ children }: Props) => {
             </ul>
           </>
         </aside>
-        <main className={[styles.mainContainer].join(' ')}>{children}</main>
+        <main className={[styles.mainContainer].join(' ')}>
+          <Navigation onClick={() => setToggle(!toggle)} />
+          {children}
+        </main>
       </div>
     </div>
   );
