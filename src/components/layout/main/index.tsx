@@ -106,9 +106,9 @@ const AppLayout = ({ children }: Props) => {
             </ul>
           </>
         </aside>
-        <main className={[styles.mainContainer].join(' ')}>
+        <main>
           <Navigation onClick={() => setToggle(!toggle)} />
-          {children}
+          <div className={[styles.mainContainer].join(' ')}>{children}</div>
         </main>
       </div>
     </div>

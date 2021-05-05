@@ -11,7 +11,7 @@
       display: grid;
       grid-template-columns: 18.75rem 1fr;
       grid-template-rows: auto;
-      column-gap: 4rem;
+      column-gap: 0 !important;
       min-height: calc(100vh - var(--navbar-height) - 2.625rem);
     }
 
@@ -65,6 +65,7 @@
 .mainContainer {
   margin-top: 2.625rem;
   margin-right: 2.3rem;
+  margin-left: 2.3rem;
 }
 
 .logout {
