@@ -64,24 +64,16 @@ const Withdrawal = () => {
 
           <Card className={styles.card}>
             <div style={{ fontWeight: 500 }}>Amount to Withdraw</div>
-            <div className="mt-30">
-              <CustomInput
-                name_of_input="NGN"
-                placeholder="0,000"
-                className={styles.input}
-              />
+            <div className={[styles.inputContainer, 'mt-30'].join(' ')}>
+              <CustomInput name_of_input="NGN" placeholder="0,000" />
               <Button>Proceed</Button>
             </div>
           </Card>
 
           <Card className={styles.card}>
             <div style={{ fontWeight: 500 }}>Withdraw USDT</div>
-            <div className="mt-30">
-              <CustomInput
-                name_of_input="USDT"
-                placeholder="0,000"
-                className={styles.input}
-              />
+            <div className={[styles.inputContainer, 'mt-30'].join(' ')}>
+              <CustomInput name_of_input="USDT" placeholder="0,000" />
               <Button>Proceed</Button>
             </div>
           </Card>
