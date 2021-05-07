@@ -21,6 +21,10 @@
       width: 2rem;
       margin-right: 1rem;
 
+      path {
+        fill: #000;
+      }
+
       @include xl {
         display: none;
       }

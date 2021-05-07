@@ -26,22 +26,26 @@ const Navigation: FC<Props> = ({ onClick }) => {
   return (
     <nav
       className={
-        isLoggedIn ? [styles.navbar, 'light'].join(' ') : styles.navbar
+        isLoggedIn ? [styles.navbar, 'light nav-75'].join(' ') : styles.navbar
       }
     >
       <div
         className={
           !isLoggedIn
-            ? ['container', 'flex justify-content-between pr-50'].join(' ')
-            : 'flex justify-content-between pr-50'
+            ? ['container', 'flex justify-content-between pr-30'].join(' ')
+            : 'flex justify-content-between pr-30'
         }
       >
         <div className={styles.menu}>
           {!path.includes('/auth') && (
-            <Hamburger className={styles.hamburger} onClick={onClick} />
+            <Hamburger
+              className={styles.hamburger}
+              onClick={onClick}
+              style={{ fill: '#000 !important' }}
+            />
           )}
           <a href={isLoggedIn ? '/app/home' : 'https://rabbicapitals.com'}>
-            <Logo className={styles.logo} />
+            {isLoggedIn ? null : <Logo className={styles.logo} />}
           </a>
         </div>
         {!isLoggedIn ? (

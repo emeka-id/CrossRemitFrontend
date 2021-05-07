@@ -6,6 +6,7 @@
   .main {
     display: block;
     min-height: calc(100vh - var(--navbar-height) - 0.7rem);
+    width: 100%;
 
     @include xl {
       display: grid;
@@ -16,9 +17,9 @@
     }
 
     aside {
-      // display: none;
+      //display: none;
       line-height: 4;
-      position: sticky;
+      position: fixed;
       top: 0;
       z-index: 2;
       height: 100vh;
@@ -35,7 +36,7 @@
 
       @include xl {
         display: block;
-        position: relative;
+        position: sticky;
         z-index: 0;
 
         & i {
@@ -64,8 +65,13 @@
 
 .mainContainer {
   margin-top: 2.625rem;
-  margin-right: 2.3rem;
-  margin-left: 2.3rem;
+  margin-right: 1.5rem;
+  margin-left: 1.5rem;
+
+  @include lg {
+    margin-right: 2.5rem;
+    margin-left: 2.5rem;
+  }
 }
 
 .logout {

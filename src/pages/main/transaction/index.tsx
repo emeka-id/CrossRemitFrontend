@@ -46,7 +46,7 @@ const Transaction = () => {
 
   return (
     <>
-      <h3 className="mt-5 mb-5 font-weight-normal">Transaction</h3>
+      <h2 className="mt-5 mb-25 font-weight-bold">Transaction</h2>
 
       <Card className="mt-15">
         {loading && !data.length ? (
@@ -115,11 +115,12 @@ const Transaction = () => {
           </div>
         )}
         <div className="flex justify-content-center">
-          {showMore && (
-            <Button variant="outline" onClick={() => Transactions()}>
-              {loading ? <Loading /> : 'Load more'}
-            </Button>
-          )}
+          {showMore ||
+            (loading && (
+              <Button variant="outline" onClick={() => Transactions()}>
+                {loading ? <Loading /> : 'Load more'}
+              </Button>
+            ))}
         </div>
       </Card>
     </>

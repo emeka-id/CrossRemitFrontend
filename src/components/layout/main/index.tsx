@@ -8,6 +8,7 @@ import {
   MyInvestmentRouteIcon,
   LogoutRouteIcon,
   Logo,
+  WithdrawRouteIcon,
 } from 'assets/svg';
 import Button from 'components/button';
 import Card from 'components/card';
@@ -45,6 +46,11 @@ const AppLayout = ({ children }: Props) => {
       link: '/app/deposit',
     },
     {
+      icon: <WithdrawRouteIcon />,
+      name: 'Withdraw',
+      link: '/app/withdraw',
+    },
+    {
       icon: <MyInvestmentRouteIcon />,
       name: 'My Investment',
       link: '/app/my-investment',
@@ -74,7 +80,7 @@ const AppLayout = ({ children }: Props) => {
         <aside className={toggle ? 'showMobileNav' : 'hideMobileNav'}>
           <>
             <i onClick={() => setToggle(!toggle)}>
-              <Close />
+              <Close style={{ fill: '#fff' }} />
             </i>
             <div className="mt-20">
               <a href={'/app/home'}>

@@ -44,15 +44,10 @@ ul {
 }
 
 li {
-  & > a {
-    color: var(--light) !important;
-    opacity: 0.7 !important;
-  }
-
   svg {
     path {
       fill: var(--light) !important;
-      opacity: 0.7 !important;
+      opacity: 0.8 !important;
     }
   }
 }
@@ -71,7 +66,8 @@ li.activeLink {
 }
 
 .showMobileNav {
-  left: 0;
+  left: 0 !important;
+
   & > div {
     height: 100vh;
   }
@@ -84,7 +80,7 @@ li.activeLink {
 }
 
 .hideMobileNav {
-  left: -16.75rem;
+  left: -20.75rem !important;
 
   @include xl {
     left: inherit;
@@ -110,10 +106,11 @@ li.activeLink {
 
 a {
   text-decoration: none;
-  color: var(--base-color) !important;
+  color: var(--light) !important;
 
   &:hover {
-    color: var(--dark) !important;
+    color: var(--light) !important;
+    opacity: 1 !important;
   }
 }
 
@@ -201,4 +198,8 @@ select {
 .dark-loader {
   fill: var(--dark) !important;
   stroke: var(--dark) !important;
+}
+
+.nav-75 {
+  height: 75px !important;
 }

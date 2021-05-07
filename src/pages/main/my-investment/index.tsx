@@ -15,7 +15,7 @@ const MyInvestment = () => {
 
   return (
     <>
-      <h3 className="mt-5 mb-5 font-weight-normal">My Investments</h3>
+      <h2 className="mt-5 mb-25 font-weight-bold">My Investments</h2>
       <Card className="mt-15">
         <>
           <div className="mb-20">All Investments</div>
@@ -58,9 +58,11 @@ const MyInvestment = () => {
           )}
         </>
         <div className="mt-30">
-          <Link to={'/app/invest'}>
-            <Button>Invest</Button>
-          </Link>
+          {MyInvestments.isLoading ? null : (
+            <Link to={'/app/invest'}>
+              <Button>Invest</Button>
+            </Link>
+          )}
         </div>
       </Card>
     </>

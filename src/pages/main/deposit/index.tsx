@@ -103,7 +103,7 @@ const Deposit = () => {
 
   return (
     <>
-      <h3 className="mt-5 mb-5 font-weight-normal">Deposit</h3>
+      <h2 className="mt-5 mb-25 font-weight-bold">Deposit</h2>
       <Card className="mt-15">
         Deposit Amount
         <form onSubmit={handleSubmit} className="mt-20">
@@ -112,6 +112,7 @@ const Deposit = () => {
               onChange={handleChange}
               name="amount"
               label="Enter Amount to deposit"
+              name_of_input="NGN"
               id="depositAmount"
             />
           </div>
