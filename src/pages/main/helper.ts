@@ -1,6 +1,10 @@
+import { IList, IResponse } from 'types/response';
 import { IInterest, IMyInvestment } from 'types/user';
 
 const interestTotal = (prev: number, current: IInterest): number =>
+  prev + current.amount;
+
+const activeInvestmentReduce = (prev: number, current: IMyInvestment): number =>
   prev + current.amount;
 
 const remainingMonths = (createdAt: string, duration: number): number => {
@@ -10,6 +14,14 @@ const remainingMonths = (createdAt: string, duration: number): number => {
   let differenceInTime = date2.getTime() - date1.getTime();
   let differenceInMonth = differenceInTime / (1000 * 3600 * 730);
   return Math.floor(differenceInMonth);
+};
+
+export const activeInvestmentTotal = (data: IList<IMyInvestment>) => {
+  const activeInvestment: number = data.response.reduce(
+    activeInvestmentReduce,
+    0
+  );
+  return activeInvestment;
 };
 
 export const returnInvestmentData = (investment: IMyInvestment) => {

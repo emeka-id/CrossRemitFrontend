@@ -1,0 +1,30 @@
+@import '../../../styles/breakpoint';
+
+.home {
+  display: grid;
+
+  .accounting {
+    display: block;
+
+    @include lg {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 2rem;
+    }
+  }
+}
+
+.withdrawHead {
+  line-height: 0.5 !important;
+  box-shadow: 0px 4px 17px 0px rgba(0, 0, 0, 0.05);
+}
+
+.card {
+  box-shadow: 0px 4px 17px 0px rgba(0, 0, 0, 0.05);
+}
+
+.input {
+  &:first-child {
+    width: 50% !important;
+  }
+}

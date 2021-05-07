@@ -1,6 +1,7 @@
 .btn {
   padding: 0rem 2rem;
   font-family: var(--body-font) !important;
+  font-weight: 500;
   color: var(--dark);
   background: var(--primary-color);
   border-radius: 5px;
@@ -24,5 +25,19 @@
     background-color: transparent;
     color: var(--light);
     border: none;
+  }
+  &[data-variant='logout'] {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--light);
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    height: 60px;
+
+    svg {
+      path {
+        fill: var(--light) !important;
+      }
+    }
   }
 }

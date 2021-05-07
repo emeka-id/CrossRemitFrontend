@@ -7,6 +7,8 @@ import {
   DepositRouteIcon,
   MyInvestmentRouteIcon,
   LogoutRouteIcon,
+  Logo,
+  WithdrawRouteIcon,
 } from 'assets/svg';
 import Button from 'components/button';
 import Card from 'components/card';
@@ -44,6 +46,11 @@ const AppLayout = ({ children }: Props) => {
       link: '/app/deposit',
     },
     {
+      icon: <WithdrawRouteIcon />,
+      name: 'Withdraw',
+      link: '/app/withdraw',
+    },
+    {
       icon: <MyInvestmentRouteIcon />,
       name: 'My Investment',
       link: '/app/my-investment',
@@ -69,38 +76,46 @@ const AppLayout = ({ children }: Props) => {
 
   return (
     <div className={styles.layout}>
-      <Navigation onClick={() => setToggle(!toggle)} />
-
-      <div className={[styles.main, 'container'].join(' ')}>
+      <div className={[styles.main].join(' ')}>
         <aside className={toggle ? 'showMobileNav' : 'hideMobileNav'}>
-          <Card>
-            <>
-              <i onClick={() => setToggle(!toggle)}>
-                <Close />
-              </i>
-              <ul>
-                {data.map((item, index) => (
-                  <li
-                    key={index}
-                    className={`flex${
-                      location.pathname === item.link ? ' activeLink' : ''
-                    }`}
-                  >
-                    <Link to={item.link} onClick={() => setToggle(false)}>
-                      {item.icon} <span className="ml-15">{item.name}</span>
-                    </Link>
-                  </li>
-                ))}
-                <li>
-                  <Link to="" onClick={handleLogOut}>
-                    <LogoutRouteIcon /> <span className="ml-15">Logout</span>
+          <>
+            <i onClick={() => setToggle(!toggle)}>
+              <Close style={{ fill: '#fff' }} />
+            </i>
+            <div className="mt-20">
+              <a href={'/app/home'}>
+                <Logo />
+              </a>
+            </div>
+
+            <hr style={{ opacity: '0.1' }} />
+            <ul>
+              {data.map((item, index) => (
+                <li
+                  key={index}
+                  className={`flex${
+                    location.pathname === item.link ? ' activeLink' : ''
+                  }`}
+                >
+                  <Link to={item.link} onClick={() => setToggle(false)}>
+                    {item.icon} <span className="ml-15">{item.name}</span>
                   </Link>
                 </li>
-              </ul>
-            </>
-          </Card>
+              ))}
+              <div className="ml-15 mt-40 mr-15">
+                <Link to="" onClick={handleLogOut}>
+                  <Button variant="logout">
+                    <LogoutRouteIcon /> <span className="ml-15">Logout</span>
+                  </Button>
+                </Link>
+              </div>
+            </ul>
+          </>
         </aside>
-        <main>{children}</main>
+        <main>
+          <Navigation onClick={() => setToggle(!toggle)} />
+          <div className={[styles.mainContainer].join(' ')}>{children}</div>
+        </main>
       </div>
     </div>
   );

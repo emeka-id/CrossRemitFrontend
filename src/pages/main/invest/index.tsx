@@ -107,7 +107,7 @@ const Invest = () => {
 
   return (
     <>
-      <h3 className="mt-5 mb-5 font-weight-normal">Invest</h3>
+      <h2 className="mt-5 mb-25 font-weight-bold">Invest</h2>
       <div className="mb-20 mt-15">
         <Card color="primary-color" className="flex justify-content-between">
           <div>
@@ -134,6 +134,7 @@ const Invest = () => {
               name="amount"
               label="Enter Amount to invest"
               id="investAmount"
+              name_of_input="NGN"
               onChange={handleChange}
             />
             <CustomInput
@@ -146,6 +147,7 @@ const Invest = () => {
                 )
               }
               label="Total Interest based on 20%"
+              name_of_input="NGN"
               id="investInterest"
               disable={true}
             />

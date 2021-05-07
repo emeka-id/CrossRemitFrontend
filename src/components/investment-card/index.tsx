@@ -13,6 +13,7 @@ type Props = {
   interest: number;
   progress: number;
   timeLeft: string;
+  hideIcon?: boolean;
 };
 
 const InvestmentCard: FC<Props> = ({
@@ -24,11 +25,12 @@ const InvestmentCard: FC<Props> = ({
   interestPaid,
   progress,
   timeLeft,
+  hideIcon,
 }) => {
   return (
     <div className={styles.card}>
       <div className={[styles.investment, 'flex'].join(' ')}>
-        <Icon />
+        {hideIcon ? null : <Icon />}
         <div className="ml-30">
           <div>{name}</div>
           <div className="grey-text small">Growing for {duration} months</div>

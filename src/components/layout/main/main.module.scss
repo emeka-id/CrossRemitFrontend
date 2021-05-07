@@ -5,25 +5,27 @@
 
   .main {
     display: block;
-    margin-top: 2.625rem;
     min-height: calc(100vh - var(--navbar-height) - 0.7rem);
+    width: 100%;
 
     @include xl {
       display: grid;
-      grid-template-columns: 16.75rem 1fr;
+      grid-template-columns: 18.75rem 1fr;
       grid-template-rows: auto;
-      column-gap: 4rem;
+      column-gap: 0 !important;
       min-height: calc(100vh - var(--navbar-height) - 2.625rem);
     }
 
     aside {
-      // display: none;
+      //display: none;
       line-height: 4;
       position: fixed;
       top: 0;
       z-index: 2;
       height: 100vh;
       transition: 0.3s;
+      padding: 15px;
+      background-color: var(--side-nav-dark);
 
       & i {
         display: block;
@@ -34,7 +36,7 @@
 
       @include xl {
         display: block;
-        position: relative;
+        position: sticky;
         z-index: 0;
 
         & i {
@@ -43,20 +45,32 @@
       }
 
       li {
+        margin-left: 20px;
         a {
           opacity: 0.5;
           &:hover {
             opacity: 1;
+            color: var(--light);
             svg {
               path {
                 opacity: 1;
-                fill: var(--dark);
               }
             }
           }
         }
       }
     }
+  }
+}
+
+.mainContainer {
+  margin-top: 2.625rem;
+  margin-right: 1.5rem;
+  margin-left: 1.5rem;
+
+  @include lg {
+    margin-right: 2.5rem;
+    margin-left: 2.5rem;
   }
 }
 

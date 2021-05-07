@@ -1,22 +1,24 @@
-import { Invest, Investment, Loading, Wallet } from 'assets/svg';
-import { AccountCard, Button, Card, InvestmentCard, Modal } from 'components';
-import { IModalRef } from 'components/modal';
+import {
+  Chart,
+  Investment,
+  Loading,
+  WalletBalance,
+  WalletMoneyInvested,
+} from 'assets/svg';
+import { Button, Card, InvestmentCard } from 'components';
 import {
   GetMyAccountBalanceApiService,
   GetMyActiveInvestmentsApiService,
   GetMyInvestmentTotalApiService,
 } from 'core/services/user';
-import React, { useRef } from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
 import { IMyInvestment, ITransactions, IUserInvestment } from 'types/user';
 import styles from './home.module.scss';
-import Withdrawal from './withdrawal';
-import { returnInvestmentData } from '../helper';
+import { activeInvestmentTotal, returnInvestmentData } from '../helper';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
-  const modal = useRef<IModalRef>(null);
-
   const MyActiveInvestments = useQuery(
     'getMyActiveInvestments',
     GetMyActiveInvestmentsApiService
@@ -34,94 +36,162 @@ const Home = () => {
 
   return (
     <>
-      <h3 className="mt-5 mb-5 font-weight-normal">Dashboard</h3>
-      <Card className="mt-15">
-        <div className={styles.home}>
-          <div className={styles.accounting}>
-            <AccountCard
-              icon={Wallet}
-              amount={
-                GetAccountBalance.isLoading
-                  ? 'loading...'
-                  : new Intl.NumberFormat().format(
-                      Number(GetAccountBalance.data?.data)
-                    )
-              }
-              title="Available Balance"
-            >
-              <Link to="/app/deposit">
-                <Button className="mb-10">Deposit</Button>
-              </Link>
+      <div className={styles.lock}>
+        <div>
+          <div className="flex justify-content-between">
+            <h2 className="mt-5 mb-5 font-weight-bold">Dashboard</h2>
+            <Button>Invest</Button>
+          </div>
 
-              <Button variant="outline" onClick={() => modal?.current?.open()}>
-                Withdraw
-              </Button>
-            </AccountCard>
-            <AccountCard
-              icon={Invest}
-              amount={
-                GetInvestmentBalance.isLoading
-                  ? 'loading...'
-                  : new Intl.NumberFormat().format(
-                      Number(GetInvestmentBalance.data?.data)
+          <div className={styles.amounts}>
+            <Card>
+              <small>Total Investment</small>
+              <h3>
+                N{' '}
+                {GetInvestmentBalance.isSuccess
+                  ? new Intl.NumberFormat().format(
+                      Number(GetInvestmentBalance.data.data)
                     )
-              }
-              title="Total Money Invested"
-            >
-              <Link to="/app/invest">
-                <Button className="mb-10">Invest More</Button>
-              </Link>
-            </AccountCard>
+                  : 'loading'}
+              </h3>
+            </Card>
+            <Card>
+              <small>Total Returns</small>
+              <h3>N {0}</h3>
+            </Card>
+            <Card>
+              <small>Active Investment</small>
+              <h3>
+                N{' '}
+                {MyActiveInvestments.isSuccess
+                  ? new Intl.NumberFormat().format(
+                      Number(activeInvestmentTotal(MyActiveInvestments.data))
+                    )
+                  : 'loading'}
+              </h3>
+            </Card>
+            <Card>
+              <small>Expected Returns</small>
+              <h3>N {0}</h3>
+            </Card>
           </div>
-          <div>
-            <p className="mb-5">Active Investments</p>
-          </div>
-          {MyActiveInvestments.isLoading ? (
-            <Card variant="block">
-              <div className="flex justify-content-center align-item-center">
-                <div className="pt-20 pb-20">
-                  <Loading className="dark-loader" />
+
+          {/* Investment Information Section */}
+          <div className={styles.investment}>
+            <Card className={styles.chart}>
+              <h3>Returns</h3>
+            </Card>
+            <Card>
+              <div>
+                <div className="flex justify-content-between">
+                  <h3>Active Investments</h3>
+                  <div>See More</div>
                 </div>
+
+                {MyActiveInvestments.isLoading ? (
+                  <Card variant="block">
+                    <div className="flex justify-content-center align-item-center">
+                      <div className="pt-20 pb-20">
+                        <Loading className="dark-loader" />
+                      </div>
+                    </div>
+                  </Card>
+                ) : MyActiveInvestments.data?.response.length === 0 ? (
+                  <Card variant="outline">
+                    <div className="flex justify-content-center align-item-center">
+                      <div>
+                        You have no investments yet,
+                        <Link to="/app/invest">
+                          {'  '}
+                          <span className="text-primary-color">invest now</span>
+                        </Link>
+                      </div>
+                    </div>
+                  </Card>
+                ) : (
+                  MyActiveInvestments.data?.response.map(
+                    (Investments: IMyInvestment, index: number) => (
+                      <InvestmentCard
+                        key={index}
+                        icon={Investment}
+                        name={returnInvestmentData(Investments).name}
+                        duration={`${
+                          returnInvestmentData(Investments).duration
+                        }`}
+                        timeLeft={`${
+                          returnInvestmentData(Investments).timeLeft
+                        }`}
+                        amount={`${Investments.amount}`}
+                        interest={returnInvestmentData(Investments).interest}
+                        interestPaid={
+                          returnInvestmentData(Investments).interestPaid
+                        }
+                        progress={returnInvestmentData(Investments).progress}
+                        hideIcon={true}
+                      />
+                    )
+                  )
+                )}
               </div>
             </Card>
-          ) : MyActiveInvestments.data?.response.length === 0 ? (
-            <Card variant="outline">
-              <div className="flex justify-content-center align-item-center">
-                <div>
-                  You have no investments yet,
-                  <Link to="/app/invest">
-                    {'  '}
-                    <span className="text-primary-color">invest now</span>
-                  </Link>
-                </div>
+          </div>
+
+          {/* Balance Information Section */}
+          <div className={styles.balances}>
+            <Card>
+              <WalletBalance />
+              <div className="mt-20">
+                <div>Available Balance</div>
+                <h1>
+                  N{' '}
+                  {GetAccountBalance.isSuccess
+                    ? new Intl.NumberFormat().format(
+                        Number(GetAccountBalance.data?.data)
+                      )
+                    : 'loading'}
+                </h1>
+              </div>
+              <div className="mt-40">
+                <Button className="mr-10">Deposit</Button>
+                <Button variant="outline">Withdraw</Button>
               </div>
             </Card>
-          ) : (
-            <div className="mt-20">
-              {MyActiveInvestments.data?.response.map(
-                (Investments: IMyInvestment, index: number) => (
-                  <InvestmentCard
-                    key={index}
-                    icon={Investment}
-                    name={returnInvestmentData(Investments).name}
-                    duration={`${returnInvestmentData(Investments).duration}`}
-                    timeLeft={`${returnInvestmentData(Investments).timeLeft}`}
-                    amount={`${Investments.amount}`}
-                    interest={returnInvestmentData(Investments).interest}
-                    interestPaid={
-                      returnInvestmentData(Investments).interestPaid
-                    }
-                    progress={returnInvestmentData(Investments).progress}
-                  />
-                )
-              )}
-            </div>
-          )}
+            <Card>
+              <WalletMoneyInvested />
+              <div className="mt-20">
+                <div>Total Money Invested</div>
+                <h1>
+                  N{' '}
+                  {GetInvestmentBalance.isSuccess
+                    ? new Intl.NumberFormat().format(
+                        Number(GetInvestmentBalance.data.data)
+                      )
+                    : 'loading'}
+                </h1>
+              </div>
+              <div className="mt-40">
+                <Button>Invest</Button>
+              </div>
+            </Card>
+            <Card className="primary-color">
+              <div className={styles.heading}>Next Payment Dates</div>
+              <hr />
+              <div className={styles.payDayGrid}>
+                <div>Saturday - 24th May 2021</div>
+                <div>05 : 12 : 30 : 30</div>
+              </div>
+              <div className={styles.payDayGrid}>
+                <div>Saturday - 24th May 2021</div>
+                <div>05 : 12 : 30 : 30</div>
+              </div>
+              <div className={styles.payDayGrid}>
+                <div>Saturday - 24th May 2021</div>
+                <div>05 : 12 : 30 : 30</div>
+              </div>
+            </Card>
+          </div>
         </div>
-      </Card>
-      <Modal ref={modal}>
-        <Withdrawal modal={modal} />
-      </Modal>
+      </div>
     </>
   );
 };

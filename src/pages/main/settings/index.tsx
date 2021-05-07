@@ -10,7 +10,7 @@ import Password from './password';
 const Settings = () => {
   return (
     <>
-      <h3 className="mt-5 mb-5 font-weight-normal">Settings</h3>
+      <h2 className="mt-5 mb-25 font-weight-bold">Settings</h2>
       <Card className="mt-15">
         <Tabs>
           <Tab title="Bank Details">

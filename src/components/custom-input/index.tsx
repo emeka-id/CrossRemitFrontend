@@ -7,11 +7,17 @@ interface Props
     DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
     ''
   > {
-  label: string;
+  label?: string;
   disable?: boolean;
+  name_of_input?: string;
 }
 
-const CustomInput: FC<Props> = ({ label, disable = false, ...props }) => {
+const CustomInput: FC<Props> = ({
+  label,
+  disable = false,
+  name_of_input,
+  ...props
+}) => {
   return (
     <Card
       variant={disable ? 'block' : 'outline'}
@@ -19,7 +25,7 @@ const CustomInput: FC<Props> = ({ label, disable = false, ...props }) => {
     >
       <label>{label}</label>
       <div className={styles.suffix}>
-        <span className={styles.placeholder_text}>NGN</span>
+        <span className={styles.placeholder_text}>{name_of_input}</span>
         <input readOnly={disable} {...props} />
       </div>
     </Card>
