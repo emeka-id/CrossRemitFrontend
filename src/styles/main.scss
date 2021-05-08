@@ -44,6 +44,7 @@ ul {
 }
 
 li {
+  display: block;
   svg {
     path {
       fill: var(--light) !important;
@@ -67,10 +68,11 @@ li.activeLink {
 
 .showMobileNav {
   left: 0 !important;
+  width: 16.75rem;
 
-  & > div {
-    height: 100vh;
-  }
+  // & > div {
+  //   height: 100vh;
+  // }
 
   @include xl {
     & > div {

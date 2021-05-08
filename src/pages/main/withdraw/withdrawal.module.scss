@@ -23,8 +23,10 @@
   box-shadow: 0px 4px 17px 0px rgba(0, 0, 0, 0.05);
 }
 
-.input {
-  &:first-child {
+.inputContainer {
+  width: 100%;
+
+  @include md {
     width: 50% !important;
   }
 }
