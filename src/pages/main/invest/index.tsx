@@ -81,6 +81,7 @@ const Invest = () => {
         ...inputs,
         investment: investmentPlan,
         investmentName: selectedInvestment?.name,
+        dateInvested: new Date(),
       });
     } else if (Number(inputs.amount) > Number(GetAccountBalance.data?.data)) {
       toast.error("You don't have sufficient balance to make this investment");

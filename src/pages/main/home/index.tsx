@@ -11,14 +11,18 @@ import {
   GetMyActiveInvestmentsApiService,
   GetMyInvestmentTotalApiService,
 } from 'core/services/user';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useQuery } from 'react-query';
 import { IMyInvestment, ITransactions, IUserInvestment } from 'types/user';
 import styles from './home.module.scss';
 import { activeInvestmentTotal, returnInvestmentData } from '../helper';
 import { Link } from 'react-router-dom';
+import UserContext from 'context/user';
 
 const Home = () => {
+  const { currentUser } = useContext(UserContext);
+  const { bank, idCard } = currentUser;
+
   const MyActiveInvestments = useQuery(
     'getMyActiveInvestments',
     GetMyActiveInvestmentsApiService
@@ -41,6 +45,48 @@ const Home = () => {
           <div className="flex justify-content-between">
             <h2 className="mt-5 mb-5 font-weight-bold">Dashboard</h2>
             <Button>Invest</Button>
+          </div>
+
+          <div className="mt-30">
+            {idCard.status === 'Not Verified' ? (
+              <Card
+                className={[
+                  styles.verify,
+                  'flex justify-content-between primary-color-light',
+                ].join(' ')}
+              >
+                <div>
+                  <h3>Verify Your Identity</h3>
+                  <div style={{ width: '80%' }}>
+                    Please provide your identity as this will enable us to
+                    verify your identity and provide you quality service.
+                  </div>
+                </div>
+                <Link to="/app/settings">
+                  <Button>Verify Now</Button>
+                </Link>
+              </Card>
+            ) : null}
+
+            {!bank.accountNumber ? (
+              <Card
+                className={[
+                  styles.verify,
+                  'flex justify-content-between primary-color-light',
+                ].join(' ')}
+              >
+                <div>
+                  <h3>Add Bank Details</h3>
+                  <div style={{ width: '80%' }}>
+                    Please provide your bank details as this will enable us to
+                    provide payout
+                  </div>
+                </div>
+                <Link to="/app/settings">
+                  <Button>Add Bank Account</Button>
+                </Link>
+              </Card>
+            ) : null}
           </div>
 
           <div className={styles.amounts}>
