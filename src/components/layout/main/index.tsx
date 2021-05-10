@@ -12,9 +12,10 @@ import {
 } from 'assets/svg';
 import Button from 'components/button';
 import Card from 'components/card';
+import UserContext from 'context/user';
 import { Constants, Page } from 'core/utils/constants';
 import { SecureStorage } from 'core/utils/storage';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useLocation, useHistory, useRouteMatch } from 'react-router-dom';
 import Navigation from '../../navigation';
 import styles from './main.module.scss';
@@ -28,6 +29,9 @@ const AppLayout = ({ children }: Props) => {
   const location = useLocation();
   const history = useHistory();
   const [toggle, setToggle] = useState(false);
+
+  const { currentUser } = useContext(UserContext);
+  const { bank, idCard } = currentUser;
 
   const data = [
     {
@@ -114,7 +118,54 @@ const AppLayout = ({ children }: Props) => {
         </aside>
         <main>
           <Navigation onClick={() => setToggle(!toggle)} />
-          <div className={[styles.mainContainer].join(' ')}>{children}</div>
+          <div className={[styles.mainContainer].join(' ')}>
+            <div className="mt-30">
+              {idCard ? (
+                idCard.status === 'Not Verified' ? (
+                  <Card
+                    className={[
+                      styles.verify,
+                      'flex justify-content-between primary-color-light',
+                    ].join(' ')}
+                  >
+                    <div>
+                      <h3>Verify Your Identity</h3>
+                      <small style={{ width: '80%' }}>
+                        Please provide your identity as this will enable us to
+                        verify your identity and provide you quality service.
+                      </small>
+                    </div>
+                    <Link to="/app/settings">
+                      <Button>Verify Now</Button>
+                    </Link>
+                  </Card>
+                ) : null
+              ) : null}
+
+              {bank ? (
+                !bank.accountNumber ? (
+                  <Card
+                    className={[
+                      styles.verify,
+                      'flex justify-content-between primary-color-light',
+                    ].join(' ')}
+                  >
+                    <div>
+                      <h3>Add Bank Details</h3>
+                      <small style={{ width: '80%' }}>
+                        Please provide your bank details as this will enable us
+                        to provide payout
+                      </small>
+                    </div>
+                    <Link to="/app/settings">
+                      <Button>Add Bank Account</Button>
+                    </Link>
+                  </Card>
+                ) : null
+              ) : null}
+            </div>
+            {children}
+          </div>
         </main>
       </div>
     </div>

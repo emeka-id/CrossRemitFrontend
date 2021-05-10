@@ -15,7 +15,6 @@ function App() {
       <AuthProviderContainer>
         <BrowserRouter>
           <AppRouter />
-          <ResetPassword />
         </BrowserRouter>
       </AuthProviderContainer>
       {process.env.REACT_APP_ENVIRONMENT === 'development' && (

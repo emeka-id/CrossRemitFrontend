@@ -1,3 +1,4 @@
+import ResetPassword from 'components/reset-password';
 import { UserProviderContainer } from 'context/user';
 import React, { lazy, Suspense } from 'react';
 
@@ -22,6 +23,7 @@ const AppRouter = () => (
         />
       </Switch>
     </Suspense>
+    <ResetPassword />
   </UserProviderContainer>
 );
 export default AppRouter;
