@@ -45,7 +45,7 @@ export interface IUser {
   validation?: string;
   suspend?: boolean;
   ban?: boolean;
-  reset_password?: boolean;
+  resetPassword: boolean;
 }
 
 export interface ICard {
@@ -63,6 +63,7 @@ export interface IInvest {
   name: string;
   _id: string;
   createdAt: string;
+  dateInvested: string;
 }
 
 export interface ITransactions {
@@ -79,7 +80,7 @@ export interface IUserInvestment {
   amount: number;
   percent: number;
   investmentName?: string;
-  dateInvested?: Date;
+  dateInvested: string;
 }
 
 //TODO Find a way to merge IUserInvestment and IInvest types
@@ -91,6 +92,7 @@ export interface IMyInvestment {
   percent: number;
   interest: IInterest[];
   active: boolean;
+  dateInvested: string;
 }
 
 export interface IInterest {

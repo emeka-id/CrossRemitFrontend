@@ -1,13 +1,16 @@
 @import '../../../styles/breakpoint';
 
 .invest {
-    display: block;
+  display: block;
 
-    @include sm {
-        display: grid;
-        grid-template-columns: 1.1fr 0.9fr;
-        grid-template-rows: auto;
-        gap: 1rem;
-    }
+  @include sm {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    gap: 1rem;
+  }
 
-} 
+  .customDrop {
+    z-index: 99;
+  }
+}

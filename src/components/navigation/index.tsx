@@ -36,7 +36,7 @@ const Navigation: FC<Props> = ({ onClick }) => {
             : 'flex justify-content-between pr-30'
         }
       >
-        <div className={styles.menu}>
+        <div className={[styles.menu, 'pl-20'].join(' ')}>
           {!path.includes('/auth') && (
             <Hamburger
               className={styles.hamburger}

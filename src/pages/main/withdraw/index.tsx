@@ -10,28 +10,67 @@ import {
   GetMyAccountBalanceApiService,
   GetMyActiveInvestmentsApiService,
   GetMyInvestmentTotalApiService,
+  WithdrawalApiSerive,
 } from 'core/services/user';
-import React from 'react';
-import { useQuery } from 'react-query';
-import { IMyInvestment, ITransactions, IUserInvestment } from 'types/user';
+import React, { useContext } from 'react';
+import { useMutation, useQuery } from 'react-query';
+import {
+  IMyInvestment,
+  ITransactions,
+  IUserInvestment,
+  IWithdrawal,
+} from 'types/user';
 import styles from './withdrawal.module.scss';
 import { returnInvestmentData } from '../helper';
 import { Link } from 'react-router-dom';
+import { AxiosResponse } from 'axios';
+import modal from 'components/modal';
+import { handleError } from 'core/utils/error-handler';
+import useForm from 'core/utils/use-form';
+import toast from 'react-hot-toast';
+import { IResponse } from 'types/response';
+import UserContext from 'context/user';
 
 const Withdrawal = () => {
-  const MyActiveInvestments = useQuery(
-    'getMyActiveInvestments',
-    GetMyActiveInvestmentsApiService
-  );
-
-  const GetInvestmentBalance = useQuery(
-    'getInvestmentBalance',
-    GetMyInvestmentTotalApiService
-  );
+  const { currentUser } = useContext(UserContext);
 
   const GetAccountBalance = useQuery(
     'getAccountBalance',
     GetMyAccountBalanceApiService
+  );
+
+  const Withdrawal = useMutation(WithdrawalApiSerive, {
+    onSuccess: (res: AxiosResponse<IResponse>) => {
+      const { data } = res;
+      GetAccountBalance.refetch();
+      toast.success(`${data.message}`);
+      return;
+    },
+    onError: (error) => {
+      const { message = null } = handleError(error);
+    },
+  });
+
+  const initState = {
+    amount: 0,
+  };
+
+  const submit = () => {
+    if (Number(inputs.amount) > Number(GetAccountBalance.data?.data)) {
+      toast.error('You cannot withdraw more than your balance');
+    }
+    if (!currentUser.bank.accountNumber && !currentUser.bank.sortCode) {
+      toast.error(
+        'You cannot withdraw without your bank details, provide them in Settings'
+      );
+    } else if (Number(inputs.amount) < Number(GetAccountBalance.data?.data)) {
+      Withdrawal.mutate({ ...inputs, amount: Number(inputs.amount) });
+    }
+  };
+
+  const { inputs, handleChange, handleSubmit } = useForm<IWithdrawal>(
+    initState,
+    submit
   );
 
   return (
@@ -64,18 +103,28 @@ const Withdrawal = () => {
 
           <Card className={styles.card}>
             <div style={{ fontWeight: 500 }}>Amount to Withdraw</div>
-            <div className={[styles.inputContainer, 'mt-30'].join(' ')}>
-              <CustomInput name_of_input="NGN" placeholder="0,000" />
-              <Button>Proceed</Button>
-            </div>
+            <form onSubmit={handleSubmit}>
+              <div className={[styles.inputContainer, 'mt-30'].join(' ')}>
+                <CustomInput
+                  name_of_input="NGN"
+                  placeholder="0,000"
+                  onChange={handleChange}
+                />
+                <Button disabled={Withdrawal.isLoading && true}>
+                  {Withdrawal.isLoading ? <Loading /> : 'Proceed'}
+                </Button>
+              </div>
+            </form>
           </Card>
 
           <Card className={styles.card}>
             <div style={{ fontWeight: 500 }}>Withdraw USDT</div>
-            <div className={[styles.inputContainer, 'mt-30'].join(' ')}>
-              <CustomInput name_of_input="USDT" placeholder="0,000" />
-              <Button>Proceed</Button>
-            </div>
+            <form>
+              <div className={[styles.inputContainer, 'mt-30'].join(' ')}>
+                <CustomInput name_of_input="USDT" placeholder="0,000" />
+                <Button>Proceed</Button>
+              </div>
+            </form>
           </Card>
         </div>
       </div>

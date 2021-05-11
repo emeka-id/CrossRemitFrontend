@@ -6,6 +6,7 @@ import UserContext from 'context/user';
 import {
   GetListOfInvestApiService,
   GetMyAccountBalanceApiService,
+  GetMyActiveInvestmentsApiService,
   StartNewInvestmentApiService,
 } from 'core/services/user';
 import { handleError } from 'core/utils/error-handler';
@@ -38,6 +39,11 @@ const Invest = () => {
   const GetAccountBalance = useQuery(
     'getAccountBalance',
     GetMyAccountBalanceApiService
+  );
+
+  const MyActiveInvestments = useQuery(
+    'getMyActiveInvestments',
+    GetMyActiveInvestmentsApiService
   );
 
   const tempInvestmentList: Array<Iselect> = [];
@@ -80,9 +86,12 @@ const Invest = () => {
       mutate({
         ...inputs,
         investment: investmentPlan,
+        percent: selectedInvestment?.duration === 4 ? 100 : 20,
         investmentName: selectedInvestment?.name,
-        dateInvested: new Date(),
+        dateInvested: JSON.stringify(new Date()),
       });
+    } else if (!inputs.amount) {
+      toast.error('Please enter an amount');
     } else if (Number(inputs.amount) > Number(GetAccountBalance.data?.data)) {
       toast.error("You don't have sufficient balance to make this investment");
     } else if (investmentPlan === '') {
@@ -93,8 +102,9 @@ const Invest = () => {
   const initInvestment: IUserInvestment = {
     investment: '',
     amount: 0,
-    percent: 20,
+    percent: 0,
     investmentName: '',
+    dateInvested: '',
   };
 
   const { inputs, handleChange, handleSubmit } = useForm<IUserInvestment>(
@@ -106,14 +116,16 @@ const Invest = () => {
     (data) => data._id === investmentPlan
   );
 
+  const equalTo6 = MyActiveInvestments.data?.response.length === 6;
+
   return (
     <>
       <h2 className="mt-5 mb-25 font-weight-bold">Invest</h2>
       <div className="mb-20 mt-15">
         <Card color="primary-color" className="flex justify-content-between">
           <div>
-            <h3 className="font-weight-normal mb-10">Available Balance</h3>
-            <h2 className="font-weight-normal mt-5 mb-5">
+            <h3 className="font-weight-bold mb-10">Available Balance</h3>
+            <h2 className="font-weight-medium mt-5 mb-5">
               &#x20A6;{' '}
               {GetAccountBalance.isLoading
                 ? '...loading'
@@ -127,43 +139,52 @@ const Invest = () => {
           </Link>
         </Card>
       </div>
-      <Card>
-        Investment Amount
-        <form className="mt-20" onSubmit={handleSubmit}>
-          <div className={styles.invest}>
-            <CustomInput
-              name="amount"
-              label="Enter Amount to invest"
-              id="investAmount"
-              name_of_input="NGN"
-              onChange={handleChange}
-            />
-            <CustomInput
-              defaultValue={
-                selectedInvestment &&
-                new Intl.NumberFormat().format(
-                  Number(checkInput(inputs.amount)) *
-                    0.2 *
-                    selectedInvestment?.duration
-                )
-              }
-              label="Total Interest based on 20%"
-              name_of_input="NGN"
-              id="investInterest"
-              disable={true}
-            />
-            <CustomDropdown
-              dropdownOption={InvestmentSelectList}
-              placeHolderText="Select an investment option"
-              selectedOption={investmentPlan}
-              handleChange={(e: string) => setInvestmentPlan(e)}
-            />
-          </div>
-          <Button className="mt-40" disabled={isLoading ? true : false}>
-            {isLoading ? <Loading /> : 'Invest'}
-          </Button>
-        </form>
-      </Card>
+      <div>
+        <Card>
+          <h3>Investment Amount</h3>
+          <form className="mt-20" onSubmit={handleSubmit}>
+            <div className={styles.invest}>
+              <div className="form-group">
+                <CustomInput
+                  name="amount"
+                  label="Enter Amount to invest"
+                  id="investAmount"
+                  name_of_input="NGN"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <CustomInput
+                  defaultValue={
+                    selectedInvestment &&
+                    new Intl.NumberFormat().format(
+                      Number(checkInput(inputs.amount)) *
+                        0.2 *
+                        selectedInvestment?.duration
+                    )
+                  }
+                  label="Total Interest based on 20%"
+                  name_of_input="NGN"
+                  id="investInterest"
+                  disable={true}
+                />
+              </div>
+
+              <div className={[styles.customDrop, 'form-group'].join(' ')}>
+                <CustomDropdown
+                  dropdownOption={InvestmentSelectList}
+                  placeHolderText="Select an investment option"
+                  selectedOption={investmentPlan}
+                  handleChange={(e: string) => setInvestmentPlan(e)}
+                />
+              </div>
+            </div>
+            <Button className="mt-40" disabled={isLoading ? true : false}>
+              {isLoading ? <Loading /> : 'Invest'}
+            </Button>
+          </form>
+        </Card>
+      </div>
     </>
   );
 };
