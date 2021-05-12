@@ -9,6 +9,7 @@ import ProgressBar from "./progress-bar";
 import CustomInput from "./custom-input";
 import Tabs from "./tabs";
 import Modal from "./modal";
+import TextLoader from "./text-loader";
 
 export {
   Navigation,
@@ -22,4 +23,5 @@ export {
   CustomInput,
   Tabs,
   Modal,
+  TextLoader
 };
