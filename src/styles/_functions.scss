@@ -1,4 +1,4 @@
-$spaceamounts: (5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 75, 100);
+$spaceamounts: (0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 75, 100);
 $sides: (top, bottom, left, right);
 $alignment: (left, right, center);
 $colors: (
@@ -12,6 +12,7 @@ $colors: (
   secondary-color-light,
   border-color,
   red
+  
 );
 
 @each $space in $spaceamounts {

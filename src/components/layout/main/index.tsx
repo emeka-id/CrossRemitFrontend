@@ -129,7 +129,7 @@ const AppLayout = ({ children }: Props) => {
                     ].join(' ')}
                   >
                     <div>
-                      <h3>Verify Your Identity</h3>
+                      <h3 className="m-0">Verify Your Identity</h3>
                       <small style={{ width: '80%' }}>
                         Please provide your identity as this will enable us to
                         verify your identity and provide you quality service.
@@ -151,7 +151,7 @@ const AppLayout = ({ children }: Props) => {
                     ].join(' ')}
                   >
                     <div>
-                      <h3>Add Bank Details</h3>
+                      <h3 className="m-0">Add Bank Details</h3>
                       <small style={{ width: '80%' }}>
                         Please provide your bank details as this will enable us
                         to provide payout

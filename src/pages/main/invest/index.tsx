@@ -1,6 +1,6 @@
 import { Loading } from 'assets/svg';
 import { AxiosResponse } from 'axios';
-import { Button, Card, CustomInput } from 'components';
+import { Button, Card, CustomInput, TextLoader } from 'components';
 import CustomDropdown from 'components/custom-dropdown';
 import UserContext from 'context/user';
 import {
@@ -75,6 +75,11 @@ const Invest = () => {
     },
   });
 
+  const getInvestmentPlanPercent = (id: string) => {
+    const plan = InvestList.data?.data.find((obj) => obj._id === id);
+    return plan?.percent || 0;
+  };
+
   const submit = () => {
     if (Number(inputs.amount) < 100000) {
       toast.error('You have to invest a minimum of N 100,000');
@@ -86,7 +91,7 @@ const Invest = () => {
       mutate({
         ...inputs,
         investment: investmentPlan,
-        percent: selectedInvestment?.duration === 4 ? 100 : 20,
+        percent: getInvestmentPlanPercent(investmentPlan),
         investmentName: selectedInvestment?.name,
         dateInvested: JSON.stringify(new Date()),
       });
@@ -128,7 +133,7 @@ const Invest = () => {
             <h2 className="font-weight-medium mt-5 mb-5">
               &#x20A6;{' '}
               {GetAccountBalance.isLoading
-                ? '...loading'
+                ? <TextLoader />
                 : new Intl.NumberFormat().format(
                     Number(GetAccountBalance.data?.data)
                   )}
@@ -157,13 +162,18 @@ const Invest = () => {
                 <CustomInput
                   defaultValue={
                     selectedInvestment &&
+                    getInvestmentPlanPercent(investmentPlan) !== 100 ? 
                     new Intl.NumberFormat().format(
                       Number(checkInput(inputs.amount)) *
-                        0.2 *
+                      (getInvestmentPlanPercent(investmentPlan)/100) *
                         selectedInvestment?.duration
-                    )
+                    ):
+                    Number(checkInput(inputs.amount))
                   }
-                  label="Total Interest based on 20%"
+                  label={`Total Interest ${
+                    investmentPlan &&
+                    'Based on ' + getInvestmentPlanPercent(investmentPlan) + '%'
+                  } `}
                   name_of_input="NGN"
                   id="investInterest"
                   disable={true}

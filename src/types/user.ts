@@ -60,6 +60,7 @@ export interface IBank {
 }
 export interface IInvest {
   duration: number;
+  percent: number;
   name: string;
   _id: string;
   createdAt: string;
@@ -83,6 +84,12 @@ export interface IUserInvestment {
   dateInvested: string;
 }
 
+export interface IDashboard {
+  totalInvestmentAmount: Number;
+  activeInvestmentAmount: Number;
+  totalReturnAmount: Number;
+}
+
 //TODO Find a way to merge IUserInvestment and IInvest types
 export interface IMyInvestment {
   user: string;
@@ -93,6 +100,7 @@ export interface IMyInvestment {
   interest: IInterest[];
   active: boolean;
   dateInvested: string;
+  nextROI: string;
 }
 
 export interface IInterest {

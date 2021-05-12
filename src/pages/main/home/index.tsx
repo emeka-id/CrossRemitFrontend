@@ -5,19 +5,22 @@ import {
   WalletBalance,
   WalletMoneyInvested,
 } from 'assets/svg';
-import { Button, Card, InvestmentCard } from 'components';
+import { Button, Card, InvestmentCard, TextLoader } from 'components';
 import {
   GetMyAccountBalanceApiService,
   GetMyActiveInvestmentsApiService,
-  GetMyInvestmentTotalApiService,
 } from 'core/services/user';
 import React, { useContext } from 'react';
 import { useQuery } from 'react-query';
-import { IMyInvestment, ITransactions, IUserInvestment } from 'types/user';
+import { IMyInvestment } from 'types/user';
 import styles from './home.module.scss';
-import { activeInvestmentTotal, returnInvestmentData } from '../helper';
+import { returnInvestmentData } from '../helper';
 import { Link } from 'react-router-dom';
 import UserContext from 'context/user';
+import {
+  GetDashboardApiService,
+  NextROIApiService,
+} from 'core/services/user-investment';
 
 const Home = () => {
   const { currentUser } = useContext(UserContext);
@@ -27,16 +30,15 @@ const Home = () => {
     'getMyActiveInvestments',
     GetMyActiveInvestmentsApiService
   );
-
-  const GetInvestmentBalance = useQuery(
-    'getInvestmentBalance',
-    GetMyInvestmentTotalApiService
-  );
-
   const GetAccountBalance = useQuery(
     'getAccountBalance',
     GetMyAccountBalanceApiService
   );
+
+  const GetDashboard = useQuery('getDashboard', GetDashboardApiService);
+  const GetNextROI = useQuery('getNextROI', NextROIApiService);
+
+  console.log(GetDashboard.data?.data);
 
   return (
     <>
@@ -53,45 +55,67 @@ const Home = () => {
             <Card>
               <small>Total Investment</small>
               <h3>
-                N{' '}
-                {GetInvestmentBalance.isSuccess
-                  ? new Intl.NumberFormat().format(
-                      Number(GetInvestmentBalance.data.data)
-                    )
-                  : 'loading'}
+                ₦{' '}
+                {GetDashboard.isSuccess ? (
+                  new Intl.NumberFormat().format(
+                    Number(GetDashboard.data.data.totalInvestmentAmount)
+                  )
+                ) : (
+                  <TextLoader />
+                )}
               </h3>
             </Card>
             <Card>
               <small>Total Returns</small>
-              <h3>N {0}</h3>
+              <h3>
+                ₦{' '}
+                {GetDashboard.isSuccess ? (
+                  new Intl.NumberFormat().format(
+                    Number(GetDashboard.data.data.totalReturnAmount)
+                  )
+                ) : (
+                  <TextLoader />
+                )}
+              </h3>
             </Card>
             <Card>
               <small>Active Investment</small>
               <h3>
-                N{' '}
-                {MyActiveInvestments.isSuccess
-                  ? new Intl.NumberFormat().format(
-                      Number(activeInvestmentTotal(MyActiveInvestments.data))
-                    )
-                  : 'loading'}
+                ₦{' '}
+                {GetDashboard.isSuccess ? (
+                  new Intl.NumberFormat().format(
+                    Number(GetDashboard.data.data.activeInvestmentAmount)
+                  )
+                ) : (
+                  <TextLoader />
+                )}
               </h3>
             </Card>
             <Card>
               <small>Expected Returns</small>
-              <h3>N {0}</h3>
+              <h3>
+                ₦ <TextLoader />
+              </h3>
             </Card>
           </div>
 
           {/* Investment Information Section */}
           <div className={styles.investment}>
             <Card className={styles.chart}>
-              <h3>Returns</h3>
+              <div>
+                <h3>Returns</h3>
+                <div className="flex justify-content-center align-item-center">
+                  <div className="pt-20 pb-20">
+                    <Loading className="dark-loader" />
+                  </div>
+                </div>
+              </div>
             </Card>
             <Card>
               <div>
                 <div className="flex justify-content-between">
                   <h3>Active Investments</h3>
-                  <div>See More</div>
+                  <Link to="/app/invest"><span className="text-dark">See More</span></Link>
                 </div>
 
                 {MyActiveInvestments.isLoading ? (
@@ -149,12 +173,14 @@ const Home = () => {
               <div className="mt-20">
                 <div>Available Balance</div>
                 <h1>
-                  N{' '}
-                  {GetAccountBalance.isSuccess
-                    ? new Intl.NumberFormat().format(
-                        Number(GetAccountBalance.data?.data)
-                      )
-                    : 'loading'}
+                  ₦{' '}
+                  {GetAccountBalance.isSuccess ? (
+                    new Intl.NumberFormat().format(
+                      Number(GetAccountBalance.data?.data)
+                    )
+                  ) : (
+                    <TextLoader />
+                  )}
                 </h1>
               </div>
               <div className="mt-40">
@@ -171,12 +197,14 @@ const Home = () => {
               <div className="mt-20">
                 <div>Total Money Invested</div>
                 <h1>
-                  N{' '}
-                  {GetInvestmentBalance.isSuccess
-                    ? new Intl.NumberFormat().format(
-                        Number(GetInvestmentBalance.data.data)
-                      )
-                    : 'loading'}
+                  ₦{' '}
+                  {GetDashboard.isSuccess ? (
+                    new Intl.NumberFormat().format(
+                      Number(GetDashboard.data.data.totalInvestmentAmount)
+                    )
+                  ) : (
+                    <TextLoader />
+                  )}
                 </h1>
               </div>
               <div className="mt-40">
@@ -186,19 +214,40 @@ const Home = () => {
               </div>
             </Card>
             <Card className="primary-color">
-              <div className={styles.heading}>Next Payment Dates</div>
-              <hr />
-              <div className={styles.payDayGrid}>
-                <div>Saturday - 24th May 2021</div>
-                <div>05 : 12 : 30 : 30</div>
-              </div>
-              <div className={styles.payDayGrid}>
-                <div>Saturday - 24th May 2021</div>
-                <div>05 : 12 : 30 : 30</div>
-              </div>
-              <div className={styles.payDayGrid}>
-                <div>Saturday - 24th May 2021</div>
-                <div>05 : 12 : 30 : 30</div>
+              <div>
+                <div className={styles.heading}>Next Payment Dates</div>
+                <hr />
+                {GetNextROI.isLoading ? (
+                  <div className="flex justify-content-center align-item-center">
+                    <div className="pt-50 pb-20">
+                      <Loading className="dark-loader" />
+                    </div>
+                  </div>
+                ) : (
+                  GetNextROI.data?.response.length === 0 && (
+                    <div className="flex justify-content-center align-item-center">
+                      <div className="pt-50 pb-50">
+                        You have no investments yet,
+                        <Link to="/app/invest">
+                          <span className="text-base-color"> invest now</span>
+                        </Link>
+                      </div>
+                    </div>
+                  )
+                )}
+                {GetNextROI.isSuccess &&
+                  GetNextROI.data?.response.map(
+                    (item: IMyInvestment, index: Number) => (
+                      <div className={styles.payDayGrid}>
+                        <div>{new Date(item.nextROI).toDateString()}</div>
+                        <div>{`${
+                          new Date(item.nextROI).toTimeString().split(' ')[0]
+                        }  ${
+                          new Date(item.nextROI).toTimeString().split(' ')[1]
+                        }`}</div>
+                      </div>
+                    )
+                  )}
               </div>
             </Card>
           </div>

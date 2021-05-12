@@ -5,7 +5,7 @@ import {
   WalletBalance,
   WalletMoneyInvested,
 } from 'assets/svg';
-import { Button, Card, CustomInput, InvestmentCard } from 'components';
+import { Button, Card, CustomInput, InvestmentCard, TextLoader } from 'components';
 import {
   GetMyAccountBalanceApiService,
   GetMyActiveInvestmentsApiService,
@@ -88,12 +88,12 @@ const Withdrawal = () => {
                 <div className="ml-50">
                   <div>Available Balance</div>
                   <h2>
-                    N{' '}
+                  ₦{' '}
                     {GetAccountBalance.isSuccess
                       ? new Intl.NumberFormat().format(
                           Number(GetAccountBalance.data.data)
                         )
-                      : 'loading'}
+                      : <TextLoader />}
                   </h2>
                 </div>
               </div>
