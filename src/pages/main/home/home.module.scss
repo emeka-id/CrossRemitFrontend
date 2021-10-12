@@ -1,4 +1,4 @@
-@import '../../../styles/breakpoint';
+@import "../../../styles/breakpoint";
 
 .home {
   display: grid;
@@ -19,22 +19,85 @@
   line-height: 1.5 !important;
 }
 
-.amounts {
-  margin: 20px 0;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-column-gap: 1rem;
-  line-height: 1 !important;
-
-  & > div {
-    box-shadow: 0px 4px 17px 0px rgba(0, 0, 0, 0.05);
-    padding: 20px 20px 5px 20px !important;
-    line-height: 1 !important;
-  }
+.cardContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 
   @include lg {
-    grid-template-columns: repeat(4, 1fr);
-    grid-column-gap: 1rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+}
+
+.dropDown {
+  width: 120px;
+  font-weight: bold;
+  height: 60px;
+  font-size: 20px;
+  border-radius: 0;
+  margin: 0 0 0 10px;
+}
+
+.text {
+  color: #8b8b8b;
+}
+
+.amounts {
+  margin: 15px 0 5px 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1 !important;
+
+  @include lg {
+    flex-direction: row;
+  }
+
+  // & > div {
+  //   box-shadow: 0px 4px 17px 0px rgba(0, 0, 0, 0.05);
+  //   padding: 20px 20px 5px 20px !important;
+  //   line-height: 1 !important;
+  // }
+
+  .boxes {
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 0;
+  }
+
+  .amountboxes {
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    border-radius: 0;
+  }
+
+  .amountBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 60px;
+    border: 1px solid var(--border-color);
+  }
+
+  .rateBox {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 200px;
+    height: 60px;
+    border: 1px solid var(--border-color);
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .matchButton {
+    width: 200px;
+    height: 60px;
+    font-size: 20px;
+    font-weight: bold;
   }
 }
 
@@ -44,7 +107,7 @@
   grid-column-gap: 1rem;
 
   @include lg {
-    grid-template-columns: 40% auto;
+    grid-template-columns: repeat(4, 4fr);
     grid-column-gap: 1rem;
   }
 
@@ -53,7 +116,50 @@
     padding: 20px 20px 5px 20px !important;
     line-height: 1.5 !important;
   }
+
+  .chartButton {
+    width: 100%;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .chartContainer {
+    margin-bottom: 25px;
+  }
 }
+
+.crossRemit {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.weBuyContainer {
+  width: 500px;
+}
+
+.adButton {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 200px;
+  height: 60px;
+  background-color: rgba(47, 82, 228, 0.1);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.line {
+  margin: 0 !important;
+}
+
+.adText {
+  color: #2f52e4;
+}
+
+// .canadaLogo {
+//   font-size: 30px;
+// }
 
 .balances {
   display: grid;

@@ -1,4 +1,4 @@
-@import '../../styles/breakpoint';
+@import "../../styles/breakpoint";
 
 .navbar {
   background-color: var(--dark);
@@ -62,5 +62,21 @@
     min-width: 28px;
     padding-top: 4px;
     text-align: center;
+  }
+
+  .dashboardText {
+    font-weight: bold;
+    margin-left: 50px;
+    font-size: 22px;
+  }
+
+  .navbarContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .notificationContainer {
+    display: flex;
   }
 }

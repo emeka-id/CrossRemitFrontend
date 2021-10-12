@@ -1,7 +1,7 @@
 :root {
   /*==== COLORS ====*/
-  --primary-color: #ffd200;
-  --primary-color-light: #fff9de;
+  --primary-color: #2f52e4;
+  --primary-color-light: #ffffff;
   --secondary-color: #009546;
   --secondary-color-light: #e9ffde;
   --base-color: #838595;
@@ -12,10 +12,15 @@
   --dark-blue: #060046;
   --red: #e0475b;
   --status-color: #191e26;
-  --side-nav-dark: #000000;
+  --side-nav-dark: #2f52e4;
+
+  --badge-success: #ddfaf4;
+  --badge-danger: #ffe2e2;
+  --badge-warning: #fff06d;
+  --badge-color: #77d4a2;
 
   /*===== TYPOGRAPHY ====*/
-  --body-font: 'Poppins', san-serif;
+  --body-font: "Poppins", san-serif;
   --normal-font-size: 1rem;
   --normal-font-weight: 300;
 

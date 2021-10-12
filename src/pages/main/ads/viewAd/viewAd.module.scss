@@ -1,0 +1,39 @@
+.cardContainer {
+  width: 500px;
+  height: 600px;
+}
+
+.confirmAd {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.cardContentContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.text {
+  color: #aaaaaa;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+.contactText {
+  color: #2f52e4;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.buyButton {
+  width: 230px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.backArrow {
+  cursor: pointer;
+}

@@ -1,7 +1,27 @@
 .txn {
-    border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 
-    .ref {
-        text-align: right;
-    }
+  .ref {
+    text-align: right;
+  }
+}
+
+.table_container {
+  overflow-y: hidden;
+}
+
+table {
+  td,
+  th {
+    width: 350px;
+    text-align: left;
+    padding: 15px 15px;
+    font-size: 20px;
+  }
+}
+
+table,
+th,
+td {
+  border-collapse: collapse;
 }

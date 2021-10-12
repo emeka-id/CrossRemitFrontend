@@ -1,4 +1,4 @@
-@import '../../../styles/breakpoint';
+@import "../../../styles/breakpoint";
 
 .layout {
   background: var(--grey);
@@ -68,9 +68,14 @@
   margin-right: 1.5rem;
   margin-left: 1.5rem;
 
-  @include lg {
+  @include md {
     margin-right: 2.5rem;
     margin-left: 2.5rem;
+  }
+
+  @include lg {
+    margin-right: 5rem;
+    margin-left: 5rem;
   }
 }
 

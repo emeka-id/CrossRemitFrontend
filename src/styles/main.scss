@@ -1,7 +1,7 @@
-@import './variables.css';
-@import './functions';
-@import './typography';
-@import './breakpoint';
+@import "./variables.css";
+@import "./functions";
+@import "./typography";
+@import "./breakpoint";
 
 *,
 ::before,
@@ -131,7 +131,7 @@ select {
   border: 1px solid var(--border-color);
   padding: 1rem;
 
-  &[type='checkbox'] {
+  &[type="checkbox"] {
     height: 1rem;
     width: auto;
     margin: 0;
@@ -178,8 +178,8 @@ select {
 }
 
 .profile-img {
-  height: 80px;
-  width: 80px;
+  height: 70px;
+  width: 70px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--border-color);

@@ -1,0 +1,72 @@
+@import "../../../../styles/breakpoint";
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+
+  @include lg {
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  & > div {
+    box-shadow: 0px 4px 17px 0px rgba(0, 0, 0, 0.05);
+    padding: 20px 20px 5px 20px !important;
+    line-height: 1.5 !important;
+  }
+}
+
+.card {
+  width: 400px;
+  padding: 50px 20px;
+}
+
+.backText {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.createadText {
+  font-size: 40px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.transactionText {
+  color: #8b8b8b;
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+
+.tradeText {
+  font-size: 20px;
+  margin-bottom: 60px;
+}
+
+.logoContainer {
+  margin: 70px 0 30px 0;
+}
+
+.frontLogo {
+  position: relative;
+  left: -30px;
+}
+
+.arrowLogo {
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+.adText {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.arrowContainer {
+  font-size: 20px;
+}
+
+.backArrow {
+  cursor: pointer;
+}

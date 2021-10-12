@@ -1,8 +1,9 @@
-# Rabbi Capital investment
+# CrossRemit
 
-Visit [Rabbi](https://rabbi.com).
+Visit [Cross Remit](https://crossremit.com).
 
 ## Requirements
+
 - Node.js 14.15.4 (through nvm)
 
 Install dependency using `yarn` or `npm install`

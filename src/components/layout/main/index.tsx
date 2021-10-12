@@ -1,24 +1,22 @@
 import {
   Analytics,
   Close,
-  InvestRouteIcon,
-  SettingsRouteIcon,
-  TransactionsRouteIcon,
+  CrossRemitLogo,
   DepositRouteIcon,
-  MyInvestmentRouteIcon,
+  InvestRouteIcon,
   LogoutRouteIcon,
-  Logo,
+  TransactionsRouteIcon,
   WithdrawRouteIcon,
-} from 'assets/svg';
-import Button from 'components/button';
-import Card from 'components/card';
-import UserContext from 'context/user';
-import { Constants, Page } from 'core/utils/constants';
-import { SecureStorage } from 'core/utils/storage';
-import React, { useContext, useState } from 'react';
-import { Link, useLocation, useHistory, useRouteMatch } from 'react-router-dom';
-import Navigation from '../../navigation';
-import styles from './main.module.scss';
+} from "assets/svg";
+import Button from "components/button";
+import Card from "components/card";
+import UserContext from "context/user";
+import { Constants } from "core/utils/constants";
+import { SecureStorage } from "core/utils/storage";
+import React, { useContext, useState } from "react";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import Navigation from "../../navigation";
+import styles from "./main.module.scss";
 
 type Props = {
   title?: string;
@@ -36,38 +34,28 @@ const AppLayout = ({ children }: Props) => {
   const data = [
     {
       icon: <Analytics />,
-      name: 'Dashboard',
-      link: '/app/home',
+      name: "Dashboard",
+      link: "/app/home",
     },
     {
       icon: <InvestRouteIcon />,
-      name: 'Invest',
-      link: '/app/invest',
+      name: "Ads",
+      link: "/app/ads",
     },
     {
       icon: <DepositRouteIcon />,
-      name: 'Deposit',
-      link: '/app/deposit',
+      name: "Transactions",
+      link: "/app/transaction",
     },
     {
       icon: <WithdrawRouteIcon />,
-      name: 'Withdraw',
-      link: '/app/withdraw',
-    },
-    {
-      icon: <MyInvestmentRouteIcon />,
-      name: 'My Investment',
-      link: '/app/my-investment',
+      name: "Chat",
+      link: "/app/withdraw",
     },
     {
       icon: <TransactionsRouteIcon />,
-      name: 'Transaction',
-      link: '/app/transaction',
-    },
-    {
-      icon: <SettingsRouteIcon />,
-      name: 'Settings',
-      link: '/app/settings',
+      name: "Profile",
+      link: "/app/deposit",
     },
   ];
 
@@ -75,38 +63,33 @@ const AppLayout = ({ children }: Props) => {
     const secureStorage = new SecureStorage();
     secureStorage.removeItem(Constants.token);
     secureStorage.removeItem(Constants.currentUser);
-    history.push('/auth/login');
+    history.push("/auth/login");
   };
 
   return (
     <div className={styles.layout}>
-      <div className={[styles.main].join(' ')}>
-        <aside className={toggle ? 'showMobileNav' : 'hideMobileNav'}>
+      <div className={[styles.main].join(" ")}>
+        <aside className={toggle ? "showMobileNav" : "hideMobileNav"}>
           <>
             <i onClick={() => setToggle(!toggle)}>
-              <Close style={{ fill: '#fff' }} />
+              <Close style={{ fill: "#fff" }} />
             </i>
             <div className="mt-20">
-              <a href={'/app/home'}>
-                <Logo />
+              <a href={"/app/home"}>
+                <CrossRemitLogo />
               </a>
             </div>
 
-            <hr style={{ opacity: '0.1' }} />
+            <hr style={{ opacity: "0.1" }} />
             <ul>
               {data.map((item, index) => (
-                <li
-                  key={index}
-                  className={`flex${
-                    location.pathname === item.link ? ' activeLink' : ''
-                  }`}
-                >
+                <li key={index}>
                   <Link to={item.link} onClick={() => setToggle(false)}>
                     {item.icon} <span className="ml-15">{item.name}</span>
                   </Link>
                 </li>
               ))}
-              <div className="ml-15 mt-40 mr-15">
+              <div className="ml-15 mt-100 mr-15">
                 <Link to="" onClick={handleLogOut}>
                   <Button variant="logout">
                     <LogoutRouteIcon /> <span className="ml-15">Logout</span>
@@ -118,52 +101,50 @@ const AppLayout = ({ children }: Props) => {
         </aside>
         <main>
           <Navigation onClick={() => setToggle(!toggle)} />
-          <div className={[styles.mainContainer].join(' ')}>
-            <div className="mt-30">
-              {idCard ? (
-                idCard.status === 'Not Verified' ? (
-                  <Card
-                    className={[
-                      styles.verify,
-                      'flex justify-content-between primary-color-light',
-                    ].join(' ')}
-                  >
-                    <div>
-                      <h3 className="m-0">Verify Your Identity</h3>
-                      <small style={{ width: '80%' }}>
-                        Please provide your identity as this will enable us to
-                        verify your identity and provide you quality service.
-                      </small>
-                    </div>
-                    <Link to="/app/settings">
-                      <Button>Verify Now</Button>
-                    </Link>
-                  </Card>
-                ) : null
-              ) : null}
+          <div className={[styles.mainContainer].join(" ")}>
+            {idCard ? (
+              idCard.status === "Not Verified" ? (
+                <Card
+                  className={[
+                    styles.verify,
+                    "flex justify-content-between primary-color-light",
+                  ].join(" ")}
+                >
+                  <div>
+                    <h3 className="m-0">Verify Your Identity</h3>
+                    <small style={{ width: "80%" }}>
+                      Please provide your identity as this will enable us to
+                      verify your identity and provide you quality service.
+                    </small>
+                  </div>
+                  <Link to="/app/settings">
+                    <Button>Verify Now</Button>
+                  </Link>
+                </Card>
+              ) : null
+            ) : null}
 
-              {bank ? (
-                !bank.accountNumber ? (
-                  <Card
-                    className={[
-                      styles.verify,
-                      'flex justify-content-between primary-color-light',
-                    ].join(' ')}
-                  >
-                    <div>
-                      <h3 className="m-0">Add Bank Details</h3>
-                      <small style={{ width: '80%' }}>
-                        Please provide your bank details as this will enable us
-                        to provide payout
-                      </small>
-                    </div>
-                    <Link to="/app/settings">
-                      <Button>Add Bank Account</Button>
-                    </Link>
-                  </Card>
-                ) : null
-              ) : null}
-            </div>
+            {bank ? (
+              !bank.accountNumber ? (
+                <Card
+                  className={[
+                    styles.verify,
+                    "flex justify-content-between primary-color-light",
+                  ].join(" ")}
+                >
+                  <div>
+                    <h3 className="m-0">Add Bank Details</h3>
+                    <small style={{ width: "80%" }}>
+                      Please provide your bank details as this will enable us to
+                      provide payout
+                    </small>
+                  </div>
+                  <Link to="/app/settings">
+                    <Button>Add Bank Account</Button>
+                  </Link>
+                </Card>
+              ) : null
+            ) : null}
             {children}
           </div>
         </main>

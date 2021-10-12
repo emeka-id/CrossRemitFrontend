@@ -1,0 +1,76 @@
+.mainContainer {
+  padding: 0 50px;
+}
+
+.arrowContainer {
+  font-size: 20px;
+}
+
+.postAd {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.postText {
+  color: #8b8b8b;
+  font-weight: bold;
+}
+
+.backArrow {
+  cursor: pointer;
+}
+
+.sellText {
+  color: #8b8b8b;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.dropdownInputContainer {
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.dropDown {
+  width: 700px;
+  height: 70px;
+  font-size: 20px;
+  border: none;
+}
+
+.input {
+  width: 700px;
+  height: 70px;
+  font-size: 20px;
+  border: none;
+}
+
+.rateBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  width: 700px;
+  height: 70px;
+  font-size: 20px;
+  color: #8b8b8b;
+  background-color: white;
+}
+
+.referenceText {
+  display: flex;
+  justify-content: right;
+  color: #8b8b8b;
+  font-size: 20px;
+}
+
+.timeContainer {
+  display: none;
+}
+
+.proceedButton {
+  width: 500px;
+  height: 70px;
+  font-size: 20px;
+  font-weight: bold;
+}

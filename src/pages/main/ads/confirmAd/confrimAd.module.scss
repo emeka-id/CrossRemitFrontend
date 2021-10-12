@@ -1,0 +1,65 @@
+@import "../../../../styles/breakpoint";
+
+.arrowContainer {
+  font-size: 20px;
+}
+
+.confirmAd {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.postText {
+  color: #8b8b8b;
+  font-weight: bold;
+}
+
+.backArrow {
+  cursor: pointer;
+}
+
+.transactionText {
+  color: #8b8b8b;
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+
+.cardContainer {
+  width: 500px;
+  height: 500px;
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.confirmButton {
+  width: auto;
+  height: 70px;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 30px;
+
+  @include lg {
+    width: 500px;
+    height: 70px;
+  }
+}
+
+.cardText {
+  color: #8b8b8b;
+  font-size: 16px;
+
+  @include lg {
+    font-size: 20px;
+  }
+}
+
+.cardText2 {
+  font-weight: bold;
+  font-size: 16px;
+
+  @include lg {
+    font-size: 20px;
+  }
+}

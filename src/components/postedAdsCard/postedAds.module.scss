@@ -1,0 +1,28 @@
+.chartButton {
+  width: 100%;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.chartContainer {
+  margin-bottom: 25px;
+}
+
+.chart {
+  position: relative;
+
+  svg {
+    opacity: 1;
+  }
+
+  .chartWarning {
+    position: absolute;
+    top: 45%;
+    right: 30%;
+    padding: 15px;
+    background-color: var(--dark);
+    color: var(--light);
+    border-radius: 50px;
+  }
+}

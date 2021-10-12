@@ -1,0 +1,26 @@
+.badge {
+  text-align: center;
+  font-size: 13px;
+  padding: 2px 20px;
+
+  div {
+    padding: 2.5px 0;
+  }
+
+  &[data-type="Completed"] {
+    background-color: var(--badge-success);
+    color: var(--badge-color);
+  }
+  &[data-type="Declined"] {
+    background-color: var(--badge-danger);
+    color: var(--red);
+  }
+  &[data-type="New"] {
+    background-color: var(--badge-success);
+    color: var(--dark);
+  }
+}
+
+.text {
+  font-weight: bold;
+}
