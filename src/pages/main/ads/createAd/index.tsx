@@ -19,9 +19,9 @@ const CreateAds = () => {
       <div>
         <div className={[styles.arrowContainer, "flex"].join(" ")}>
           <BackArrow onClick={goBack} className={styles.backArrow} />
-          <div className="ml-10">Back</div>
+          <div className={[styles.backText, "ml-10"].join(" ")}>Back</div>
         </div>
-        <div className="text-center">
+        <div className={[styles.mainContainer, "text-center"].join(" ")}>
           <div className={styles.createadText}>Create an AD</div>
           <div className={styles.transactionText}>
             What transaction would you like to make today

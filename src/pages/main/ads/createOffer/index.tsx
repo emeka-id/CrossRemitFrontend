@@ -15,9 +15,9 @@ const CreateOffer = () => {
     <div>
       <div className={[styles.arrowContainer, "flex"].join(" ")}>
         <BackArrow onClick={goBack} className={styles.backArrow} />
-        <div className="ml-10">Back</div>
+        <div className={[styles.back, "ml-10"].join(" ")}>Back</div>
       </div>
-      <div className="text-center">
+      <div className={[styles.topTextContainer].join(" ")}>
         <div className={styles.confirmAd}>Create Offer</div>
         <div className={styles.transactionText}>
           Please enter the desired rate you would like to purchase

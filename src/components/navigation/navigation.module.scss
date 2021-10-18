@@ -68,12 +68,21 @@
     font-weight: bold;
     margin-left: 50px;
     font-size: 22px;
+    display: none;
+
+    @include lg {
+      display: block;
+    }
   }
 
   .navbarContainer {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
+
+    @include lg {
+      justify-content: space-between;
+    }
   }
 
   .notificationContainer {

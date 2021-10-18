@@ -72,7 +72,7 @@ const Navigation: FC<Props> = ({ onClick }) => {
               <img
                 src={currentUser.pic || profile}
                 alt=""
-                className="profile-img small"
+                className="profile-img small ml-20"
               />
             </div>
           </div>

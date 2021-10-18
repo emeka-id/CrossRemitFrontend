@@ -18,13 +18,13 @@ const ConfirmAd = () => {
     <div>
       <div className={[styles.arrowContainer, "flex"].join(" ")}>
         <BackArrow onClick={goBack} className={styles.backArrow} />
-        <div className="ml-10">Back</div>
+        <div className={[styles.back, "ml-10"].join(" ")}>Back</div>
       </div>
-      <div className="text-center">
+      <div className={[styles.topTextContainer].join(" ")}>
         <div className={styles.confirmAd}>Confirm</div>
         <div className={styles.transactionText}>
-          You are about to post an AD with these details. Confirm the
-          <br /> details below before posting
+          You are about to post an AD with these details. <br />
+          Confirm the details below before posting
         </div>
         <div className="flex justify-content-center">
           <Card className={styles.cardContainer}>
@@ -54,9 +54,11 @@ const ConfirmAd = () => {
             </div>
           </Card>
         </div>
-        <Button className={styles.confirmButton} onClick={proceed}>
-          Yes, Confirm
-        </Button>
+        <div className="flex justify-content-center">
+          <Button className={styles.confirmButton} onClick={proceed}>
+            Yes, Confirm
+          </Button>
+        </div>
       </div>
     </div>
   );
