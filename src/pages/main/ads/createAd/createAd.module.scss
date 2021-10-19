@@ -1,8 +1,25 @@
 @import "../../../../styles/breakpoint";
 
+// .mainContainer {
+//   padding: 0;
+
+//   @include md {
+//     padding: 0 200px;
+//   }
+
+//   @include lg {
+//     padding: 0 300px;
+//   }
+// }
+
 .cardContainer {
   display: flex;
   flex-direction: column;
+
+  @include md {
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
 
   @include lg {
     flex-direction: row;
@@ -17,34 +34,83 @@
 }
 
 .card {
-  width: 400px;
+  width: 320px;
   padding: 50px 20px;
+  height: 270px;
+
+  @include md {
+    width: 320px;
+    height: 400px;
+  }
+
+  @include lg {
+    width: 400px;
+    height: 500px;
+  }
 }
 
 .backText {
   cursor: pointer;
   font-size: 20px;
+  display: none;
+
+  @include lg {
+    display: block;
+  }
 }
 
 .createadText {
-  font-size: 40px;
+  font-size: 20px;
   font-weight: bold;
-  margin: 20px 0;
+  margin: 0;
+
+  @include md {
+    font-size: 30px;
+    margin: 20px 0;
+  }
+
+  @include lg {
+    font-size: 40px;
+    margin: 20px 0;
+  }
 }
 
 .transactionText {
   color: #8b8b8b;
-  font-size: 20px;
-  margin-bottom: 40px;
+  font-size: 14px;
+  margin-bottom: 20px;
+
+  @include md {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+
+  @include lg {
+    font-size: 20px;
+    margin-bottom: 40px;
+  }
 }
 
 .tradeText {
-  font-size: 20px;
-  margin-bottom: 60px;
+  font-size: 14px;
+  margin-bottom: 0;
+
+  @include lg {
+    font-size: 20px;
+    margin-bottom: 60px;
+  }
 }
 
 .logoContainer {
-  margin: 70px 0 30px 0;
+  margin: 5px 0 5px 0;
+
+  @include md {
+    margin: 30px 0 30px 0;
+  }
+
+  @include lg {
+    margin: 70px 0 30px 0;
+  }
 }
 
 .frontLogo {
@@ -55,12 +121,23 @@
 .arrowLogo {
   margin-bottom: 30px;
   cursor: pointer;
+  margin-top: 20px;
 }
 
 .adText {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
+
+  @include md {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  @include lg {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
 }
 
 .arrowContainer {

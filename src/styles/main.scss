@@ -60,7 +60,7 @@ li.activeLink {
 
     svg {
       path {
-        fill: var(--primary-color) !important;
+        fill: var(--primary-color);
       }
     }
   }
@@ -108,7 +108,7 @@ li.activeLink {
 
 a {
   text-decoration: none;
-  color: var(--light) !important;
+  color: var(--light);
 
   &:hover {
     color: var(--light) !important;

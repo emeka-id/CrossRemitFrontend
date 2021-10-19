@@ -1,4 +1,9 @@
-import { Arrow, BackArrow } from "assets/svg";
+import {
+  Arrow,
+  BackArrow,
+  CanadaRoundFlag,
+  NigeriaRoundFlag,
+} from "assets/svg";
 import { Button, Card } from "components";
 import profile from "../../../../assets/img/profile-avatar.png";
 import React from "react";
@@ -21,7 +26,7 @@ const ViewAd = () => {
     <div>
       <div className={[styles.arrowContainer, "flex"].join(" ")}>
         <BackArrow onClick={goBack} className={styles.backArrow} />
-        <div className="ml-10">Back</div>
+        <div className={[styles.back, "ml-10"].join(" ")}>Back</div>
       </div>
       <div className="text-center">
         <div className={styles.confirmAd}>AD details</div>
@@ -32,46 +37,106 @@ const ViewAd = () => {
             <div className="flex justify-content-center">
               <img src={profile} className="profile-img mb-40" />
             </div>
-            <div className="flex justify-content-between mb-20">
+            <div
+              className={[
+                styles.textContainer,
+                "flex justify-content-between",
+              ].join(" ")}
+            >
               <div>Username</div>
               <div>Cat Williams</div>
             </div>
-            <div className="flex justify-content-between mb-20">
+            <div
+              className={[
+                styles.textContainer,
+                "flex justify-content-between",
+              ].join(" ")}
+            >
               <div>Date Posted</div>
               <div>12/01/21</div>
             </div>
-            <div className="flex justify-content-between mb-20">
+            <div
+              className={[
+                styles.textContainer,
+                "flex justify-content-between",
+              ].join(" ")}
+            >
               <div>Looking for</div>
-              <div>NGN</div>
+              <div>
+                <NigeriaRoundFlag className="mr-10" />
+                <span>NGN</span>
+              </div>
             </div>
-            <div className="flex justify-content-between mb-20">
+            <div
+              className={[
+                styles.textContainer,
+                "flex justify-content-between",
+              ].join(" ")}
+            >
               <div>Amount</div>
               <div>200, 000</div>
             </div>
-            <div className="flex justify-content-between mb-20">
+            <div
+              className={[
+                styles.textContainer,
+                "flex justify-content-between",
+              ].join(" ")}
+            >
               <div>In exchange for</div>
-              <div>CAD</div>
+              <div>
+                <CanadaRoundFlag className="mr-10" />
+                CAD
+              </div>
             </div>
-            <div className="flex justify-content-between mb-20">
+            <div
+              className={[
+                styles.textContainer,
+                "flex justify-content-between",
+              ].join(" ")}
+            >
               <div>Exchange Rate</div>
-              <div>1CAD = N450</div>
+              <div>
+                <CanadaRoundFlag className="mr-10" />
+                <span>1CAD = </span>
+                <NigeriaRoundFlag className="mr-10 ml-5" />
+                N450
+              </div>
             </div>
-            <div className="flex justify-content-between mb-20">
+            <div
+              className={[
+                styles.textContainer,
+                "flex justify-content-between",
+              ].join(" ")}
+            >
               <div>Response Time</div>
               <div>2 Hours</div>
             </div>
-            <div className="flex justify-content-between mb-20">
+            <div
+              className={[
+                styles.textContainer,
+                "flex justify-content-between",
+              ].join(" ")}
+            >
               <div>Current Status</div>
               <Badge type="Completed">Completed</Badge>
             </div>
-            <div className="flex justify-content-between mb-20">
+            <div
+              className={[
+                styles.textContainer,
+                "flex justify-content-between",
+              ].join(" ")}
+            >
               <div>Interested Buyers</div>
               <div>TunOG & 2others</div>
             </div>
           </div>
         </Card>
       </div>
-      <div className="flex justify-content-center mb-50">
+      <div
+        className={[styles.buttonContainer, "flex justify-content-center"].join(
+          " "
+        )}
+      >
         <Button className={styles.buyButton}>Buy</Button>
         <Button
           variant="outline"
@@ -82,7 +147,12 @@ const ViewAd = () => {
         </Button>
       </div>
       <div className={styles.text}>OR</div>
-      <div className="flex justify-content-center">
+      <div
+        className={[
+          styles.contactContainer,
+          "flex justify-content-center",
+        ].join(" ")}
+      >
         <div className={styles.contactText}>Contact Seller</div>
         <Arrow />
       </div>

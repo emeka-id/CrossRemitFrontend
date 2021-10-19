@@ -28,6 +28,8 @@ export { ReactComponent as WithdrawRouteIcon } from "./withdraw-route-icon.svg";
 export { ReactComponent as CrossRemitLogo } from "./white logoN 1.svg";
 export { ReactComponent as BellLogo } from "./Notification.svg";
 export { ReactComponent as CanadaFlag } from "./canadaLogo.svg";
+export { ReactComponent as CanadaRoundFlag } from "./canadaRoundFlag.svg";
+export { ReactComponent as NigeriaRoundFlag } from "./nigerianRoundFlag.svg";
 export { ReactComponent as PostAdLogo } from "./postAdIcon.svg";
 export { ReactComponent as CompleteAdLogo } from "./completeAdIcon.svg";
 export { ReactComponent as FowardArrow } from "./fowardArrow.svg";

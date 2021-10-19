@@ -1,76 +1,149 @@
+@import "../../../../styles/breakpoint";
+
 .mainContainer {
-  padding: 0 50px;
-}
+  padding: 0;
 
-.arrowContainer {
-  font-size: 20px;
-}
+  @include lg {
+    padding: 0 200px 0 50px;
+  }
 
-.postAd {
-  font-size: 40px;
-  font-weight: bold;
-}
+  .arrowContainer {
+    font-size: 20px;
+  }
 
-.postText {
-  color: #8b8b8b;
-  font-weight: bold;
-}
+  .postAd {
+    font-size: 20px;
+    font-weight: bold;
 
-.backArrow {
-  cursor: pointer;
-}
+    @include lg {
+      font-size: 40px;
+    }
+  }
 
-.sellText {
-  color: #8b8b8b;
-  font-size: 20px;
-  margin-bottom: 15px;
-}
+  .postText {
+    color: #8b8b8b;
+    font-weight: bold;
+    font-size: 12px;
 
-.dropdownInputContainer {
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
+    @include lg {
+      font-size: 20px;
+    }
+  }
 
-.dropDown {
-  width: 700px;
-  height: 70px;
-  font-size: 20px;
-  border: none;
-}
+  .backArrow {
+    cursor: pointer;
+  }
 
-.input {
-  width: 700px;
-  height: 70px;
-  font-size: 20px;
-  border: none;
-}
+  .cardContainer {
+    background-color: var(--grey);
+    display: flex;
+    flex-direction: column;
+  }
 
-.rateBox {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  width: 700px;
-  height: 70px;
-  font-size: 20px;
-  color: #8b8b8b;
-  background-color: white;
-}
+  .sellText {
+    color: #8b8b8b;
+    font-size: 14px;
+    margin-bottom: 8px;
+    margin-top: 5px;
 
-.referenceText {
-  display: flex;
-  justify-content: right;
-  color: #8b8b8b;
-  font-size: 20px;
-}
+    @include lg {
+      margin-top: 50px;
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+  }
 
-.timeContainer {
-  display: none;
-}
+  .dropdownInputContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-bottom: 20px;
 
-.proceedButton {
-  width: 500px;
-  height: 70px;
-  font-size: 20px;
-  font-weight: bold;
+    @include lg {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+    }
+  }
+
+  .dropDown {
+    width: 300px;
+    height: 50px;
+    font-size: 16px;
+    border: none;
+    margin-bottom: 20px;
+
+    @include lg {
+      width: 700px;
+      height: 70px;
+      font-size: 20px;
+      margin-bottom: 0;
+    }
+  }
+
+  .input {
+    width: 300px;
+    height: 50px;
+    font-size: 16px;
+    border: none;
+    margin-bottom: 0 !important;
+
+    @include lg {
+      width: 700px;
+      height: 70px;
+      font-size: 20px;
+    }
+  }
+
+  .rateBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    width: 300px;
+    height: 50px;
+    font-size: 16px;
+    color: #8b8b8b;
+    background-color: white;
+
+    @include lg {
+      width: 700px;
+      height: 70px;
+      font-size: 20px;
+    }
+  }
+
+  .referenceText {
+    display: flex;
+    justify-content: right;
+    color: #8b8b8b;
+    font-size: 12px;
+
+    @include lg {
+      font-size: 20px;
+    }
+  }
+
+  .timeContainer {
+    display: none;
+  }
+
+  .buttonContainer {
+    margin-top: 40px;
+
+    @include lg {
+      margin-top: 100px;
+    }
+  }
+
+  .proceedButton {
+    width: 300px;
+    height: 70px;
+    font-size: 20px;
+    font-weight: bold;
+
+    @include lg {
+      width: 500px;
+    }
+  }
 }

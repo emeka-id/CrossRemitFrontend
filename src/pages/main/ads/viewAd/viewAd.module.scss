@@ -1,25 +1,96 @@
+@import "../../../../styles/breakpoint";
+
 .cardContainer {
   width: 500px;
-  height: 600px;
+  height: 450px;
+
+  @include md {
+    width: 500px;
+    height: 600px;
+  }
+
+  @include lg {
+    width: 500px;
+    height: 600px;
+  }
+
+  svg {
+    width: 15px;
+    height: 15px;
+    vertical-align: text-bottom;
+
+    @include md {
+      width: 16px;
+      height: 16px;
+      vertical-align: baseline;
+    }
+
+    @include lg {
+      width: 17px;
+      height: 17px;
+      vertical-align: text-top;
+    }
+  }
+
+  .textContainer {
+    margin-bottom: 12px;
+
+    @include md {
+      margin-bottom: 20px;
+    }
+
+    @include lg {
+      margin-bottom: 20px;
+    }
+  }
 }
 
 .confirmAd {
-  font-size: 40px;
+  font-size: 20px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
+
+  @include lg {
+    font-size: 40px;
+  }
+}
+
+.back {
+  display: none;
+
+  @include md {
+    display: block;
+  }
+
+  @include lg {
+    display: block;
+  }
 }
 
 .cardContentContainer {
   display: flex;
   flex-direction: column;
+  font-size: 12px;
+
+  @include md {
+    font-size: 16px;
+  }
+
+  @include lg {
+    font-size: 18px;
+  }
 }
 
 .text {
   color: #aaaaaa;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   display: flex;
   justify-content: center;
   align-self: center;
+
+  @include lg {
+    margin-bottom: 20px;
+  }
 }
 
 .contactText {
@@ -28,10 +99,30 @@
   margin-right: 20px;
 }
 
+.contactContainer {
+  margin-bottom: 20px;
+
+  @include lg {
+    margin-bottom: 0;
+  }
+}
+
+.buttonContainer {
+  margin-bottom: 30px;
+
+  @include lg {
+    margin-bottom: 50px;
+  }
+}
+
 .buyButton {
   width: 230px;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 12px;
+
+  @include lg {
+    font-size: 16px;
+  }
 }
 
 .backArrow {

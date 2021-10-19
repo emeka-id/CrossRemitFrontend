@@ -5,9 +5,33 @@
 }
 
 .confirmAd {
-  font-size: 40px;
+  font-size: 26px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-top: 10px;
+
+  @include md {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  @include lg {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+}
+
+.topTextContainer {
+  text-align: left;
+
+  @include md {
+    text-align: center;
+  }
+
+  @include lg {
+    text-align: center;
+  }
 }
 
 .postText {
@@ -19,22 +43,49 @@
   cursor: pointer;
 }
 
+.back {
+  display: none;
+
+  @include md {
+    display: block;
+  }
+
+  @include lg {
+    display: block;
+  }
+}
+
 .transactionText {
   color: #8b8b8b;
-  font-size: 20px;
-  margin-bottom: 40px;
+  font-size: 14px;
+  margin-bottom: 20px;
+
+  @include md {
+    font-size: 20px;
+    margin-bottom: 40px;
+  }
+
+  @include lg {
+    font-size: 20px;
+    margin-bottom: 40px;
+  }
 }
 
 .cardContainer {
   width: 500px;
-  height: 500px;
+  height: 350px;
   padding: 30px 40px;
+  margin-bottom: 0 !important;
   display: flex;
   flex-direction: column;
+
+  @include lg {
+    height: 500px;
+  }
 }
 
 .confirmButton {
-  width: auto;
+  width: 300px;
   height: 70px;
   font-size: 20px;
   font-weight: bold;

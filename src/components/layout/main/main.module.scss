@@ -5,7 +5,7 @@
 
   .main {
     display: block;
-    min-height: calc(100vh - var(--navbar-height) - 0.7rem);
+    min-height: 100vh;
     width: 100%;
 
     @include xl {
@@ -45,12 +45,11 @@
       }
 
       li {
-        margin-left: 20px;
+        padding-left: 20px;
         a {
           opacity: 0.5;
           &:hover {
             opacity: 1;
-            color: var(--light);
             svg {
               path {
                 opacity: 1;
@@ -63,10 +62,26 @@
   }
 }
 
+.activeLink {
+  color: black;
+  svg {
+    color: black;
+  }
+  &:hover {
+    opacity: 1;
+    color: black;
+  }
+}
+
+.linkContainer {
+  background-color: white;
+}
+
 .mainContainer {
   margin-top: 2.625rem;
   margin-right: 1.5rem;
   margin-left: 1.5rem;
+  margin-bottom: 2.625rem;
 
   @include md {
     margin-right: 2.5rem;

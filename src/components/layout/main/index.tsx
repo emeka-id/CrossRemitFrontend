@@ -14,7 +14,7 @@ import UserContext from "context/user";
 import { Constants } from "core/utils/constants";
 import { SecureStorage } from "core/utils/storage";
 import React, { useContext, useState } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation, useRouteMatch } from "react-router-dom";
 import Navigation from "../../navigation";
 import styles from "./main.module.scss";
 
@@ -31,31 +31,42 @@ const AppLayout = ({ children }: Props) => {
   const { currentUser } = useContext(UserContext);
   const { bank, idCard } = currentUser;
 
+  const useGetIsActive = (url: string) => {
+    const match = useRouteMatch(url);
+    console.log("check url", match);
+    return match ? true : false;
+  };
+
   const data = [
     {
       icon: <Analytics />,
       name: "Dashboard",
       link: "/app/home",
+      isActive: useGetIsActive("/app/home"),
     },
     {
       icon: <InvestRouteIcon />,
       name: "Ads",
       link: "/app/ads",
+      isActive: useGetIsActive("/app/ads"),
     },
     {
       icon: <DepositRouteIcon />,
       name: "Transactions",
       link: "/app/transaction",
+      isActive: useGetIsActive("/app/transaction"),
     },
     {
       icon: <WithdrawRouteIcon />,
       name: "Chat",
       link: "/app/withdraw",
+      isActive: useGetIsActive("/app/withdraw"),
     },
     {
       icon: <TransactionsRouteIcon />,
       name: "Profile",
       link: "/app/deposit",
+      isActive: useGetIsActive("/app/deposit"),
     },
   ];
 
@@ -83,8 +94,15 @@ const AppLayout = ({ children }: Props) => {
             <hr style={{ opacity: "0.1" }} />
             <ul>
               {data.map((item, index) => (
-                <li key={index}>
-                  <Link to={item.link} onClick={() => setToggle(false)}>
+                <li
+                  key={index}
+                  className={item.isActive ? styles.linkContainer : ""}
+                >
+                  <Link
+                    className={item.isActive ? styles.activeLink : ""}
+                    to={item.link}
+                    onClick={() => setToggle(false)}
+                  >
                     {item.icon} <span className="ml-15">{item.name}</span>
                   </Link>
                 </li>
