@@ -1,3 +1,4 @@
+import { CanadaFlag, NigeriaFlag } from "assets/svg";
 import { Button, Card } from "components";
 import React from "react";
 import styles from "./postedAds.module.scss";
@@ -13,7 +14,12 @@ const PostedAds = () => {
           ].join(" ")}
         >
           <div>Looking for</div>
-          <div>CAD</div>
+          <div>
+            <span>
+              <CanadaFlag />
+            </span>
+            CAD
+          </div>
         </div>
         <div
           className={[
@@ -22,7 +28,12 @@ const PostedAds = () => {
           ].join(" ")}
         >
           <div>Amount available to sell</div>
-          <div>2000</div>
+          <div>
+            <span>
+              <NigeriaFlag className="mr-50" />
+            </span>
+            2000
+          </div>
         </div>
         <div
           className={[

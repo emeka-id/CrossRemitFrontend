@@ -1,14 +1,21 @@
 import { BackArrow } from "assets/svg";
 import { Button } from "components";
-import React from "react";
+import { IModalRef } from "components/modal";
+import React, { useRef } from "react";
 import { useHistory } from "react-router";
 import styles from "./createOffer.module.scss";
+import SuccessModal from "./successModal";
 
 const CreateOffer = () => {
+  const modal = useRef<IModalRef>(null);
   const history = useHistory();
 
   const goBack = () => {
     history.go(-1);
+  };
+
+  const confirmation = () => {
+    modal.current?.open();
   };
 
   return (
@@ -36,8 +43,11 @@ const CreateOffer = () => {
         </div>
       </div>
       <div className="flex justify-content-center">
-        <Button className={styles.sendButton}>Send Request</Button>
+        <Button className={styles.sendButton} onClick={confirmation}>
+          Send Request
+        </Button>
       </div>
+      <SuccessModal modal={modal} />
     </div>
   );
 };
