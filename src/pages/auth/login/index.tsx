@@ -1,20 +1,22 @@
-import { Button } from 'components';
-import AuthContext from 'context/auth';
-import { LoginApiService } from 'core/services/user';
-import { Page } from 'core/utils/constants';
-import { handleError } from 'core/utils/error-handler';
-import useForm from 'core/utils/use-form';
-import React, { useContext } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { IAuth, ILogin } from 'types/user';
-import { IResponse } from 'types/response';
-import styles from './login.module.scss';
-import { Loading } from 'assets/svg';
-import { useMutation } from 'react-query';
-import { AxiosResponse } from 'axios';
-import UserContext from 'context/user';
-import toast from 'react-hot-toast';
-import { YellowLineIcon } from 'assets/svg';
+import { EyeIcon, Loading } from "assets/svg";
+import { AxiosResponse } from "axios";
+import { Button } from "components";
+import AuthContext from "context/auth";
+import UserContext from "context/user";
+import { LoginApiService } from "core/services/user";
+import { Page } from "core/utils/constants";
+import { handleError } from "core/utils/error-handler";
+import useForm from "core/utils/use-form";
+import React, { useContext } from "react";
+import toast from "react-hot-toast";
+import { useMutation } from "react-query";
+import { Link, useHistory } from "react-router-dom";
+import { IResponse } from "types/response";
+import { IAuth, ILogin } from "types/user";
+import CrossRemit from "../../../assets/img/crossremit-photo.png";
+import Photo from "../../../assets/img/portrait-photo.png";
+import BlueRectangle from "../../../assets/img/blue rectangle.png";
+import styles from "./login.module.scss";
 
 const Login = () => {
   const { setAuthAndCache } = useContext(AuthContext);
@@ -48,54 +50,82 @@ const Login = () => {
   let history = useHistory();
 
   const submit = () => mutate(inputs);
-  const initState = { email: '', password: '' };
+  const initState = { email: "", password: "" };
   const { inputs, handleChange, handleSubmit } = useForm<ILogin>(
     initState,
     submit
   );
 
   return (
-    <div>
-      <div className="text-center">
-        <h2 className="mb-5">Login To Rabbi</h2>
-
-        <YellowLineIcon />
+    <div className={styles.mainContainer}>
+      <div className={styles.leftContainer}>
+        <img src={CrossRemit} alt="crossremit avatar" />
+        <h1>
+          Buy and Sell <br />
+          FX, Securely.
+        </h1>
+        <div className={styles.imageContainer}>
+          <div className={styles.potrait}>
+            <img src={Photo} alt="portrait avatar" />
+          </div>
+          <div className={styles.rectangle}>
+            <img src={BlueRectangle} alt="rectangle" />
+          </div>
+        </div>
       </div>
-      <form className="mt-40" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <input
-            name="email"
-            type="email"
-            required
-            placeholder="Email Address"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            name="password"
-            type="password"
-            required
-            placeholder="Password"
-            className="pr-100"
-            onChange={handleChange}
-          />
-          <div className={styles.forgotPassword}>
-            <Link to="/auth/forgot-password">Forgot Password</Link>
+      <div className={styles.rightContainer}>
+        <form className="mt-40" onSubmit={handleSubmit}>
+          <div className="text-center">
+            <h2>Sign in</h2>
+            <div className={[styles.createAccount, "mb-50"].join(" ")}>
+              Sign in your details as merchant to continue.
+            </div>
           </div>
-        </div>
-
-        <div className={styles.action}>
           <div>
-            <label className="flex">
-              <input type="checkbox" className="mr-5" /> Remember me
-            </label>
+            <input
+              name="email"
+              type="email"
+              required
+              placeholder="Email Address"
+              onChange={handleChange}
+            />
           </div>
-          <Button type="submit" disabled={isLoading ? true : false}>
-            {isLoading ? <Loading /> : 'Login'}
-          </Button>
-        </div>
-      </form>
+          <div className={styles.passwordContainer}>
+            <input
+              name="password"
+              type="password"
+              required
+              placeholder="Password"
+              className="pr-100"
+              onChange={handleChange}
+            />
+            <div className={styles.eyeIconContainer}>
+              <EyeIcon />
+            </div>
+          </div>
+          <div className={styles.forgotPassword}>
+            <Link to="/auth/forgot-password">Forgot Password?</Link>
+          </div>
+
+          <div>
+            <Button
+              type="submit"
+              disabled={isLoading ? true : false}
+              className={styles.action}
+            >
+              {isLoading ? <Loading /> : "Login"}
+            </Button>
+          </div>
+          <div
+            className={[styles.createAccount, "mt-20 text-center"].join(" ")}
+          >
+            Don’t have an account?{" "}
+            <Link to="/auth/signup" className={styles.link}>
+              Create an account
+            </Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

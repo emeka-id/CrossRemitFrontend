@@ -3,6 +3,10 @@
 .layout {
   background: var(--grey);
 
+  svg {
+    vertical-align: text-bottom;
+  }
+
   .main {
     display: block;
     min-height: 100vh;
@@ -46,17 +50,6 @@
 
       li {
         padding-left: 20px;
-        a {
-          opacity: 0.5;
-          &:hover {
-            opacity: 1;
-            svg {
-              path {
-                opacity: 1;
-              }
-            }
-          }
-        }
       }
     }
   }
@@ -64,17 +57,14 @@
 
 .activeLink {
   color: black;
-  svg {
-    color: black;
-  }
   &:hover {
-    opacity: 1;
     color: black;
   }
 }
 
 .linkContainer {
   background-color: white;
+  border-radius: 4px;
 }
 
 .mainContainer {
@@ -96,4 +86,8 @@
 
 .logout {
   cursor: pointer;
+}
+
+.logoutButtonContainer {
+  margin-top: 350px;
 }

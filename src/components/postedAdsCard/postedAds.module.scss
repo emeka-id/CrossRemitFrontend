@@ -7,14 +7,14 @@
 
 .chartContainer {
   margin-bottom: 25px;
+
+  svg {
+    vertical-align: baseline;
+  }
 }
 
 .chart {
   position: relative;
-
-  svg {
-    opacity: 1;
-  }
 
   .chartWarning {
     position: absolute;

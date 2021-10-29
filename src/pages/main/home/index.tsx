@@ -63,7 +63,6 @@ const Home = () => {
             </Card>
           </div>
 
-          {/* Investment Information Section */}
           <div
             className={[
               styles.crossRemit,
@@ -83,7 +82,6 @@ const Home = () => {
             <PostedAds />
           </div>
 
-          {/* Balance Information Section */}
           <div>
             <div className={[styles.crossRemit, "mb-20"].join(" ")}>
               Buy from CrossRemit

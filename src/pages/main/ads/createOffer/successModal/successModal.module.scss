@@ -1,0 +1,77 @@
+@import "../../../../../styles/breakpoint";
+
+.modalContainer {
+  width: 300px;
+  height: 300px;
+  padding: 15px;
+  overflow: hidden;
+  position: relative;
+
+  h2 {
+    margin: 0;
+    font-size: 20px;
+
+    @include lg {
+      font-size: 30px;
+    }
+  }
+
+  @include md {
+    width: 350px;
+    height: 350px;
+    padding: 20px;
+    overflow: hidden;
+  }
+
+  @include lg {
+    width: 400px;
+    height: 400px;
+    padding: 30px;
+    overflow: hidden;
+  }
+
+  img {
+    width: 100px;
+    height: 100px;
+
+    @include lg {
+      width: 140px;
+      height: 140px;
+    }
+  }
+}
+
+.closeIcon {
+  position: absolute;
+  right: 15px;
+  cursor: pointer;
+
+  @include md {
+    right: 20px;
+  }
+
+  @include lg {
+    right: 20px;
+  }
+}
+
+.successText {
+  font-size: 12px;
+
+  @include lg {
+    font-size: 16px;
+  }
+}
+
+.buttonContainer {
+  width: 100%;
+  margin-top: 15px;
+
+  @include lg {
+    margin-top: 25px;
+  }
+}
+
+.saveButton {
+  width: 250px;
+}

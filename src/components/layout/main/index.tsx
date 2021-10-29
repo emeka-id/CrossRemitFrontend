@@ -1,12 +1,17 @@
 import {
-  Analytics,
+  AdsIcon,
+  ChatIcon,
   Close,
   CrossRemitLogo,
+  DarkAdsIcon,
+  DarkChatIcon,
+  DarkDashBoardIcon,
+  DarkProfileIcon,
+  DarkTransactionIcon,
+  DashBoardIcon,
   DepositRouteIcon,
-  InvestRouteIcon,
-  LogoutRouteIcon,
-  TransactionsRouteIcon,
-  WithdrawRouteIcon,
+  LogoutIcon,
+  ProfileIcon,
 } from "assets/svg";
 import Button from "components/button";
 import Card from "components/card";
@@ -33,37 +38,48 @@ const AppLayout = ({ children }: Props) => {
 
   const useGetIsActive = (url: string) => {
     const match = useRouteMatch(url);
-    console.log("check url", match);
     return match ? true : false;
   };
 
   const data = [
     {
-      icon: <Analytics />,
+      icon: useGetIsActive("/app/home") ? (
+        <DarkDashBoardIcon />
+      ) : (
+        <DashBoardIcon />
+      ),
       name: "Dashboard",
       link: "/app/home",
       isActive: useGetIsActive("/app/home"),
     },
     {
-      icon: <InvestRouteIcon />,
+      icon: useGetIsActive("/app/ads") ? <DarkAdsIcon /> : <AdsIcon />,
       name: "Ads",
       link: "/app/ads",
       isActive: useGetIsActive("/app/ads"),
     },
     {
-      icon: <DepositRouteIcon />,
+      icon: useGetIsActive("/app/transaction") ? (
+        <DarkTransactionIcon />
+      ) : (
+        <DepositRouteIcon />
+      ),
       name: "Transactions",
       link: "/app/transaction",
       isActive: useGetIsActive("/app/transaction"),
     },
     {
-      icon: <WithdrawRouteIcon />,
+      icon: useGetIsActive("/app/withdraw") ? <DarkChatIcon /> : <ChatIcon />,
       name: "Chat",
       link: "/app/withdraw",
       isActive: useGetIsActive("/app/withdraw"),
     },
     {
-      icon: <TransactionsRouteIcon />,
+      icon: useGetIsActive("/app/deposit") ? (
+        <DarkProfileIcon />
+      ) : (
+        <ProfileIcon />
+      ),
       name: "Profile",
       link: "/app/deposit",
       isActive: useGetIsActive("/app/deposit"),
@@ -107,10 +123,14 @@ const AppLayout = ({ children }: Props) => {
                   </Link>
                 </li>
               ))}
-              <div className="ml-15 mt-100 mr-15">
+              <div
+                className={[styles.logoutButtonContainer, "ml-15 mr-15"].join(
+                  " "
+                )}
+              >
                 <Link to="" onClick={handleLogOut}>
                   <Button variant="logout">
-                    <LogoutRouteIcon /> <span className="ml-15">Logout</span>
+                    <LogoutIcon /> <span className="ml-15">Logout</span>
                   </Button>
                 </Link>
               </div>

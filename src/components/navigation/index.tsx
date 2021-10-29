@@ -24,44 +24,9 @@ const Navigation: FC<Props> = ({ onClick }) => {
   let { path }: routing = useRouteMatch();
 
   return (
-    <nav
-      className={
-        isLoggedIn ? [styles.navbar, "light nav-75"].join(" ") : styles.navbar
-      }
-    >
-      <div
-        className={
-          !isLoggedIn
-            ? ["container", "flex justify-content-between pr-30"].join(" ")
-            : "flex pr-30"
-        }
-      >
-        <div className={[styles.menu, "pl-20"].join(" ")}>
-          {!path.includes("/auth") && (
-            <Hamburger
-              className={styles.hamburger}
-              onClick={onClick}
-              style={{ fill: "#000 !important" }}
-            />
-          )}
-          <a href={isLoggedIn ? "/app/home" : "https://crossremit.com"}>
-            {isLoggedIn ? null : <CrossRemitLogo className={styles.logo} />}
-          </a>
-        </div>
-        {!isLoggedIn ? (
-          <div className="flex">
-            <div className="">
-              <Link to="/auth/login">
-                <Button variant="stripped">Login</Button>
-              </Link>
-            </div>
-            <div>
-              <Link to="/auth/signup">
-                <Button>Signup</Button>
-              </Link>
-            </div>
-          </div>
-        ) : (
+    <div>
+      {isLoggedIn && (
+        <nav className={[styles.navbar, "light nav-75"].join(" ")}>
           <div className={[styles.navbarContainer, "flex"].join(" ")}>
             <div className={styles.dashboardText}>Dashboard</div>
             <div className={styles.notificationContainer}>
@@ -76,9 +41,9 @@ const Navigation: FC<Props> = ({ onClick }) => {
               />
             </div>
           </div>
-        )}
-      </div>
-    </nav>
+        </nav>
+      )}
+    </div>
   );
 };
 
